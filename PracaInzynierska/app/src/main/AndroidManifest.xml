@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserMainMenuActivity" />
-        <activity android:name=".CoachMainMenuActivity"></activity>
+        <activity android:name=".CoachMainMenuActivity" />
+        <activity android:name=".UserPersonalInfo.UserNoteListActivity"></activity>
     </application>
 
 </manifest>

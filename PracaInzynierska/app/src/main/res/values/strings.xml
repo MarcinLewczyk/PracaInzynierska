@@ -2,4 +2,6 @@
     <string name="app_name">PracaInzynierska</string>
     <string name="coach">Trener</string>
     <string name="user">Użytkownik</string>
+    <string name="notes">Notatki</string>
+    <string name="add_new">Dodaj nową</string>
 </resources>
