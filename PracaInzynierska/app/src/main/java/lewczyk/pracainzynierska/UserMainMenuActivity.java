@@ -6,7 +6,10 @@ import android.os.Bundle;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import lewczyk.pracainzynierska.UserPersonalInfo.UserNoteListActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExerciseMenuActivity;
+import lewczyk.pracainzynierska.UserFeatures.ArchiveListActivity;
+import lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.UserPersonalInfoMenuActivity;
 
 public class UserMainMenuActivity extends AppCompatActivity {
 
@@ -16,9 +19,28 @@ public class UserMainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_main_menu);
         ButterKnife.bind(this);
     }
+
+    @OnClick(R.id.userExerciseButton)
+    public void moveToUserExerciseMenu(){
+        Intent intent = new Intent(getApplicationContext(), UserExerciseMenuActivity.class);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.userNotesMainMenuButton)
     public void moveToUserNotesList(){
         Intent intent = new Intent(getApplicationContext(), UserNoteListActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.userPersonalInfoButton)
+    public void moveToUserPersonalInfo(){
+        Intent intent = new Intent(getApplicationContext(), UserPersonalInfoMenuActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.userArchiveButton)
+    public void moveToUserArchive(){
+        Intent intent = new Intent(getApplicationContext(), ArchiveListActivity.class);
         startActivity(intent);
     }
 }

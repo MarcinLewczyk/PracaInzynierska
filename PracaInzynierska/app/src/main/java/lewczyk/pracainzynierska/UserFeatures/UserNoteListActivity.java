@@ -1,11 +1,13 @@
-package lewczyk.pracainzynierska.UserPersonalInfo;
+package lewczyk.pracainzynierska.UserFeatures;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.OnClick;
 import lewczyk.pracainzynierska.Adapters.UserNoteAdapter;
 import lewczyk.pracainzynierska.Database.UserNoteRepository;
 import lewczyk.pracainzynierska.DatabaseTables.UserNote;
@@ -23,5 +25,13 @@ public class UserNoteListActivity extends AppCompatActivity {
         ArrayList<UserNote> userNoteList = (ArrayList) UserNoteRepository.findAll(this);
         UserNoteAdapter adapter = new UserNoteAdapter(userNoteList, this);
         notesList.setAdapter(adapter);
+    }
+
+    @OnClick(R.id.userNotesButton)
+    public void addNewNote(){
+        Intent intent = new Intent(getApplicationContext(), EditUserNoteActivity.class);
+        intent.putExtra("noteId", -1);
+        startActivity(intent);
+        finish();
     }
 }

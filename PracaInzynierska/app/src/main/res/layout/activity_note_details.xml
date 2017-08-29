@@ -3,30 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity">
+    tools:context="lewczyk.pracainzynierska.DataDetailsPresentation.NoteDetailsActivity">
 
-    <TextView
-        android:id="@+id/notesTextView"
+    <WebView
+        android:id="@+id/noteDetailsWebView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/notes"
-        android:textSize="30dp"
-        android:textAlignment="center"/>
-
-    <ListView
-        android:id="@+id/userNotesListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/notesTextView">
-
-    </ListView>
+        android:background="@android:color/transparent">
+    </WebView>
 
     <Button
-        android:id="@+id/userNotesButton"
+        android:id="@+id/noteDetailsModButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:text="@string/add_new"
+        android:text="@string/modify"
+        android:layout_above="@+id/noteDetailsDelButton"/>
+
+    <Button
+        android:id="@+id/noteDetailsDelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

@@ -12,6 +12,7 @@ import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
+import lewczyk.pracainzynierska.DatabaseTables.CoachNote;
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 
@@ -25,6 +26,7 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
     private RuntimeExceptionDao<ExercisePurpose, Long> exercisePurposeDao;
     private RuntimeExceptionDao<BodyParameter, Long> bodyParameterDao;
     private RuntimeExceptionDao<UserNote, Long> userNoteDao;
+    private RuntimeExceptionDao<CoachNote, Long> coachNoteDao;
 
 
     private OrmLiteDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -62,6 +64,10 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
             TableUtils.dropTable(connectionSource, UserNote.class, true);
             TableUtils.createTableIfNotExists(connectionSource, UserNote.class);
+
+            TableUtils.dropTable(connectionSource, CoachNote.class, true);
+            TableUtils.createTableIfNotExists(connectionSource, CoachNote.class);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -86,5 +92,12 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
             userNoteDao = getRuntimeExceptionDao(UserNote.class);
         }
         return userNoteDao;
+    }
+
+    public RuntimeExceptionDao<CoachNote, Long> getCoachNoteDao() {
+        if(coachNoteDao == null) {
+            coachNoteDao = getRuntimeExceptionDao(CoachNote.class);
+        }
+        return coachNoteDao;
     }
 }

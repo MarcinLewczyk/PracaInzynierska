@@ -8,6 +8,8 @@ import com.facebook.stetho.Stetho;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Database.UserNoteRepository;
+import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 
 
 public class LoadingActivity extends AppCompatActivity {
@@ -19,6 +21,11 @@ public class LoadingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setViewSettings();
         Stetho.initializeWithDefaults(this);// doesn't work with ormlite?
+       // addData();
+    }
+
+    private void addData() {
+        UserNoteRepository.addUserNote(this, new UserNote("qqqqqqqqq qqqqqqqqqqqqqqqqqqq qqqqqqqqqqqqqqqqqq qqqqqqqqqqqqq"));
     }
 
     private void setViewSettings(){

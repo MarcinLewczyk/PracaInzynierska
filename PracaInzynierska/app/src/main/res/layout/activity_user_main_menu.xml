@@ -5,9 +5,49 @@
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.UserMainMenuActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:textSize="50dp"
+        android:textColor="@android:color/black"
+        android:text="@string/menu"/>
+
+    <Button
+        android:id="@+id/userExerciseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exercises"
+        android:textSize="25dp"
+        android:background="@android:color/transparent"
+        android:layout_above="@+id/userNotesMainMenuButton"/>
+
     <Button
         android:id="@+id/userNotesMainMenuButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/notes" />
+        android:text="@string/notes"
+        android:textSize="25dp"
+        android:background="@android:color/transparent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <Button
+        android:id="@+id/userPersonalInfoButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:layout_below="@id/userNotesMainMenuButton"
+        android:background="@android:color/transparent"
+        android:text="@string/personal_info"/>
+
+    <Button
+        android:id="@+id/userArchiveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:layout_below="@id/userPersonalInfoButton"
+        android:background="@android:color/transparent"
+        android:text="@string/archive"/>
 </RelativeLayout>
