@@ -23,11 +23,11 @@ public class ExercisePurposeListActivity extends AppCompatActivity {
         setTitle(R.string.exercise_purposes);
         ButterKnife.bind(this);
 
-        ListView exercisePurposesLisView = (ListView) findViewById(R.id.exercisePurposeListView);
+        ListView exercisePurposesListView = (ListView) findViewById(R.id.exercisePurposeListView);
 
         ArrayList<ExercisePurpose> exercisePurposesList = (ArrayList) ExercisePurposeRepository.findAll(this);
         ExercisePurposeAdapter adapter = new ExercisePurposeAdapter(exercisePurposesList, this);
-        exercisePurposesLisView.setAdapter(adapter);
+        exercisePurposesListView.setAdapter(adapter);
     }
 
     @OnClick(R.id.exercisePurposeAddButton)

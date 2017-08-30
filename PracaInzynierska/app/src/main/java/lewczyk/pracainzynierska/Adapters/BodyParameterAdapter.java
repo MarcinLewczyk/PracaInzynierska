@@ -10,56 +10,55 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lewczyk.pracainzynierska.UserFeatures.UserNoteDetailsActivity;
-import lewczyk.pracainzynierska.DatabaseTables.UserNote;
+import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterDetailsActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterListActivity;
 
-public class UserNoteAdapter extends ArrayAdapter<UserNote>{
+public class BodyParameterAdapter extends ArrayAdapter<BodyParameter> {
     private Context context;
 
-    public UserNoteAdapter(ArrayList<UserNote> userNotes, Context context){
-        super(context, R.layout.single_list_text_view, userNotes);
+    public BodyParameterAdapter(ArrayList<BodyParameter> bodyParameter, Context context) {
+        super(context, R.layout.single_list_text_view, bodyParameter);
         this.context = context;
     }
 
     private static class ViewHolder{
-        TextView noteDesc;
+        TextView bodyParameterTextView;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final UserNote dataModel = getItem(position);
+        final BodyParameter dataModel = getItem(position);
 
         ViewHolder viewHolder;
 
         if(convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_list_text_view, parent, false);
-            viewHolder.noteDesc = convertView.findViewById(R.id.listTitleTextView);
+            viewHolder.bodyParameterTextView = convertView.findViewById(R.id.listTitleTextView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if(dataModel.getText().length() >= 25){
-            viewHolder.noteDesc.setText(dataModel.getText().substring(0,30));
+        if(dataModel.getMuscleName().length() >= 25){
+            viewHolder.bodyParameterTextView.setText(dataModel.getMuscleName().substring(0,25));
         } else {
-            viewHolder.noteDesc.setText(dataModel.getText());
+            viewHolder.bodyParameterTextView.setText(dataModel.getMuscleName());
         }
-
-        viewHolder.noteDesc.setOnClickListener(new View.OnClickListener(){
+        viewHolder.bodyParameterTextView.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), UserNoteDetailsActivity.class);
+                Intent intent = new Intent(view.getContext(), BodyParameterDetailsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("noteId", dataModel.getId());
+                intent.putExtra("parameterId", dataModel.getId());
                 view.getContext().startActivity(intent);
 
                 //Without this, after back button pressed, adapter's list could show data that have been deleted
                 // which could lead to nullPointer
-                ((UserNoteListActivity)context).finish();
+                ((BodyParameterListActivity)context).finish();
             }
         });
         return convertView;

@@ -19,7 +19,7 @@
         <activity android:name=".UserMainMenuActivity" />
         <activity android:name=".CoachMainMenuActivity" />
         <activity android:name=".UserFeatures.UserNoteListActivity" />
-        <activity android:name=".DataDetailsPresentation.NoteDetailsActivity" />
+        <activity android:name=".UserFeatures.UserNoteDetailsActivity" />
         <activity android:name=".UserFeatures.UserNoteEditActivity" />
         <activity android:name=".UserFeatures.ArchiveListActivity" />
         <activity android:name=".UserPersonalInfo.UserPersonalInfoMenuActivity" />

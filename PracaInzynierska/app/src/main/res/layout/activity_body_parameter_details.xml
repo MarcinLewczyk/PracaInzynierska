@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterDetailsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/bodyParameterDetailTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="20dp"
+        android:text="@string/name"/>
+
+    <TextView
+        android:id="@+id/bodyParameterTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bodyParameterDetailTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/bodyParameterDetailCurrentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/circumference"
+        android:textSize="20dp"
+        android:layout_below="@id/bodyParameterTextView"/>
+
+    <TextView
+        android:id="@+id/bodyParameterCurrTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bodyParameterDetailCurrentTextView">
+    </TextView>
+
+    <Button
+        android:id="@+id/bodyParameterModButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/modify"
+        android:layout_above="@+id/bodyParameterDelButton"/>
+
+    <Button
+        android:id="@+id/bodyParameterDelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

@@ -3,20 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeListActivity">
+    tools:context="lewczyk.pracainzynierska.UserFeatures.UserNoteEditActivity">
 
-    <ListView
-        android:id="@+id/exercisePurposeListView"
+    <EditText
+        android:id="@+id/userNoteEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/exercisePurposeAddButton"
+        android:id="@+id/userNoteEditSaveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/save"
         android:background="@android:color/transparent"
-        android:text="@string/add_new_purpose"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

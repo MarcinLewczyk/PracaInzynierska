@@ -25,14 +25,14 @@ public class LoadingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Stetho.initializeWithDefaults(this);// doesn't work with ormlite?
         setTitle(getString(R.string.user_choice));
-     //   addData();
+       // addData();
     }
 
     private void addData() {
         UserNoteRepository.addUserNote(this, new UserNote("hhhhhhhhh hhhhhhhhhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhh"));
         ExercisePurposeRepository.addExercisePurpose(this, new ExercisePurpose("150 na klate", "50 na klate"));
-        ExercisePurposeRepository.addExercisePurpose(this, new ExercisePurpose("kaptury 50", "kaptury 25"));
-        BodyParameterRepository.addBodyParameter(this, new BodyParameter("Udo", 25.5));
+        ExercisePurposeRepository.addExercisePurpose(this, new ExercisePurpose("kaptury 50 ", "kaptury 25"));
+        BodyParameterRepository.addBodyParameter(this, new BodyParameter("Udoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo", 25.5));
         BodyParameterRepository.addBodyParameter(this, new BodyParameter("Triceps", 5.0));
     }
 

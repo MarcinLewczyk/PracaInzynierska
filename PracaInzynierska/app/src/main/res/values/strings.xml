@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Praca Inzynierska</string>
+    <string name="app_name">Praca Inżynierska</string>
     <string name="coach">Trener</string>
     <string name="user">Użytkownik</string>
     <string name="notes">Notatki</string>
@@ -27,4 +27,11 @@
     <string name="create_new_purpose">Utwórz nowy cel</string>
     <string name="edit_purpose">Edytuj cel</string>
     <string name="more_than_0_characters_required">Wymagane więcej niż 0 znaków</string>
+    <string name="add_new_body_parameter">Dodaj nowy parametr</string>
+    <string name="name">Nazwa</string>
+    <string name="circumference">Obwód</string>
+    <string name="parameter_detail">Szczegóły parametru</string>
+    <string name="edit_parameter">Edytuj parametr</string>
+    <string name="create_new_note">Utwórz nową notatkę</string>
+    <string name="edit_note">Edytuj notatkę</string>
 </resources>

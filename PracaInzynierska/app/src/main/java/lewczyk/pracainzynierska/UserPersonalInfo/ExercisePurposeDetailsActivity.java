@@ -3,7 +3,7 @@ package lewczyk.pracainzynierska.UserPersonalInfo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.webkit.WebView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,11 +15,10 @@ import lewczyk.pracainzynierska.R;
 public class ExercisePurposeDetailsActivity extends AppCompatActivity {
     private long purposeId;
     private String msg;
-    private String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
-    @BindView(R.id.exercisePurposeWebView)
-    WebView purposeTitle;
-    @BindView(R.id.exercisePurposeCurrWebView)
-    WebView purposeState;
+    @BindView(R.id.exercisePurposeTextView)
+    TextView purposeTitle;
+    @BindView(R.id.exercisePurposeCurrTextView)
+    TextView purposeState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +32,11 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
         purposeId = intent.getLongExtra("purposeId", -1);
 
         if(purposeId == -1){
-            purposeTitle.loadData(String.format(htmlParam, msg), "text/html", "utf-8");
+            purposeTitle.setText(msg);
         } else {
             ExercisePurpose tmp = ExercisePurposeRepository.findById(this, purposeId);
-            purposeTitle.loadData(String.format(htmlParam, tmp.getExercisePurpose()), "text/html", "utf-8");
-            purposeState.loadData(String.format(htmlParam, tmp.getCurrentState()), "text/html", "utf-8");
+            purposeTitle.setText(tmp.getExercisePurpose());
+            purposeState.setText(tmp.getCurrentState());
         }
     }
 

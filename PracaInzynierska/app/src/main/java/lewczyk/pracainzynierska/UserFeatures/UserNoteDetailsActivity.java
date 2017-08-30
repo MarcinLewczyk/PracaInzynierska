@@ -1,4 +1,4 @@
-package lewczyk.pracainzynierska.DataDetailsPresentation;
+package lewczyk.pracainzynierska.UserFeatures;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +10,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Database.UserNoteRepository;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserFeatures.UserNoteEditActivity;
-import lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity;
 
-public class NoteDetailsActivity extends AppCompatActivity {
+public class UserNoteDetailsActivity extends AppCompatActivity {
     private long noteId;
     private String msg;
     private String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
@@ -22,7 +20,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note_details);
+        setContentView(R.layout.activity_user_note_details);
         ButterKnife.bind(this);
 
         loadStrings();
