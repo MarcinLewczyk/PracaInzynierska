@@ -10,56 +10,55 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lewczyk.pracainzynierska.DataDetailsPresentation.NoteDetailsActivity;
-import lewczyk.pracainzynierska.DatabaseTables.UserNote;
+import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeDetailsActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeListActivity;
 
-public class UserNoteAdapter extends ArrayAdapter<UserNote>{
+public class ExercisePurposeAdapter extends ArrayAdapter<ExercisePurpose> {
     private Context context;
 
-    public UserNoteAdapter(ArrayList<UserNote> userNotes, Context context){
-        super(context, R.layout.single_list_text_view, userNotes);
+    public ExercisePurposeAdapter(ArrayList<ExercisePurpose> exercisePurposes, Context context){
+        super(context, R.layout.single_list_text_view,exercisePurposes);
         this.context = context;
     }
 
     private static class ViewHolder{
-        TextView noteDesc;
+        TextView exercisePurposeTextView;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final UserNote dataModel = getItem(position);
+        final ExercisePurpose dataModel = getItem(position);
 
         ViewHolder viewHolder;
 
         if(convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_list_text_view, parent, false);
-            viewHolder.noteDesc = convertView.findViewById(R.id.listTitleTextView);
+            viewHolder.exercisePurposeTextView = convertView.findViewById(R.id.listTitleTextView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if(dataModel.getText().length() >= 25){
-            viewHolder.noteDesc.setText(dataModel.getText().substring(0,30));
+        if(dataModel.getExercisePurpose().length() >= 25){
+            viewHolder.exercisePurposeTextView.setText(dataModel.getExercisePurpose().substring(0,25));
         } else {
-            viewHolder.noteDesc.setText(dataModel.getText());
+            viewHolder.exercisePurposeTextView.setText(dataModel.getExercisePurpose());
         }
-
-        viewHolder.noteDesc.setOnClickListener(new View.OnClickListener(){
+        viewHolder.exercisePurposeTextView.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), NoteDetailsActivity.class);
+                Intent intent = new Intent(view.getContext(), ExercisePurposeDetailsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("noteId", dataModel.getId());
+                intent.putExtra("purposeId", dataModel.getId());
                 view.getContext().startActivity(intent);
 
                 //Without this, after back button pressed, adapter's list could show data that have been deleted
                 // which could lead to nullPointer
-                ((UserNoteListActivity)context).finish();
+                ((ExercisePurposeListActivity)context).finish();
             }
         });
         return convertView;

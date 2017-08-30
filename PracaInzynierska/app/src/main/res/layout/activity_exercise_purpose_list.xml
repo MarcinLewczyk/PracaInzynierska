@@ -3,30 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity">
+    tools:context="lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeListActivity">
 
     <TextView
-        android:id="@+id/notesTextView"
+        android:id="@+id/exercisePurposeTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/notes"
+        android:text="@string/exercise_purposes"
         android:textSize="30dp"
         android:textAlignment="center"/>
 
     <ListView
-        android:id="@+id/userNotesListView"
+        android:id="@+id/exercisePurposeListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/notesTextView">
+        android:layout_below="@id/exercisePurposeTextView">
 
     </ListView>
 
     <Button
-        android:id="@+id/userNotesAddButton"
+        android:id="@+id/exercisePurposeAddButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:text="@string/add_new"
+        android:text="@string/add_new_purpose"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

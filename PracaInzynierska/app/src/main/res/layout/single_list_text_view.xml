@@ -7,7 +7,7 @@
     android:id="@+id/notesLinearLayout">
 
     <TextView
-        android:id="@+id/noteDescTextView"
+        android:id="@+id/listTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left|center_vertical"

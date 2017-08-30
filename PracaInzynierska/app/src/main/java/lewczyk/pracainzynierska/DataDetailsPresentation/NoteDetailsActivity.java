@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Database.UserNoteRepository;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserFeatures.EditUserNoteActivity;
+import lewczyk.pracainzynierska.UserFeatures.UserNoteEditActivity;
 import lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity;
 
 public class NoteDetailsActivity extends AppCompatActivity {
@@ -23,10 +23,13 @@ public class NoteDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_details);
+        ButterKnife.bind(this);
+
         loadStrings();
+
         Intent intent = getIntent();
         noteId = intent.getLongExtra("noteId", -1);
-        ButterKnife.bind(this);
+
         if(noteId == -1){
             noteDetails.loadData(String.format(htmlParam, msg), "text/html", "utf-8");
         } else {
@@ -37,12 +40,13 @@ public class NoteDetailsActivity extends AppCompatActivity {
 
     private void loadStrings() {
         msg  = getString(R.string.no_data);
+        setTitle(R.string.note_details);
     }
 
     @OnClick(R.id.noteDetailsModButton)
     public void moveToNoteMod(){
         if(noteId != -1){
-            Intent intent = new Intent(getApplicationContext(), EditUserNoteActivity.class);
+            Intent intent = new Intent(getApplicationContext(), UserNoteEditActivity.class);
             intent.putExtra("noteId", noteId);
             startActivity(intent);
             finish();
@@ -57,5 +61,12 @@ public class NoteDetailsActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(),UserNoteListActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

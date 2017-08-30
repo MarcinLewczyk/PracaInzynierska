@@ -11,4 +11,20 @@
     <string name="exercises">Cwiczenia</string>
     <string name="personal_info">Personalia</string>
     <string name="archive">Archiwum</string>
+    <string name="exercise_purposes">Cele cwiczeń</string>
+    <string name="body_parameters">Parametry ciała</string>
+    <string name="add_new_purpose">Dodaj nowy</string>
+    <string name="exercise_purpose">Cel ćwiczenia</string>
+    <string name="current_state">Obecny stan</string>
+    <string name="user_menu">Menu użytkownika</string>
+    <string name="coach_menu">Menu trenera</string>
+    <string name="note_details">Szczegóły notatki</string>
+    <string name="user_choice">Wybór użytkownika</string>
+    <string name="purpose_details">Szczegółu celu</string>
+    <string name="parameters">Parametry</string>
+    <string name="exercise_menu">Menu cwiczeń</string>
+    <string name="save">Zapisz</string>
+    <string name="create_new_purpose">Utwórz nowy cel</string>
+    <string name="edit_purpose">Edytuj cel</string>
+    <string name="more_than_0_characters_required">Wymagane więcej niż 0 znaków</string>
 </resources>

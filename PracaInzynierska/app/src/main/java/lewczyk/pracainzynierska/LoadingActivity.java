@@ -8,7 +8,11 @@ import com.facebook.stetho.Stetho;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Database.BodyParameterRepository;
+import lewczyk.pracainzynierska.Database.ExercisePurposeRepository;
 import lewczyk.pracainzynierska.Database.UserNoteRepository;
+import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
+import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 
 
@@ -19,17 +23,17 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         ButterKnife.bind(this);
-        setViewSettings();
         Stetho.initializeWithDefaults(this);// doesn't work with ormlite?
-       // addData();
+        setTitle(getString(R.string.user_choice));
+     //   addData();
     }
 
     private void addData() {
-        UserNoteRepository.addUserNote(this, new UserNote("qqqqqqqqq qqqqqqqqqqqqqqqqqqq qqqqqqqqqqqqqqqqqq qqqqqqqqqqqqq"));
-    }
-
-    private void setViewSettings(){
-        getSupportActionBar().hide();
+        UserNoteRepository.addUserNote(this, new UserNote("hhhhhhhhh hhhhhhhhhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhhhh hhhhhhhhhh"));
+        ExercisePurposeRepository.addExercisePurpose(this, new ExercisePurpose("150 na klate", "50 na klate"));
+        ExercisePurposeRepository.addExercisePurpose(this, new ExercisePurpose("kaptury 50", "kaptury 25"));
+        BodyParameterRepository.addBodyParameter(this, new BodyParameter("Udo", 25.5));
+        BodyParameterRepository.addBodyParameter(this, new BodyParameter("Triceps", 5.0));
     }
 
     @OnClick(R.id.userButton)

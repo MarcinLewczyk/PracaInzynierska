@@ -20,10 +20,16 @@
         <activity android:name=".CoachMainMenuActivity" />
         <activity android:name=".UserFeatures.UserNoteListActivity" />
         <activity android:name=".DataDetailsPresentation.NoteDetailsActivity" />
-        <activity android:name=".UserFeatures.EditUserNoteActivity" />
+        <activity android:name=".UserFeatures.UserNoteEditActivity" />
         <activity android:name=".UserFeatures.ArchiveListActivity" />
         <activity android:name=".UserPersonalInfo.UserPersonalInfoMenuActivity" />
-        <activity android:name=".UserExercise.UserExerciseMenuActivity"></activity>
+        <activity android:name=".UserExercise.UserExerciseMenuActivity" />
+        <activity android:name=".UserPersonalInfo.ExercisePurposeListActivity" />
+        <activity android:name=".UserPersonalInfo.ExercisePurposeDetailsActivity" />
+        <activity android:name=".UserPersonalInfo.ExercisePurposeEditActivity" />
+        <activity android:name=".UserPersonalInfo.BodyParameterListActivity" />
+        <activity android:name=".UserPersonalInfo.BodyParameterDetailsActivity" />
+        <activity android:name=".UserPersonalInfo.BodyParameterEditActivity"></activity>
     </application>
 
 </manifest>

@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.UserPersonalInfo.UserPersonalInfoMenuActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:id="@+id/centerPersonalInfoTextView"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/exercisePurposeListButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exercise_purposes"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:padding="12dp"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@id/centerPersonalInfoTextView"/>
+
+    <Button
+        android:id="@+id/bodyParametersListButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/body_parameters"
+        android:background="@android:color/transparent"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/centerPersonalInfoTextView"/>
+
+</RelativeLayout>

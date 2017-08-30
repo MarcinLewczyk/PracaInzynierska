@@ -19,6 +19,7 @@ public class UserNoteListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_notes_list);
+        setTitle(R.string.notes);
 
         ListView notesList = (ListView) findViewById(R.id.userNotesListView);
 
@@ -27,9 +28,9 @@ public class UserNoteListActivity extends AppCompatActivity {
         notesList.setAdapter(adapter);
     }
 
-    @OnClick(R.id.userNotesButton)
+    @OnClick(R.id.userNotesAddButton)
     public void addNewNote(){
-        Intent intent = new Intent(getApplicationContext(), EditUserNoteActivity.class);
+        Intent intent = new Intent(getApplicationContext(), UserNoteEditActivity.class);
         intent.putExtra("noteId", -1);
         startActivity(intent);
         finish();

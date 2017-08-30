@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeEditActivity">
+
+    <TextView
+        android:id="@+id/exercisePurposeEditTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="20dp"
+        android:text="@string/exercise_purpose"/>
+
+    <EditText
+        android:id="@+id/exercisePurposeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exercisePurposeEditTitleTextView"/>
+
+    <TextView
+        android:id="@+id/exercisePurposeEditCurrentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/current_state"
+        android:textSize="20dp"
+        android:layout_below="@id/exercisePurposeEditText"/>
+
+    <EditText
+        android:id="@+id/exercisePurposeCurrentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exercisePurposeEditCurrentTextView"/>
+
+    <Button
+        android:id="@+id/exercisePurposeEditSaveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

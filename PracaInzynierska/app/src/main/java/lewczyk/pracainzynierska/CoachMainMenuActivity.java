@@ -9,5 +9,6 @@ public class CoachMainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_main_menu);
+        setTitle(R.string.coach_menu);
     }
 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeDetailsActivity">
+
+    <TextView
+        android:id="@+id/exercisePurposeDetailTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="20dp"
+        android:text="@string/exercise_purpose"/>
+
+    <WebView
+        android:id="@+id/exercisePurposeWebView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_below="@id/exercisePurposeDetailTitleTextView">
+    </WebView>
+
+    <TextView
+        android:id="@+id/exercisePurposeDetailCurrentTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/current_state"
+        android:textSize="20dp"
+        android:layout_below="@id/exercisePurposeWebView"/>
+
+    <WebView
+        android:id="@+id/exercisePurposeCurrWebView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_below="@+id/exercisePurposeDetailCurrentTextView">
+    </WebView>
+
+    <Button
+        android:id="@+id/exercisePurposeModButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/modify"
+        android:layout_above="@+id/exercisePurposeDelButton"/>
+
+    <Button
+        android:id="@+id/exercisePurposeDelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

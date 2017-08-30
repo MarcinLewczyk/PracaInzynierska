@@ -5,12 +5,10 @@ import android.os.Bundle;
 
 import lewczyk.pracainzynierska.R;
 
-public class ArchiveListActivity extends AppCompatActivity {
-
+public class UserNoteEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_archive_list);
-        setTitle(R.string.archive);
+        setContentView(R.layout.activity_edit_user_note);
     }
 }
