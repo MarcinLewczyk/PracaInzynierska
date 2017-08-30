@@ -35,6 +35,22 @@
         android:layout_below="@+id/bodyParameterDetailCurrentTextView">
     </TextView>
 
+    <TextView
+        android:id="@+id/bodyParameterArchiveTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/archive"
+        android:textSize="20dp"
+        android:layout_below="@+id/bodyParameterCurrTextView">
+    </TextView>
+
+    <ListView
+        android:id="@+id/bodyParameterArchiveListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bodyParameterArchiveTextView">
+    </ListView>
+
     <Button
         android:id="@+id/bodyParameterModButton"
         android:layout_width="match_parent"

@@ -3,13 +3,21 @@ package lewczyk.pracainzynierska.UserPersonalInfo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.j256.ormlite.dao.ForeignCollection;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Adapters.BodyParameterArchiveAdapter;
 import lewczyk.pracainzynierska.Database.BodyParameterRepository;
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
+import lewczyk.pracainzynierska.DatabaseTables.BodyParameterArchive;
 import lewczyk.pracainzynierska.R;
 
 public class BodyParameterDetailsActivity extends AppCompatActivity {
@@ -19,18 +27,24 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
     TextView parameterTitle;
     @BindView(R.id.bodyParameterCurrTextView)
     TextView parameterState;
+    ForeignCollection<BodyParameterArchive> archive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_body_parameter_details);
-
-        loadStrings();
+        Intent intent = getIntent();
+        parameterId = intent.getLongExtra("parameterId", -1);
 
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        parameterId = intent.getLongExtra("parameterId", -1);
+        loadStrings();
+
+    }
+
+    private void loadStrings() {
+        msg  = getString(R.string.no_data);
+        setTitle(getString(R.string.parameter_detail));
 
         if(parameterId == -1){
             parameterTitle.setText(msg);
@@ -38,12 +52,16 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
             BodyParameter tmp = BodyParameterRepository.findById(this, parameterId);
             parameterTitle.setText(tmp.getMuscleName());
             parameterState.setText(Double.toString(tmp.getCircumference()));
+            archive = tmp.getParametersArchive();
+            ArrayList<BodyParameterArchive> toAdapter = new ArrayList<>();
+            for(BodyParameterArchive e: archive){
+                toAdapter.add(e);
+            }
+            Collections.reverse(toAdapter);
+            ListView bodyParametersArchiveListView = (ListView) findViewById(R.id.bodyParameterArchiveListView);
+            BodyParameterArchiveAdapter adapter = new BodyParameterArchiveAdapter(toAdapter, this);
+            bodyParametersArchiveListView.setAdapter(adapter);
         }
-    }
-
-    private void loadStrings() {
-        msg  = getString(R.string.no_data);
-        setTitle(getString(R.string.parameter_detail));
     }
 
     @OnClick(R.id.bodyParameterModButton)

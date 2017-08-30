@@ -8,9 +8,33 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=muscleName
+width=100
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=circumference
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=parametersArchive
+foreignCollection=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=lewczyk.pracainzynierska.DatabaseTables.BodyParameterArchive
+tableName=bodyParametersArchive
+# --table-fields-start--
+# --field-start--
+fieldName=oldCircumference
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=bodyParameter
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -25,6 +49,8 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=text
+width=300
+canBeNull=false
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -39,9 +65,35 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=exercisePurpose
+width=50
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=currentState
+width=50
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=purposesArchive
+foreignCollection=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=lewczyk.pracainzynierska.DatabaseTables.ExercisePurposeArchive
+tableName=exercisePurposesArchive
+# --table-fields-start--
+# --field-start--
+fieldName=oldPurpose
+width=50
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=exercisePurpose
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -56,6 +108,8 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=text
+width=300
+canBeNull=false
 # --field-end--
 # --table-fields-end--
 # --table-end--

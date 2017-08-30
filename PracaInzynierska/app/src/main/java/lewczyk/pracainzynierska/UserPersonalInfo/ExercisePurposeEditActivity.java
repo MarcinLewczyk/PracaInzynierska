@@ -3,6 +3,7 @@ package lewczyk.pracainzynierska.UserPersonalInfo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.EditText;
 
 import butterknife.BindView;
@@ -10,6 +11,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Database.ExercisePurposeRepository;
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
+import lewczyk.pracainzynierska.DatabaseTables.ExercisePurposeArchive;
 import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeEditActivity extends AppCompatActivity {
@@ -23,12 +25,10 @@ public class ExercisePurposeEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_purpose_edit);
-        ButterKnife.bind(this);
         Intent intent = getIntent();
         purposeId = intent.getLongExtra("purposeId", -1);
-
+        ButterKnife.bind(this);
         setViewSettings();
-
     }
 
     private void setViewSettings() {
@@ -44,29 +44,49 @@ public class ExercisePurposeEditActivity extends AppCompatActivity {
 
     @OnClick(R.id.exercisePurposeEditSaveButton)
     public void save(){
-        if(purpose.toString().isEmpty()){
-            purpose.setError(getString(R.string.more_than_0_characters_required));
-        } else {
-            purpose.setError(null);
-        }
-        if(currentState.toString().isEmpty()){
-            currentState.setError(getString(R.string.more_than_0_characters_required));
-        } else {
-            currentState.setError(null);
-        }
-
-        if(purpose.length() > 0 && currentState.length() > 0 && purposeId == -1){
+        validateFields();
+        if(validateData() && purposeId == -1){
             ExercisePurposeRepository.addExercisePurpose(getApplicationContext(),
                     new ExercisePurpose(purpose.getText().toString(), currentState.getText().toString()));
-        } else if(purpose.length() > 0 && currentState.length() > 0 && purposeId != -1){
+            moveToExercisePurposeList();
+        } else if(validateData() && purposeId != -1){
             ExercisePurpose edited = ExercisePurposeRepository.findById(this, purposeId);
+            edited.getPurposesArchive().add(new ExercisePurposeArchive(edited.getCurrentState(), edited));
             edited.setExercisePurpose(purpose.getText().toString());
             edited.setCurrentState(currentState.getText().toString());
             ExercisePurposeRepository.updateExercisePurpose(getApplicationContext(), edited);
+            moveToExercisePurposeList();
         }
+    }
+
+    public void validateFields() {
+        if(purpose.length() == 0){
+            purpose.setError(getString(R.string.more_than_0_characters_required));
+        } else if(purpose.length() >= 50){
+            purpose.setError(getString(R.string.less_than_50));
+        } else {
+            purpose.setError(null);
+        }
+        if(currentState.length() == 0){
+            currentState.setError(getString(R.string.more_than_0_characters_required));
+        } else if(currentState.length() >= 50){
+            currentState.setError(getString(R.string.less_than_50));
+        }else {
+            currentState.setError(null);
+        }
+    }
+
+    public void moveToExercisePurposeList(){
         Intent intent = new Intent(getApplicationContext(), ExercisePurposeListActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public boolean validateData(){
+        if(purpose.length() > 0 && currentState.length() > 0 && purpose.length() < 50 && currentState.length() < 50){
+            return true;
+        }
+        return false;
     }
 
     @Override

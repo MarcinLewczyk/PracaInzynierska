@@ -3,13 +3,21 @@ package lewczyk.pracainzynierska.UserPersonalInfo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.j256.ormlite.dao.ForeignCollection;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Adapters.ExercisePurposeArchiveAdapter;
 import lewczyk.pracainzynierska.Database.ExercisePurposeRepository;
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
+import lewczyk.pracainzynierska.DatabaseTables.ExercisePurposeArchive;
 import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeDetailsActivity extends AppCompatActivity {
@@ -19,17 +27,23 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
     TextView purposeTitle;
     @BindView(R.id.exercisePurposeCurrTextView)
     TextView purposeState;
+    ForeignCollection<ExercisePurposeArchive> archive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_purpose_details);
-        loadStrings();
+        Intent intent = getIntent();
+        purposeId = intent.getLongExtra("purposeId", -1);
 
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        purposeId = intent.getLongExtra("purposeId", -1);
+        loadStrings();
+    }
+
+    private void loadStrings() {
+        setTitle(getString(R.string.purpose_details));
+        msg  = getString(R.string.no_data);
 
         if(purposeId == -1){
             purposeTitle.setText(msg);
@@ -37,12 +51,16 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
             ExercisePurpose tmp = ExercisePurposeRepository.findById(this, purposeId);
             purposeTitle.setText(tmp.getExercisePurpose());
             purposeState.setText(tmp.getCurrentState());
+            archive = tmp.getPurposesArchive();
+            ArrayList<ExercisePurposeArchive> toAdapter = new ArrayList<>();
+            for(ExercisePurposeArchive e: archive){
+                toAdapter.add(e);
+            }
+            Collections.reverse(toAdapter);
+            ListView exercisePurposesArchiveListView = (ListView) findViewById(R.id.exercisePurposeArchiveListView);
+            ExercisePurposeArchiveAdapter adapter = new ExercisePurposeArchiveAdapter(toAdapter, this);
+            exercisePurposesArchiveListView.setAdapter(adapter);
         }
-    }
-
-    private void loadStrings() {
-        setTitle(getString(R.string.purpose_details));
-        msg  = getString(R.string.no_data);
     }
 
     @OnClick(R.id.exercisePurposeModButton)

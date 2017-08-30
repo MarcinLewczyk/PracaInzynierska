@@ -9,7 +9,7 @@ public class UserNote {
     @DatabaseField(generatedId = true)
     private long id;
 
-    @DatabaseField
+    @DatabaseField(canBeNull = false, width = 300)
     private String text;
 
     public UserNote(){

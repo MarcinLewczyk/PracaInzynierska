@@ -12,8 +12,10 @@ import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
+import lewczyk.pracainzynierska.DatabaseTables.BodyParameterArchive;
 import lewczyk.pracainzynierska.DatabaseTables.CoachNote;
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
+import lewczyk.pracainzynierska.DatabaseTables.ExercisePurposeArchive;
 import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 
 public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
@@ -67,6 +69,12 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
             TableUtils.dropTable(connectionSource, CoachNote.class, true);
             TableUtils.createTableIfNotExists(connectionSource, CoachNote.class);
+
+            TableUtils.dropTable(connectionSource, ExercisePurposeArchive.class, true);
+            TableUtils.createTableIfNotExists(connectionSource, ExercisePurposeArchive.class);
+
+            TableUtils.dropTable(connectionSource, BodyParameterArchive.class, true);
+            TableUtils.createTableIfNotExists(connectionSource, BodyParameterArchive.class);
 
         } catch (SQLException e) {
             e.printStackTrace();

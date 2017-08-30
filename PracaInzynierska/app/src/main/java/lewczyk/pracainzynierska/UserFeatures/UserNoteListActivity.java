@@ -33,7 +33,7 @@ public class UserNoteListActivity extends AppCompatActivity {
     @OnClick(R.id.userNoteAddButton)
     public void addNewNote(){
         Intent intent = new Intent(getApplicationContext(), UserNoteEditActivity.class);
-        intent.putExtra("noteId", -1);
+        intent.putExtra("noteId", -1L);
         startActivity(intent);
         finish();
     }

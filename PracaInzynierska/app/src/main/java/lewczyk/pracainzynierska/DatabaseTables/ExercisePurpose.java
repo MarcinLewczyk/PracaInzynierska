@@ -1,9 +1,9 @@
 package lewczyk.pracainzynierska.DatabaseTables;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
-
-import java.util.Collection;
 
 @DatabaseTable(tableName = "exercisePurposes")
 public class ExercisePurpose {
@@ -11,11 +11,14 @@ public class ExercisePurpose {
     @DatabaseField(generatedId = true)
     private long id;
 
-    @DatabaseField
+    @DatabaseField(canBeNull = false, width = 50)
     private String exercisePurpose;
 
-    @DatabaseField
+    @DatabaseField(canBeNull = false, width = 50)
     private String currentState;
+
+    @ForeignCollectionField
+    private ForeignCollection<ExercisePurposeArchive> purposesArchive;
 
     public ExercisePurpose(){
 
@@ -48,5 +51,9 @@ public class ExercisePurpose {
 
     public void setCurrentState(String currentState) {
         this.currentState = currentState;
+    }
+
+    public ForeignCollection<ExercisePurposeArchive> getPurposesArchive() {
+        return purposesArchive;
     }
 }

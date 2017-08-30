@@ -33,7 +33,7 @@ public class ExercisePurposeListActivity extends AppCompatActivity {
     @OnClick(R.id.exercisePurposeAddButton)
     public void moveToEditExercisePurpose(){
         Intent intent = new Intent(getApplicationContext(), ExercisePurposeEditActivity.class);
-        intent.putExtra("purposeId", -1);
+        intent.putExtra("purposeId", -1L);
         startActivity(intent);
         finish();
     }

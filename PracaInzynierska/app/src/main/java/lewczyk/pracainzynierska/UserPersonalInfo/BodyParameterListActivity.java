@@ -34,7 +34,7 @@ public class BodyParameterListActivity extends AppCompatActivity {
     @OnClick(R.id.bodyParameterAddButton)
     public void moveToEditBodyParameter(){
         Intent intent = new Intent(getApplicationContext(), BodyParameterEditActivity.class);
-        intent.putExtra("parameterId", -1);
+        intent.putExtra("parameterId", -1L);
         startActivity(intent);
         finish();
     }

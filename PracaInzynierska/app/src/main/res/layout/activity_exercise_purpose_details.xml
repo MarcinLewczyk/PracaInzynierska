@@ -35,6 +35,21 @@
         android:layout_below="@+id/exercisePurposeDetailCurrentTextView">
     </TextView>
 
+    <TextView
+        android:id="@+id/exercisePurposeDetailArchive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exercisePurposeCurrTextView"
+        android:text="@string/archive"
+        android:textSize="20dp"/>
+
+    <ListView
+        android:id="@+id/exercisePurposeArchiveListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exercisePurposeDetailArchive">
+    </ListView>
+
     <Button
         android:id="@+id/exercisePurposeModButton"
         android:layout_width="match_parent"

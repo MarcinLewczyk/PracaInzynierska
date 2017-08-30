@@ -21,11 +21,9 @@ public class UserNoteEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_note_edit);
-        ButterKnife.bind(this);
-
         Intent intent = getIntent();
         noteId = intent.getLongExtra("noteId", -1);
-
+        ButterKnife.bind(this);
         setViewSettings();
     }
 
@@ -41,22 +39,32 @@ public class UserNoteEditActivity extends AppCompatActivity {
 
     @OnClick(R.id.userNoteEditSaveButton)
     public void save(){
-        if(userNoteEditText.toString().isEmpty()){
-            userNoteEditText.setError(getString(R.string.more_than_0_characters_required));
-        } else {
-            userNoteEditText.setError(null);
-        }
-
-        if(userNoteEditText.length() > 0 && noteId == -1){
+        validateFields();
+        if(userNoteEditText.length() > 0 && noteId == -1 && userNoteEditText.length() < 300){
             UserNoteRepository.addUserNote(getApplicationContext(), new UserNote(userNoteEditText.toString()));
+            moveToUserNoteList();
         } else if(userNoteEditText.length() > 0 && noteId != -1){
             UserNote edited = UserNoteRepository.findById(this, noteId);
             edited.setText(userNoteEditText.toString());
             UserNoteRepository.updateUserNote(getApplicationContext(), edited);
+            moveToUserNoteList();
         }
+    }
+
+    public void moveToUserNoteList(){
         Intent intent = new Intent(getApplicationContext(), UserNoteListActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void validateFields() {
+        if(userNoteEditText.length() == 0){
+            userNoteEditText.setError(getString(R.string.more_than_0_characters_required));
+        } else if(userNoteEditText.length() >= 300) {
+            userNoteEditText.setError(getString(R.string.less_than_300));
+        } else {
+            userNoteEditText.setError(null);
+        }
     }
 
     @Override

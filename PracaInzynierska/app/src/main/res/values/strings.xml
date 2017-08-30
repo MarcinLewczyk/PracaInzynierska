@@ -34,4 +34,13 @@
     <string name="edit_parameter">Edytuj parametr</string>
     <string name="create_new_note">Utwórz nową notatkę</string>
     <string name="edit_note">Edytuj notatkę</string>
+    <string name="must_be_floating_point">Musi byc to liczba zmiennoprzecinkowa z kropką np. 5.0</string>
+    <string name="more_than_0_less_than_300">Pole nie może być puste oraz nie dłuższe niż 300 znaków</string>
+    <string name="more_than_0_less_than_50">Pole nie może być puste i nie dłuższe niż 50 znaków</string>
+    <string name="more_than_0_less_than_100">Pole nie może być puste i nie dłuższe niż 100 znaków</string>
+    <string name="more_than_0_less_than_10">Pole nie może być puste i nie dłuższe niż 10 znaków</string>
+    <string name="less_than_50">Pole musi mieć mniej niż 50 znaków</string>
+    <string name="less_than_300">Pole musi mieć mniej niż 300 znaków</string>
+    <string name="less_than_100">Pole musi zawierać mniej niż 100 znaków</string>
+    <string name="less_than_10">Pole musi zawierać mniej niż 10 znaków</string>
 </resources>
