@@ -29,7 +29,8 @@
         <activity android:name=".UserPersonalInfo.ExercisePurposeEditActivity" />
         <activity android:name=".UserPersonalInfo.BodyParameterListActivity" />
         <activity android:name=".UserPersonalInfo.BodyParameterDetailsActivity" />
-        <activity android:name=".UserPersonalInfo.BodyParameterEditActivity"></activity>
+        <activity android:name=".UserPersonalInfo.BodyParameterEditActivity" />
+        <activity android:name=".UserFeatures.ArchiveDetailActivity"></activity>
     </application>
 
 </manifest>

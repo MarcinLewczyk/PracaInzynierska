@@ -3,7 +3,7 @@ package lewczyk.pracainzynierska.DatabaseTables;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "coachNote")
+@DatabaseTable(tableName = "coachNotes")
 public class CoachNote {
 
     @DatabaseField(generatedId = true)

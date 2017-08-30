@@ -3,7 +3,9 @@ package lewczyk.pracainzynierska.DatabaseTables;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "exercisePurpose")
+import java.util.Collection;
+
+@DatabaseTable(tableName = "exercisePurposes")
 public class ExercisePurpose {
 
     @DatabaseField(generatedId = true)

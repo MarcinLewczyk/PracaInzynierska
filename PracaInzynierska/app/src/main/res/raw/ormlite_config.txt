@@ -17,7 +17,7 @@ fieldName=circumference
 #################################
 # --table-start--
 dataClass=lewczyk.pracainzynierska.DatabaseTables.CoachNote
-tableName=coachNote
+tableName=coachNotes
 # --table-fields-start--
 # --field-start--
 fieldName=id
@@ -31,7 +31,7 @@ fieldName=text
 #################################
 # --table-start--
 dataClass=lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose
-tableName=exercisePurpose
+tableName=exercisePurposes
 # --table-fields-start--
 # --field-start--
 fieldName=id
@@ -48,7 +48,7 @@ fieldName=currentState
 #################################
 # --table-start--
 dataClass=lewczyk.pracainzynierska.DatabaseTables.UserNote
-tableName=UserNote
+tableName=UserNotes
 # --table-fields-start--
 # --field-start--
 fieldName=id
