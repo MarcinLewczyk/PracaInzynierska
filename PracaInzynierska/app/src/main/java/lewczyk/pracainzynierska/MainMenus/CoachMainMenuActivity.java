@@ -1,7 +1,9 @@
-package lewczyk.pracainzynierska;
+package lewczyk.pracainzynierska.MainMenus;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import lewczyk.pracainzynierska.R;
 
 public class CoachMainMenuActivity extends AppCompatActivity {
 

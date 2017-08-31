@@ -1,4 +1,4 @@
-package lewczyk.pracainzynierska;
+package lewczyk.pracainzynierska.MainMenus;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.R;
 import lewczyk.pracainzynierska.UserExercise.UserExerciseMenuActivity;
 import lewczyk.pracainzynierska.UserFeatures.ArchiveListActivity;
 import lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity;

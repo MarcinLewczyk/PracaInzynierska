@@ -1,4 +1,4 @@
-package lewczyk.pracainzynierska;
+package lewczyk.pracainzynierska.MainMenus;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import lewczyk.pracainzynierska.Database.UserNoteRepository;
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 import lewczyk.pracainzynierska.DatabaseTables.UserNote;
+import lewczyk.pracainzynierska.R;
 
 
 public class LoadingActivity extends AppCompatActivity {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lewczyk.pracainzynierska.LoadingActivity">
+    tools:context="lewczyk.pracainzynierska.MainMenus.LoadingActivity">
     <TextView
         android:id="@+id/centerTextView"
         android:layout_width="wrap_content"

@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lewczyk.pracainzynierska.CoachMainMenuActivity">
+    tools:context="lewczyk.pracainzynierska.MainMenus.CoachMainMenuActivity">
 
 </android.support.constraint.ConstraintLayout>
