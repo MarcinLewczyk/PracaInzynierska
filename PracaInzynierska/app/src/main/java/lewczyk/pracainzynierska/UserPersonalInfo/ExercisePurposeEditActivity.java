@@ -3,7 +3,6 @@ package lewczyk.pracainzynierska.UserPersonalInfo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.EditText;
 
 import butterknife.BindView;
@@ -59,7 +58,7 @@ public class ExercisePurposeEditActivity extends AppCompatActivity {
         }
     }
 
-    public void validateFields() {
+    private void validateFields() {
         if(purpose.length() == 0){
             purpose.setError(getString(R.string.more_than_0_characters_required));
         } else if(purpose.length() >= 50){
@@ -76,17 +75,14 @@ public class ExercisePurposeEditActivity extends AppCompatActivity {
         }
     }
 
-    public void moveToExercisePurposeList(){
+    private void moveToExercisePurposeList(){
         Intent intent = new Intent(getApplicationContext(), ExercisePurposeListActivity.class);
         startActivity(intent);
         finish();
     }
 
-    public boolean validateData(){
-        if(purpose.length() > 0 && currentState.length() > 0 && purpose.length() < 50 && currentState.length() < 50){
-            return true;
-        }
-        return false;
+    private boolean validateData(){
+        return purpose.length() > 0 && currentState.length() > 0 && purpose.length() < 50 && currentState.length() < 50;
     }
 
     @Override

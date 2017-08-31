@@ -89,11 +89,8 @@ public class BodyParameterEditActivity extends AppCompatActivity {
         }
     }
 
-    public boolean validate(){
-        if(parameterName.length() > 0 && parameterState.length() > 0 && parameterName.length() < 100 && parameterState.length() < 10){
-            return true;
-        }
-        return false;
+    private boolean validate(){
+        return parameterName.length() > 0 && parameterState.length() > 0 && parameterName.length() < 100 && parameterState.length() < 10;
     }
 
     @Override

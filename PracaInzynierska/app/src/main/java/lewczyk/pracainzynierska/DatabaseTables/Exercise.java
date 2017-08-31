@@ -5,6 +5,9 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "exercises")
 public class Exercise {
+    public static final String DIFF_LEVEL_COLUMN_NAME = "diffcult";
+    public static final String EQUIPMENT_REQ_COLUMN_NAME = "equipment";
+    public static final String EXERCISE_TYPE_COLUMN_NAME = "exerciseType";
 
     @DatabaseField(generatedId = true)
     private long id;
@@ -18,13 +21,13 @@ public class Exercise {
     @DatabaseField(canBeNull = false, width = 1000)
     private String demonstration;
 
-    @DatabaseField(foreign = true, canBeNull = false)
+    @DatabaseField(foreign = true, canBeNull = false, columnName = DIFF_LEVEL_COLUMN_NAME)
     private DifficultLevel difficultLevel;
 
-    @DatabaseField(foreign = true, canBeNull = false)
+    @DatabaseField(foreign = true, canBeNull = false, columnName = EQUIPMENT_REQ_COLUMN_NAME)
     private EquipmentRequirement equipmentRequirement;
 
-    @DatabaseField(foreign = true, canBeNull = false)
+    @DatabaseField(foreign = true, canBeNull = false, columnName = EXERCISE_TYPE_COLUMN_NAME)
     private ExerciseType exerciseType;
 
     public Exercise() {

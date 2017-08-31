@@ -112,16 +112,19 @@ canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=difficultLevel
+columnName=diffcult
 canBeNull=false
 foreign=true
 # --field-end--
 # --field-start--
 fieldName=equipmentRequirement
+columnName=equipment
 canBeNull=false
 foreign=true
 # --field-end--
 # --field-start--
 fieldName=exerciseType
+columnName=exerciseType
 canBeNull=false
 foreign=true
 # --field-end--

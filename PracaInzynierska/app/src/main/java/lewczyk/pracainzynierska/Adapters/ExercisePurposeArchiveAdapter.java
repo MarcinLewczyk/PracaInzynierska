@@ -13,11 +13,9 @@ import lewczyk.pracainzynierska.DatabaseTables.ExercisePurposeArchive;
 import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeArchiveAdapter extends ArrayAdapter<ExercisePurposeArchive> {
-    private Context context;
 
     public ExercisePurposeArchiveAdapter(ArrayList<ExercisePurposeArchive> exercisePurposes, Context context){
         super(context, R.layout.single_list_text_view,exercisePurposes);
-        this.context = context;
     }
 
     private static class ViewHolder{

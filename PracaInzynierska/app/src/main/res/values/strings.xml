@@ -43,4 +43,13 @@
     <string name="less_than_300">Pole musi mieć mniej niż 300 znaków</string>
     <string name="less_than_100">Pole musi zawierać mniej niż 100 znaków</string>
     <string name="less_than_10">Pole musi zawierać mniej niż 10 znaków</string>
+    <string name="beginer">Początkujący</string>
+    <string name="intermediate">średnio-zaawansowany</string>
+    <string name="advanced">Zaawansowany</string>
+    <string name="no_equipment">Brak sprzętu</string>
+    <string name="small_equipment">Niewielki sprzęt</string>
+    <string name="exercise_machines">Maszyny do ćwiczeń</string>
+    <string name="warmup">Rozgrzewka</string>
+    <string name="cardio">Kardio</string>
+    <string name="strength_exercise">Siłowe</string>
 </resources>

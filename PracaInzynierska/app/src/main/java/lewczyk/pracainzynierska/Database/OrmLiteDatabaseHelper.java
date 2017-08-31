@@ -25,10 +25,12 @@ import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseType;
 import lewczyk.pracainzynierska.DatabaseTables.TrainingPlan;
 import lewczyk.pracainzynierska.DatabaseTables.UserNote;
+import lewczyk.pracainzynierska.R;
 
 public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private static OrmLiteDatabaseHelper instance;
+    private Context context;
 
     private static final String DATABASE_NAME = "SportApp.db";
     private static final int DATABASE_VERSION = 1;
@@ -49,6 +51,7 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private OrmLiteDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+        this.context = context;
     }
 
     public static OrmLiteDatabaseHelper getInstance(Context context) {
@@ -62,7 +65,86 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         Log.d("database", "onCreate start");
         recreateTables();
+      /*  createDifficultLevelData();
+        createEquipmentRequirementData();
+        createExerciseTypeData();
+        createExerciseData();
+        createTrainingPlanData();*/
+        fillTables();
         Log.d("database", "onCreate end");
+    }
+
+    private void fillTables() {
+        ExerciseType warmup = new ExerciseType(context.getString(R.string.warmup));
+        ExerciseType cardio = new ExerciseType(context.getString(R.string.cardio));
+        ExerciseType strength_exercise = new ExerciseType(context.getString(R.string.strength_exercise));
+
+        ExerciseTypeRepository.addExerciseType(context, warmup);
+        ExerciseTypeRepository.addExerciseType(context, cardio);
+        ExerciseTypeRepository.addExerciseType(context, strength_exercise);
+
+        EquipmentRequirement noEq = new EquipmentRequirement(context.getString(R.string.no_equipment));
+        EquipmentRequirement smallEq = new EquipmentRequirement(context.getString(R.string.small_equipment));
+        EquipmentRequirement machine = new EquipmentRequirement(context.getString(R.string.exercise_machines));
+
+        EquipmentRequirementRepository.addEquipmentRequirement(context, noEq);
+        EquipmentRequirementRepository.addEquipmentRequirement(context, smallEq);
+        EquipmentRequirementRepository.addEquipmentRequirement(context, machine);
+
+        DifficultLevel beginer = new DifficultLevel(context.getString(R.string.beginer));
+        DifficultLevel intermediate = new DifficultLevel(context.getString(R.string.intermediate));
+        DifficultLevel advanced = new DifficultLevel(context.getString(R.string.advanced));
+
+        DifficultLevelRepository.addDifficultLevel(context, beginer);
+        DifficultLevelRepository.addDifficultLevel(context, intermediate);
+        DifficultLevelRepository.addDifficultLevel(context, advanced);
+
+        Exercise ex1 = new Exercise("Kaptury", "Szyja", "Hantle w dłonie i wzruszaj ramionami", beginer, smallEq, strength_exercise);
+        Exercise ex2 = new Exercise("Drążek", "Plecy", "Podciągnięcia na drążku", intermediate, noEq, warmup);
+        Exercise ex3 = new Exercise("Laweczka", "Klata", "Machanie gryfem", advanced, machine, cardio);
+
+        ExerciseRepository.addExercise(context, ex1);
+        ExerciseRepository.addExercise(context, ex2);
+        ExerciseRepository.addExercise(context, ex3);
+
+        TrainingPlan trainingPlan = new TrainingPlan("Plecy");
+
+        TrainingPlanRepository.addTrainingPlan(context, trainingPlan);
+
+        ExerciseInTrainingPlan exer1 = new ExerciseInTrainingPlan(trainingPlan, ex1, 3, 12, 15.0);
+        ExerciseInTrainingPlan exer2 = new ExerciseInTrainingPlan(trainingPlan, ex2, 2, 15, 0.0);
+
+        ExerciseInTrainingPlanRepository.addExerciseInTrainingPlan(context, exer1);
+        ExerciseInTrainingPlanRepository.addExerciseInTrainingPlan(context, exer2);
+
+        ExerciseArchiveRepository.addExerciseArchive(context, new ExerciseArchive(3, 4, 3.5, "20170831", 150, ex1));
+
+    }
+
+    private void createTrainingPlanData() {
+
+    }
+
+    private void createExerciseData() {
+      //  ExerciseRepository.addExercise(context, new Exercise("Kaptur", "Szyja", "Hantle w dłonie i wzruszaj ramionami",));
+    }
+
+    private void createExerciseTypeData() {
+        ExerciseTypeRepository.addExerciseType(context, new ExerciseType(context.getString(R.string.warmup)));
+        ExerciseTypeRepository.addExerciseType(context, new ExerciseType(context.getString(R.string.cardio)));
+        ExerciseTypeRepository.addExerciseType(context, new ExerciseType(context.getString(R.string.strength_exercise)));
+    }
+
+    private void createEquipmentRequirementData() {
+        EquipmentRequirementRepository.addEquipmentRequirement(context, new EquipmentRequirement(context.getString(R.string.no_equipment)));
+        EquipmentRequirementRepository.addEquipmentRequirement(context, new EquipmentRequirement(context.getString(R.string.small_equipment)));
+        EquipmentRequirementRepository.addEquipmentRequirement(context, new EquipmentRequirement(context.getString(R.string.exercise_machines)));
+    }
+
+    private void createDifficultLevelData() {
+        DifficultLevelRepository.addDifficultLevel(context, new DifficultLevel(context.getString(R.string.beginer)));
+        DifficultLevelRepository.addDifficultLevel(context, new DifficultLevel(context.getString(R.string.intermediate)));
+        DifficultLevelRepository.addDifficultLevel(context, new DifficultLevel(context.getString(R.string.advanced)));
     }
 
     @Override

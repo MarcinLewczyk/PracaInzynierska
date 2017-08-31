@@ -22,12 +22,11 @@ import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeDetailsActivity extends AppCompatActivity {
     private long purposeId;
-    private String msg;
     @BindView(R.id.exercisePurposeTextView)
     TextView purposeTitle;
     @BindView(R.id.exercisePurposeCurrTextView)
     TextView purposeState;
-    ForeignCollection<ExercisePurposeArchive> archive;
+    private ForeignCollection<ExercisePurposeArchive> archive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
 
     private void loadStrings() {
         setTitle(getString(R.string.purpose_details));
-        msg  = getString(R.string.no_data);
+        String msg = getString(R.string.no_data);
 
         if(purposeId == -1){
             purposeTitle.setText(msg);

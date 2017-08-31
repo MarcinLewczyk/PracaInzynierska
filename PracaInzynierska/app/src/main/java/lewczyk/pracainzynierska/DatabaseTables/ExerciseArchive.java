@@ -3,8 +3,6 @@ package lewczyk.pracainzynierska.DatabaseTables;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.util.Date;
-
 @DatabaseTable(tableName = "exercisesArchive")
 public class ExerciseArchive {
 
@@ -18,10 +16,10 @@ public class ExerciseArchive {
     private int repeats;
 
     @DatabaseField
-    private int load;
+    private double load;
 
     @DatabaseField(canBeNull = false)
-    private Date date;
+    private String date;
 
     @DatabaseField(canBeNull = false)
     private int time;
@@ -32,7 +30,7 @@ public class ExerciseArchive {
     public ExerciseArchive() {
     }
 
-    public ExerciseArchive(int series, int repeats, int load, Date date, int time, Exercise exercise) {
+    public ExerciseArchive(int series, int repeats, double load, String date, int time, Exercise exercise) {
         this.series = series;
         this.repeats = repeats;
         this.load = load;
@@ -61,19 +59,19 @@ public class ExerciseArchive {
         this.repeats = repeats;
     }
 
-    public int getLoad() {
+    public double getLoad() {
         return load;
     }
 
-    public void setLoad(int load) {
+    public void setLoad(double load) {
         this.load = load;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

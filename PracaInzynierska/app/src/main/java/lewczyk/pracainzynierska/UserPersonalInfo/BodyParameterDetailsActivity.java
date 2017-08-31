@@ -22,12 +22,10 @@ import lewczyk.pracainzynierska.R;
 
 public class BodyParameterDetailsActivity extends AppCompatActivity {
     private long parameterId;
-    private String msg;
     @BindView(R.id.bodyParameterTextView)
     TextView parameterTitle;
     @BindView(R.id.bodyParameterCurrTextView)
     TextView parameterState;
-    ForeignCollection<BodyParameterArchive> archive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +37,10 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         loadStrings();
-
     }
 
     private void loadStrings() {
-        msg  = getString(R.string.no_data);
+        String msg = getString(R.string.no_data);
         setTitle(getString(R.string.parameter_detail));
 
         if(parameterId == -1){
@@ -52,7 +49,7 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
             BodyParameter tmp = BodyParameterRepository.findById(this, parameterId);
             parameterTitle.setText(tmp.getMuscleName());
             parameterState.setText(Double.toString(tmp.getCircumference()));
-            archive = tmp.getParametersArchive();
+            ForeignCollection<BodyParameterArchive> archive = tmp.getParametersArchive();
             ArrayList<BodyParameterArchive> toAdapter = new ArrayList<>();
             for(BodyParameterArchive e: archive){
                 toAdapter.add(e);

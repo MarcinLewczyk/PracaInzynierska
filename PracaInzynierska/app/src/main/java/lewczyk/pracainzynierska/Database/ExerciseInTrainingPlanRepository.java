@@ -36,7 +36,7 @@ public class ExerciseInTrainingPlanRepository {
         databaseHelper.getExerciseInTrainingPlanDao().delete(exerciseInTrainingPlan);
     }
 
-    //Possibly can be replaced with QueryBuilder from orm
+    //Possibly could be replaced with QueryBuilder from orm
     public static List<Exercise> findAllWithGivenTrainingPlan(Context context, TrainingPlan trainingPlan){
         OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
         List<Exercise> filteredList = new ArrayList<>();

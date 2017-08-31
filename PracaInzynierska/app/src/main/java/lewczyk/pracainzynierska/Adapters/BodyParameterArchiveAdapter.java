@@ -13,11 +13,9 @@ import lewczyk.pracainzynierska.DatabaseTables.BodyParameterArchive;
 import lewczyk.pracainzynierska.R;
 
 public class BodyParameterArchiveAdapter extends ArrayAdapter<BodyParameterArchive> {
-    private Context context;
 
     public BodyParameterArchiveAdapter(ArrayList<BodyParameterArchive> exercisePurposes, Context context){
         super(context, R.layout.single_list_text_view,exercisePurposes);
-        this.context = context;
     }
 
     private static class ViewHolder{

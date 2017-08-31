@@ -22,12 +22,12 @@ public class ExerciseInTrainingPlan {
     private int repeats;
 
     @DatabaseField(canBeNull = false)
-    private int load;
+    private double load;
 
     public ExerciseInTrainingPlan() {
     }
 
-    public ExerciseInTrainingPlan(TrainingPlan trainingPlan, Exercise exercise, int series, int repeats, int load) {
+    public ExerciseInTrainingPlan(TrainingPlan trainingPlan, Exercise exercise, int series, int repeats, double load) {
         this.trainingPlan = trainingPlan;
         this.exercise = exercise;
         this.series = series;
@@ -71,11 +71,11 @@ public class ExerciseInTrainingPlan {
         this.repeats = repeats;
     }
 
-    public int getLoad() {
+    public double getLoad() {
         return load;
     }
 
-    public void setLoad(int load) {
+    public void setLoad(double load) {
         this.load = load;
     }
 }

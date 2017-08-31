@@ -14,7 +14,6 @@ import lewczyk.pracainzynierska.R;
 public class UserNoteDetailsActivity extends AppCompatActivity {
     private long noteId;
     private String msg;
-    private String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
     @BindView(R.id.noteDetailsWebView) WebView noteDetails;
 
     @Override
@@ -28,6 +27,7 @@ public class UserNoteDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         noteId = intent.getLongExtra("noteId", -1);
 
+        String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
         if(noteId == -1){
             noteDetails.loadData(String.format(htmlParam, msg), "text/html", "utf-8");
         } else {

@@ -51,7 +51,7 @@ public class UserNoteEditActivity extends AppCompatActivity {
         }
     }
 
-    public void moveToUserNoteList(){
+    private void moveToUserNoteList(){
         Intent intent = new Intent(getApplicationContext(), UserNoteListActivity.class);
         startActivity(intent);
         finish();
