@@ -11,5 +11,6 @@ public class CoachExerciseListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_exercise_list);
+        setTitle(getString(R.string.exercises_list));
     }
 }

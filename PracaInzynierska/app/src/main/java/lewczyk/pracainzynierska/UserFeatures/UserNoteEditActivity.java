@@ -39,13 +39,12 @@ public class UserNoteEditActivity extends AppCompatActivity {
 
     @OnClick(R.id.userNoteEditSaveButton)
     public void save(){
-        validateFields();
-        if(userNoteEditText.length() > 0 && noteId == -1 && userNoteEditText.length() < 300){
-            UserNoteRepository.addUserNote(getApplicationContext(), new UserNote(userNoteEditText.toString()));
+        if(validateFields() && noteId == -1){
+            UserNoteRepository.addUserNote(getApplicationContext(), new UserNote(userNoteEditText.getText().toString()));
             moveToUserNoteList();
-        } else if(userNoteEditText.length() > 0 && noteId != -1){
+        } else if(validateFields() && noteId != -1){
             UserNote edited = UserNoteRepository.findById(this, noteId);
-            edited.setText(userNoteEditText.toString());
+            edited.setText(userNoteEditText.getText().toString());
             UserNoteRepository.updateUserNote(getApplicationContext(), edited);
             moveToUserNoteList();
         }
@@ -57,13 +56,16 @@ public class UserNoteEditActivity extends AppCompatActivity {
         finish();
     }
 
-    private void validateFields() {
-        if(userNoteEditText.length() == 0){
+    private boolean validateFields() {
+        if(userNoteEditText.getText().length() == 0){
             userNoteEditText.setError(getString(R.string.more_than_0_characters_required));
-        } else if(userNoteEditText.length() >= 300) {
+            return false;
+        } else if(userNoteEditText.getText().length() >= 300) {
             userNoteEditText.setError(getString(R.string.less_than_300));
+            return false;
         } else {
             userNoteEditText.setError(null);
+            return true;
         }
     }
 

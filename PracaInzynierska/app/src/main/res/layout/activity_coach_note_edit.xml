@@ -3,20 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lewczyk.pracainzynierska.CoachFeatures.CoachNoteListActivity">
+    tools:context="lewczyk.pracainzynierska.CoachFeatures.CoachNoteEditActivity">
 
-    <ListView
-        android:id="@+id/coachNoteListView"
+    <EditText
+        android:id="@+id/coachNoteEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/coachNoteAddButton"
+        android:id="@+id/coachNoteEditSaveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/save"
         android:background="@android:color/transparent"
-        android:text="@string/add_new"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

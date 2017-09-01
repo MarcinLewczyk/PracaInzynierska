@@ -62,4 +62,6 @@
     <string name="load">Obciążenie</string>
     <string name="order_exercise">Zadaj ćwiczenie</string>
     <string name="exercise_list">Lista ćwiczeń</string>
+    <string name="exercises_list">Lista ćwiczeń</string>
+    <string name="exercises_list_to_do">Lista zadanych ćwiczeń</string>
 </resources>
