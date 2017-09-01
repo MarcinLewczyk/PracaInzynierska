@@ -7,7 +7,7 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.CoachExercise.CoachExerciseListActivity;
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoListActivity;
 import lewczyk.pracainzynierska.CoachFeatures.CoachNoteListActivity;
 import lewczyk.pracainzynierska.R;
 
@@ -23,7 +23,7 @@ public class CoachMainMenuActivity extends AppCompatActivity {
 
     @OnClick(R.id.coachExerciseToDoButton)
     public void moveToExerciseToDo(){
-        Intent intent = new Intent(getApplicationContext(), CoachExerciseToDoActivity.class);
+        Intent intent = new Intent(getApplicationContext(), CoachExerciseToDoListActivity.class);
         startActivity(intent);
     }
 

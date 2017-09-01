@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.CoachExercise.CoachExerciseListActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ListView
+        android:id="@+id/coachExerciseListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
+    <Button
+        android:id="@+id/coachExerciseAddButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/add"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

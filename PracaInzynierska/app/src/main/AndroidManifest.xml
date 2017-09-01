@@ -33,9 +33,12 @@
         <activity android:name=".UserFeatures.ArchiveDetailActivity" />
         <activity android:name=".CoachFeatures.CoachNoteListActivity" />
         <activity android:name=".CoachExercise.CoachExerciseListActivity" />
-        <activity android:name=".CoachExercise.CoachExerciseToDoActivity" />
+        <activity android:name=".CoachExercise.CoachExerciseToDoListActivity" />
         <activity android:name=".CoachFeatures.CoachNoteEditActivity" />
-        <activity android:name=".CoachFeatures.CoachNoteDetailsActivity"></activity>
+        <activity android:name=".CoachFeatures.CoachNoteDetailsActivity" />
+        <activity android:name=".CoachExercise.CoachExerciseToDoDetailActivity" />
+        <activity android:name=".CoachExercise.CoachExerciseToDoNewActivity" />
+        <activity android:name=".CoachExercise.CoachNewExerciseActivity"></activity>
     </application>
 
 </manifest>

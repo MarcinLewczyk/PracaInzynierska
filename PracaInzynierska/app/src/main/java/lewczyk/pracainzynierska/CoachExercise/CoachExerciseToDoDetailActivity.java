@@ -5,12 +5,11 @@ import android.os.Bundle;
 
 import lewczyk.pracainzynierska.R;
 
-public class CoachExerciseToDoActivity extends AppCompatActivity {
+public class CoachExerciseToDoDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coach_exercise_to_do);
-        setTitle(getString(R.string.exercises_list_to_do));
+        setContentView(R.layout.activity_coach_exercise_to_do_detail);
     }
 }
