@@ -30,7 +30,10 @@
         <activity android:name=".UserPersonalInfo.BodyParameterListActivity" />
         <activity android:name=".UserPersonalInfo.BodyParameterDetailsActivity" />
         <activity android:name=".UserPersonalInfo.BodyParameterEditActivity" />
-        <activity android:name=".UserFeatures.ArchiveDetailActivity"></activity>
+        <activity android:name=".UserFeatures.ArchiveDetailActivity" />
+        <activity android:name=".CoachFeatures.CoachNoteListActivity" />
+        <activity android:name=".CoachExercise.CoachExerciseListActivity" />
+        <activity android:name=".CoachExercise.CoachExerciseToDoActivity"></activity>
     </application>
 
 </manifest>

@@ -52,4 +52,14 @@
     <string name="warmup">Rozgrzewka</string>
     <string name="cardio">Kardio</string>
     <string name="strength_exercise">Siłowe</string>
+    <string name="exercise_archive_details">Archiwum - szczegóły</string>
+    <string name="exercise_name">Nazwa ćwiczenia</string>
+    <string name="muscle_part">Partia mięśni</string>
+    <string name="date">Data</string>
+    <string name="time">Czas</string>
+    <string name="series">Liczba serii</string>
+    <string name="repeats_in_set">Powtórzenia w serii</string>
+    <string name="load">Obciążenie</string>
+    <string name="order_exercise">Zadaj ćwiczenie</string>
+    <string name="exercise_list">Lista ćwiczeń</string>
 </resources>

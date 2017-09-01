@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.MainMenus.CoachMainMenuActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/coachExerciseToDoButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/order_exercise"
+        android:textSize="25dp"
+        android:background="@android:color/transparent"
+        android:layout_above="@+id/coachExerciseListButton"/>
+
+    <Button
+        android:id="@+id/coachExerciseListButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exercise_list"
+        android:textSize="25dp"
+        android:background="@android:color/transparent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <Button
+        android:id="@+id/coachNotesListButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:layout_below="@id/coachExerciseListButton"
+        android:background="@android:color/transparent"
+        android:text="@string/notes"/>
+
+</RelativeLayout>

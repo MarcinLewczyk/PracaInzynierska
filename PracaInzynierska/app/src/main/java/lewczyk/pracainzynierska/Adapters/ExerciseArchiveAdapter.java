@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ExerciseArchiveAdapter extends ArrayAdapter<ExerciseArchive>{
     private static class ViewHolder{
         TextView exerciseTextView;
         TextView dateTextView;
+        LinearLayout layout;
     }
 
     @Override
@@ -41,6 +43,7 @@ public class ExerciseArchiveAdapter extends ArrayAdapter<ExerciseArchive>{
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.double_list_text_view, parent, false);
             viewHolder.exerciseTextView = convertView.findViewById(R.id.listTitleDoubleTextView);
             viewHolder.dateTextView = convertView.findViewById(R.id.listSecondPlaceDoubleTextView);
+            viewHolder.layout = convertView.findViewById(R.id.doubleListLinearLayout);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -51,23 +54,10 @@ public class ExerciseArchiveAdapter extends ArrayAdapter<ExerciseArchive>{
         } else {
             viewHolder.exerciseTextView.setText(exercise.getExerciseName());
         }
-        viewHolder.dateTextView.setText(dataModel.getDate());
+        String datePreFormat = dataModel.getDate();
+        viewHolder.dateTextView.setText(datePreFormat.substring(0,4)+"."+datePreFormat.substring(4,6)+"."+datePreFormat.substring(6,8));
 
-        viewHolder.exerciseTextView.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ArchiveDetailActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("exerciseArchiveId", dataModel.getId());
-                view.getContext().startActivity(intent);
-
-                //Without this, after back button pressed, adapter's list could show data that have been deleted
-                // which could lead to nullPointer
-                ((ArchiveListActivity)context).finish();
-            }
-        });
-        viewHolder.dateTextView.setOnClickListener(new View.OnClickListener(){
+        viewHolder.layout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
