@@ -65,4 +65,6 @@
     <string name="exercises_list">Lista ćwiczeń</string>
     <string name="exercises_list_to_do">Lista zadanych ćwiczeń</string>
     <string name="add">Dodaj</string>
+    <string name="search">Szukaj</string>
+    <string name="no_filter">Brak filtra</string>
 </resources>

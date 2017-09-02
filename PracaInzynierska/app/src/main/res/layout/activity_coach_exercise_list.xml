@@ -5,10 +5,37 @@
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.CoachExercise.CoachExerciseListActivity">
 
+    <Spinner
+        android:id="@+id/coachExerciseDifficultLevelSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <Spinner
+        android:id="@+id/coachExerciseEquipmentRequirementSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseDifficultLevelSpinner"/>
+
+    <Spinner
+        android:id="@+id/coachExerciseTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseEquipmentRequirementSpinner"/>
+
+    <Button
+        android:id="@+id/coachExerciseListSearchButton"
+        android:layout_below="@+id/coachExerciseTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/search"/>
+
     <ListView
         android:id="@+id/coachExerciseListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseListSearchButton">
     </ListView>
 
     <Button
