@@ -20,7 +20,6 @@ import lewczyk.pracainzynierska.Database.EquipmentRequirementRepository;
 import lewczyk.pracainzynierska.Database.ExerciseRepository;
 import lewczyk.pracainzynierska.Database.ExerciseTypeRepository;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
-import lewczyk.pracainzynierska.DatabaseTables.ExerciseType;
 import lewczyk.pracainzynierska.R;
 
 public class CoachExerciseListActivity extends AppCompatActivity{
@@ -62,6 +61,10 @@ public class CoachExerciseListActivity extends AppCompatActivity{
         difficultSpinner.setAdapter(difficultAdapter);
         equipmentSpinner.setAdapter(equipmentAdapter);
         typeSpinner.setAdapter(typeAdapter);
+
+        difficultSpinner.setSelection(difficultCategories.size() - 1);
+        equipmentSpinner.setSelection(equipmentCategories.size() - 1);
+        typeSpinner.setSelection(typeCategories.size() - 1);
     }
 
     private void setListViewContent(ArrayList<Exercise> coachExerciseList) {

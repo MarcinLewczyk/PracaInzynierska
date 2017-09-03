@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lewczyk.pracainzynierska.CoachExercise.CoachExerciseDetailActivity">
+
+    <TextView
+        android:id="@+id/coachExerciseNameDetailTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="20dp"
+        android:text="@string/exercise_name"/>
+
+    <TextView
+        android:id="@+id/coachExerciseNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/coachExerciseNameDetailTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseMusclePartDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/muscle_part"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseNameTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseMusclePartTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseMusclePartDetailTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseDifficultLevelDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/difficult_level"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseMusclePartTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseDifficultLevelTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseDifficultLevelDetailTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseEquipmentRequirementDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/equipment_requirement"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseDifficultLevelTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseEquipmentRequirementTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseEquipmentRequirementDetailTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseExerciseTypeDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exercise_type"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseEquipmentRequirementTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseExerciseTypeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseExerciseTypeDetailTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseDemonstrationDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/demonstration"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseExerciseTypeTextView"/>
+
+    <WebView
+        android:id="@+id/coachExerciseDemonstrationWebView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseDemonstrationDetailTextView"
+        android:background="@android:color/transparent">
+    </WebView>
+
+    <Button
+        android:id="@+id/coachExerciseModButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/modify"
+        android:layout_above="@+id/coachExerciseDelButton"/>
+
+    <Button
+        android:id="@+id/coachExerciseDelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

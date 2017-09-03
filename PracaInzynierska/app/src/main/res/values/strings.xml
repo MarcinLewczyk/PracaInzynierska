@@ -67,4 +67,9 @@
     <string name="add">Dodaj</string>
     <string name="search">Szukaj</string>
     <string name="no_filter">Brak filtra</string>
+    <string name="exercise_details">Cwiczenie - szczegóły</string>
+    <string name="difficult_level">Poziom trudności</string>
+    <string name="equipment_requirement">Wymaganie sprzętowe</string>
+    <string name="exercise_type">Typ ćwiczenia</string>
+    <string name="demonstration">Demonstracja</string>
 </resources>

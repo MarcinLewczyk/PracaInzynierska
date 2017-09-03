@@ -112,7 +112,7 @@ canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=difficultLevel
-columnName=diffcult
+columnName=difficult
 canBeNull=false
 foreign=true
 # --field-end--

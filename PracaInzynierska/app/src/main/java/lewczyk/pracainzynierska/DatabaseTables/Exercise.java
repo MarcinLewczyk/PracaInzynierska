@@ -5,7 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "exercises")
 public class Exercise {
-    public static final String DIFF_LEVEL_COLUMN_NAME = "diffcult";
+    public static final String DIFF_LEVEL_COLUMN_NAME = "difficult";
     public static final String EQUIPMENT_REQ_COLUMN_NAME = "equipment";
     public static final String EXERCISE_TYPE_COLUMN_NAME = "exerciseType";
 
