@@ -19,6 +19,10 @@ public class UserMainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main_menu);
         ButterKnife.bind(this);
+        setViewSettings();
+    }
+
+    private void setViewSettings() {
         setTitle(R.string.user_menu);
     }
 

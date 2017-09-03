@@ -18,10 +18,12 @@ public class ArchiveListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive_list);
+        setViewSettings();
+    }
+
+    private void setViewSettings() {
         setTitle(R.string.archive);
-
         ListView archiveList = (ListView) findViewById(R.id.exerciseArchiveListView);
-
         ArrayList<ExerciseArchive> exerciseArchives = (ArrayList)ExerciseArchiveRepository.findAll(this);
         Collections.reverse(exerciseArchives);
         ExerciseArchiveAdapter adapter = new ExerciseArchiveAdapter(exerciseArchives, this);

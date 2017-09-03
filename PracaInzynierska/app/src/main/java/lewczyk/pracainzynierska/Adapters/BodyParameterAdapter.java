@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class BodyParameterAdapter extends ArrayAdapter<BodyParameter> {
 
     private static class ViewHolder{
         TextView bodyParameterTextView;
+        LinearLayout layout;
     }
 
     @Override
@@ -37,6 +39,7 @@ public class BodyParameterAdapter extends ArrayAdapter<BodyParameter> {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_list_text_view, parent, false);
             viewHolder.bodyParameterTextView = convertView.findViewById(R.id.listTitleTextView);
+            viewHolder.layout = convertView.findViewById(R.id.notesLinearLayout);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -47,7 +50,7 @@ public class BodyParameterAdapter extends ArrayAdapter<BodyParameter> {
         } else {
             viewHolder.bodyParameterTextView.setText(dataModel.getMuscleName());
         }
-        viewHolder.bodyParameterTextView.setOnClickListener(new View.OnClickListener(){
+        viewHolder.layout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {

@@ -31,12 +31,12 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_exercise_detail);
         ButterKnife.bind(this);
-        Intent intent = getIntent();
-        exerciseId = intent.getLongExtra("exerciseId", -1);
         loadStrings();
     }
 
     private void loadStrings() {
+        Intent intent = getIntent();
+        exerciseId = intent.getLongExtra("exerciseId", -1);
         setTitle(getString(R.string.exercise_details));
         String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
         if(exerciseId == -1){
@@ -66,14 +66,16 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
     public void delExercise(){
         if(exerciseId != -1){
             ExerciseRepository.deleteExercise(getApplicationContext(), ExerciseRepository.findById(this, exerciseId));
-            Intent intent = new Intent(getApplicationContext(), CoachExerciseListActivity.class);
-            startActivity(intent);
-            finish();
+            moveToCoachExerciseListActivity();
         }
     }
 
     @Override
     public void onBackPressed(){
+        moveToCoachExerciseListActivity();
+    }
+
+    public void moveToCoachExerciseListActivity(){
         Intent intent = new Intent(getApplicationContext(), CoachExerciseListActivity.class);
         startActivity(intent);
         finish();

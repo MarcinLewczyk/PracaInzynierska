@@ -33,9 +33,12 @@ public class CoachExerciseListActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_exercise_list);
-        setTitle(getString(R.string.exercises_list));
         ButterKnife.bind(this);
+        setViewSettings();
+    }
 
+    private void setViewSettings() {
+        setTitle(getString(R.string.exercises_list));
         setSpinnersContent();
     }
 
@@ -82,7 +85,8 @@ public class CoachExerciseListActivity extends AppCompatActivity{
     @OnClick(R.id.coachExerciseListSearchButton)
     public void searchButton(){
         ArrayList<Exercise> coachExerciseList = (ArrayList) ExerciseRepository.filterList(ExerciseRepository.findAll(this),
-                ExerciseTypeRepository.findByName(this, selectedType), DifficultLevelRepository.findByName(this, selectedDifficult), EquipmentRequirementRepository.findByName(this, selectedEquipment));
+                ExerciseTypeRepository.findByName(this, selectedType), DifficultLevelRepository.findByName(this, selectedDifficult),
+                EquipmentRequirementRepository.findByName(this, selectedEquipment));
         setListViewContent(coachExerciseList);
     }
 

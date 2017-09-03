@@ -20,11 +20,13 @@ public class ExercisePurposeListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_purpose_list);
-        setTitle(R.string.exercise_purposes);
         ButterKnife.bind(this);
+        setViewSettings();
+    }
 
+    private void setViewSettings() {
+        setTitle(R.string.exercise_purposes);
         ListView exercisePurposesListView = (ListView) findViewById(R.id.exercisePurposeListView);
-
         ArrayList<ExercisePurpose> exercisePurposesList = (ArrayList) ExercisePurposeRepository.findAll(this);
         ExercisePurposeAdapter adapter = new ExercisePurposeAdapter(exercisePurposesList, this);
         exercisePurposesListView.setAdapter(adapter);
@@ -33,7 +35,7 @@ public class ExercisePurposeListActivity extends AppCompatActivity {
     @OnClick(R.id.exercisePurposeAddButton)
     public void moveToEditExercisePurpose(){
         Intent intent = new Intent(getApplicationContext(), ExercisePurposeEditActivity.class);
-        intent.putExtra("purposeId", -1L);
+        intent.putExtra("purposeId", -1);
         startActivity(intent);
         finish();
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class UserNoteAdapter extends ArrayAdapter<UserNote>{
 
     private static class ViewHolder{
         TextView noteDesc;
+        LinearLayout layout;
     }
 
     @Override
@@ -37,18 +39,19 @@ public class UserNoteAdapter extends ArrayAdapter<UserNote>{
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_list_text_view, parent, false);
             viewHolder.noteDesc = convertView.findViewById(R.id.listTitleTextView);
+            viewHolder.layout = convertView.findViewById(R.id.notesLinearLayout);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         if(dataModel.getText().length() >= 25){
-            viewHolder.noteDesc.setText(dataModel.getText().substring(0,30));
+            viewHolder.noteDesc.setText(dataModel.getText().substring(0,25));
         } else {
             viewHolder.noteDesc.setText(dataModel.getText());
         }
 
-        viewHolder.noteDesc.setOnClickListener(new View.OnClickListener(){
+        viewHolder.layout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {

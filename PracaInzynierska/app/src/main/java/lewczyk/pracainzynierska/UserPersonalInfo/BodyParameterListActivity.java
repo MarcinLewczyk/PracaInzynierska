@@ -20,12 +20,13 @@ public class BodyParameterListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_body_parameter_list);
-        setTitle(getString(R.string.parameters));
-
         ButterKnife.bind(this);
+        setViewSettings();
+    }
 
+    private void setViewSettings() {
+        setTitle(getString(R.string.parameters));
         ListView bodyParameterListView = (ListView) findViewById(R.id.bodyParameterListView);
-
         ArrayList<BodyParameter> bodyParametersList = (ArrayList) BodyParameterRepository.findAll(this);
         BodyParameterAdapter adapter = new BodyParameterAdapter(bodyParametersList, this);
         bodyParameterListView.setAdapter(adapter);

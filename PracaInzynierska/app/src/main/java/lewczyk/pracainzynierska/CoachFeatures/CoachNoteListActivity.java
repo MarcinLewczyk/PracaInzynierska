@@ -20,11 +20,13 @@ public class CoachNoteListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_note_list);
-        setTitle(getString(R.string.notes));
         ButterKnife.bind(this);
+        setViewSettings();
+    }
 
+    private void setViewSettings() {
+        setTitle(getString(R.string.notes));
         ListView notesList = (ListView) findViewById(R.id.coachNoteListView);
-
         ArrayList<CoachNote> coachNoteList = (ArrayList) CoachNoteRepository.findAll(this);
         CoachNoteAdapter adapter = new CoachNoteAdapter(coachNoteList, this);
         notesList.setAdapter(adapter);

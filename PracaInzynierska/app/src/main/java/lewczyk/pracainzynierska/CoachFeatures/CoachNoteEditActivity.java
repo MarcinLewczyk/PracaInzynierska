@@ -14,26 +14,24 @@ import lewczyk.pracainzynierska.R;
 
 public class CoachNoteEditActivity extends AppCompatActivity {
     private long noteId;
-    @BindView(R.id.coachNoteEditText)
-    EditText coachNoteEditText;
+    @BindView(R.id.coachNoteEditText) EditText coachNoteEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_note_edit);
-        Intent intent = getIntent();
-        noteId = intent.getLongExtra("noteId", -1);
         ButterKnife.bind(this);
         setViewSettings();
     }
 
     private void setViewSettings() {
+        Intent intent = getIntent();
+        noteId = intent.getLongExtra("noteId", -1);
         if(noteId == -1){
             setTitle(getString(R.string.create_new_note));
         } else {
             setTitle(getString(R.string.edit_note));
-            CoachNote coachNote = CoachNoteRepository.findById(getApplicationContext(), noteId);
-            coachNoteEditText.setText(coachNote.getText());
+            coachNoteEditText.setText(CoachNoteRepository.findById(getApplicationContext(), noteId).getText());
         }
     }
 

@@ -26,8 +26,12 @@ public class ArchiveDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive_detail);
-        setTitle(getString(R.string.exercise_archive_details));
         ButterKnife.bind(this);
+        setViewSettings();
+    }
+
+    private void setViewSettings() {
+        setTitle(getString(R.string.exercise_archive_details));
         loadStrings();
     }
 
@@ -37,7 +41,6 @@ public class ArchiveDetailActivity extends AppCompatActivity {
         if(archiveId != -1){
             ExerciseArchive exerciseArchive = ExerciseArchiveRepository.findById(this, archiveId);
             Exercise exercise = ExerciseRepository.findById(this, exerciseArchive.getExercise().getId());
-
             exerciseName.setText(exercise.getExerciseName());
             musclePart.setText(exercise.getMusclePart());
             String datePreFormat = exerciseArchive.getDate();

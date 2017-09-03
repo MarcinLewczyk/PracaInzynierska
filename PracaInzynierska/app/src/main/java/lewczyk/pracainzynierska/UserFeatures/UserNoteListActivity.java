@@ -20,11 +20,13 @@ public class UserNoteListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_note_list);
-        setTitle(R.string.notes);
         ButterKnife.bind(this);
+        setViewSettings();
+    }
 
+    private void setViewSettings() {
+        setTitle(R.string.notes);
         ListView notesList = (ListView) findViewById(R.id.userNoteListView);
-
         ArrayList<UserNote> userNoteList = (ArrayList) UserNoteRepository.findAll(this);
         UserNoteAdapter adapter = new UserNoteAdapter(userNoteList, this);
         notesList.setAdapter(adapter);

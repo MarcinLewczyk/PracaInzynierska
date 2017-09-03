@@ -14,26 +14,24 @@ import lewczyk.pracainzynierska.R;
 
 public class UserNoteEditActivity extends AppCompatActivity {
     private long noteId;
-    @BindView(R.id.userNoteEditText)
-    EditText userNoteEditText;
+    @BindView(R.id.userNoteEditText) EditText userNoteEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_note_edit);
-        Intent intent = getIntent();
-        noteId = intent.getLongExtra("noteId", -1);
         ButterKnife.bind(this);
         setViewSettings();
     }
 
     private void setViewSettings() {
+        Intent intent = getIntent();
+        noteId = intent.getLongExtra("noteId", -1);
         if(noteId == -1){
             setTitle(getString(R.string.create_new_note));
         } else {
             setTitle(getString(R.string.edit_note));
-            UserNote userNote = UserNoteRepository.findById(getApplicationContext(), noteId);
-            userNoteEditText.setText(userNote.getText());
+            userNoteEditText.setText(UserNoteRepository.findById(getApplicationContext(), noteId).getText());
         }
     }
 
@@ -71,8 +69,6 @@ public class UserNoteEditActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), UserNoteListActivity.class);
-        startActivity(intent);
-        finish();
+        moveToUserNoteList();
     }
 }

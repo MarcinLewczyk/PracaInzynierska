@@ -15,6 +15,10 @@ public class UserPersonalInfoMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_personal_info_menu);
         ButterKnife.bind(this);
+        setViewSettings();
+    }
+
+    private void setViewSettings() {
         setTitle(R.string.personal_info);
     }
 

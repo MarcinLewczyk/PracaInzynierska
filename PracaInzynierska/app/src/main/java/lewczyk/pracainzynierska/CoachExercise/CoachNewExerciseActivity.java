@@ -18,7 +18,6 @@ import lewczyk.pracainzynierska.Database.DifficultLevelRepository;
 import lewczyk.pracainzynierska.Database.EquipmentRequirementRepository;
 import lewczyk.pracainzynierska.Database.ExerciseRepository;
 import lewczyk.pracainzynierska.Database.ExerciseTypeRepository;
-import lewczyk.pracainzynierska.DatabaseTables.DifficultLevel;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.R;
 
@@ -49,7 +48,6 @@ public class CoachNewExerciseActivity extends AppCompatActivity {
             setTitle(getString(R.string.edit_exercise));
             loadStrings();
         }
-        setSpinnersContent();
     }
 
     private void loadStrings() {
@@ -57,8 +55,47 @@ public class CoachNewExerciseActivity extends AppCompatActivity {
         exerciseName.setText(exercise.getExerciseName());
         musclePart.setText(exercise.getMusclePart());
         demonstration.setText(exercise.getDemonstration());
+        setSpinnersContent();
+        difficultSpinner.setSelection(difficultSpinnerPosition(exercise));
+        equipmentSpinner.setSelection(equipmentSpinnerPosition(exercise));
+        typeSpinner.setSelection(typeSpinnerPosition(exercise));
     }
 
+    private int typeSpinnerPosition(Exercise exercise) {
+        List<String> difficultTypes = (ArrayList) ExerciseTypeRepository.findAllNames(this);
+        int position = 0;
+        for(String d: difficultTypes){
+            if(d.equals(ExerciseTypeRepository.findById(this, exercise.getExerciseType().getId()).getName())){
+                break;
+            }
+            position++;
+        }
+        return position;
+    }
+
+    private int equipmentSpinnerPosition(Exercise exercise) {
+        List<String> equipmentCategories = (ArrayList) EquipmentRequirementRepository.findAllNames(this);
+        int position = 0;
+        for(String d: equipmentCategories){
+            if(d.equals(EquipmentRequirementRepository.findById(this, exercise.getEquipmentRequirement().getId()).getName())){
+                break;
+            }
+            position++;
+        }
+        return position;
+    }
+
+    private int difficultSpinnerPosition(Exercise exercise) {
+        List<String> difficultCategories = (ArrayList) DifficultLevelRepository.findAllNames(this);
+        int position = 0;
+        for(String d: difficultCategories){
+            if(d.equals(DifficultLevelRepository.findById(this, exercise.getDifficultLevel().getId()).getName())){
+                break;
+            }
+            position++;
+        }
+        return position;
+    }
 
     private void setSpinnersContent() {
         List<String> difficultCategories = (ArrayList) DifficultLevelRepository.findAllNames(this);
@@ -102,16 +139,20 @@ public class CoachNewExerciseActivity extends AppCompatActivity {
                             EquipmentRequirementRepository.findByName(this, selectedEquipment), ExerciseTypeRepository.findByName(this, selectedType)));
             moveToCoachExerciseList();
         } else if(validateFields() && exerciseId != -1){
-            Exercise edited = ExerciseRepository.findById(this, exerciseId);
-            edited.setExerciseName(exerciseName.getText().toString());
-            edited.setMusclePart(musclePart.getText().toString());
-            edited.setDifficultLevel(DifficultLevelRepository.findByName(this, selectedDifficult));
-            edited.setEquipmentRequirement(EquipmentRequirementRepository.findByName(this, selectedEquipment));
-            edited.setExerciseType(ExerciseTypeRepository.findByName(this, selectedType));
-            edited.setDemonstration(demonstration.getText().toString());
-            ExerciseRepository.updateExercise(this, edited);
+            updateExercise();
             moveToCoachExerciseList();
         }
+    }
+
+    private void updateExercise() {
+        Exercise edited = ExerciseRepository.findById(this, exerciseId);
+        edited.setExerciseName(exerciseName.getText().toString());
+        edited.setMusclePart(musclePart.getText().toString());
+        edited.setDifficultLevel(DifficultLevelRepository.findByName(this, selectedDifficult));
+        edited.setEquipmentRequirement(EquipmentRequirementRepository.findByName(this, selectedEquipment));
+        edited.setExerciseType(ExerciseTypeRepository.findByName(this, selectedType));
+        edited.setDemonstration(demonstration.getText().toString());
+        ExerciseRepository.updateExercise(this, edited);
     }
 
     private void moveToCoachExerciseList() {
@@ -126,24 +167,10 @@ public class CoachNewExerciseActivity extends AppCompatActivity {
     }
 
     private boolean validateFields(){
-        if(exerciseName.getText().length() == 0){
-            exerciseName.setError(getString(R.string.more_than_0_characters_required));
-            return false;
-        } else if(exerciseName.getText().length() >= 100) {
-            exerciseName.setError(getString(R.string.less_than_100));
-            return false;
-        } else {
-            exerciseName.setError(null);
-        }
-        if(musclePart.getText().length() == 0){
-            musclePart.setError(getString(R.string.more_than_0_characters_required));
-            return false;
-        } else if(musclePart.getText().length() >= 100) {
-            musclePart.setError(getString(R.string.less_than_100));
-            return false;
-        } else {
-            musclePart.setError(null);
-        }
+        return validateExerciseName() && validateMusclePart() && validateDemonstration();
+    }
+
+    private boolean validateDemonstration() {
         if(demonstration.getText().length() == 0){
             demonstration.setError(getString(R.string.more_than_0_characters_required));
             return false;
@@ -152,8 +179,33 @@ public class CoachNewExerciseActivity extends AppCompatActivity {
             return false;
         } else {
             demonstration.setError(null);
-
+            return true;
         }
-        return true;
+    }
+
+    private boolean validateMusclePart() {
+        if(musclePart.getText().length() == 0){
+            musclePart.setError(getString(R.string.more_than_0_characters_required));
+            return false;
+        } else if(musclePart.getText().length() >= 100) {
+            musclePart.setError(getString(R.string.less_than_100));
+            return false;
+        } else {
+            musclePart.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateExerciseName() {
+        if(exerciseName.getText().length() == 0){
+            exerciseName.setError(getString(R.string.more_than_0_characters_required));
+            return false;
+        } else if(exerciseName.getText().length() >= 100) {
+            exerciseName.setError(getString(R.string.less_than_100));
+            return false;
+        } else {
+            exerciseName.setError(null);
+            return true;
+        }
     }
 }

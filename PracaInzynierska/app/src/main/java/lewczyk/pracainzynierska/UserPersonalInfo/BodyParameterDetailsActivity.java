@@ -22,29 +22,24 @@ import lewczyk.pracainzynierska.R;
 
 public class BodyParameterDetailsActivity extends AppCompatActivity {
     private long parameterId;
-    @BindView(R.id.bodyParameterTextView)
-    TextView parameterTitle;
-    @BindView(R.id.bodyParameterCurrTextView)
-    TextView parameterState;
+    @BindView(R.id.bodyParameterTextView) TextView parameterTitle;
+    @BindView(R.id.bodyParameterCurrTextView) TextView parameterState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_body_parameter_details);
-        Intent intent = getIntent();
-        parameterId = intent.getLongExtra("parameterId", -1);
-
         ButterKnife.bind(this);
-
         loadStrings();
     }
 
     private void loadStrings() {
-        String msg = getString(R.string.no_data);
+        Intent intent = getIntent();
+        parameterId = intent.getLongExtra("parameterId", -1);
         setTitle(getString(R.string.parameter_detail));
 
         if(parameterId == -1){
-            parameterTitle.setText(msg);
+            parameterTitle.setText(getString(R.string.no_data));
         } else {
             BodyParameter tmp = BodyParameterRepository.findById(this, parameterId);
             parameterTitle.setText(tmp.getMuscleName());
@@ -75,14 +70,16 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
     public void delBodyParameter(){
         if(parameterId != -1){
             BodyParameterRepository.deleteBodyParameter(getApplicationContext(), BodyParameterRepository.findById(this, parameterId));
-            Intent intent = new Intent(getApplicationContext(), BodyParameterListActivity.class);
-            startActivity(intent);
-            finish();
+            moveToBodyParametersList();
         }
     }
 
     @Override
     public void onBackPressed(){
+        moveToBodyParametersList();
+    }
+
+    private void moveToBodyParametersList(){
         Intent intent = new Intent(getApplicationContext(), BodyParameterListActivity.class);
         startActivity(intent);
         finish();

@@ -13,33 +13,26 @@ import lewczyk.pracainzynierska.R;
 
 public class CoachNoteDetailsActivity extends AppCompatActivity {
     private long noteId;
-    private String msg;
-    @BindView(R.id.coachNoteDetailsWebView)
-    WebView noteDetails;
+    @BindView(R.id.coachNoteDetailsWebView) WebView noteDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_note_details);
         ButterKnife.bind(this);
-
         loadStrings();
-
-        Intent intent = getIntent();
-        noteId = intent.getLongExtra("noteId", -1);
-
-        String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
-        if(noteId == -1){
-            noteDetails.loadDataWithBaseURL(null, String.format(htmlParam, msg), "text/html", "utf-8", null);
-        } else {
-            msg = CoachNoteRepository.findById(this, noteId).getText();
-            noteDetails.loadDataWithBaseURL(null, String.format(htmlParam, msg), "text/html", "utf-8", null);
-        }
     }
 
     private void loadStrings() {
-        msg  = getString(R.string.no_data);
         setTitle(R.string.note_details);
+        Intent intent = getIntent();
+        noteId = intent.getLongExtra("noteId", -1);
+        String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
+        if(noteId == -1){
+            noteDetails.loadDataWithBaseURL(null, String.format(htmlParam, getString(R.string.no_data)), "text/html", "utf-8", null);
+        } else {
+            noteDetails.loadDataWithBaseURL(null, String.format(htmlParam, CoachNoteRepository.findById(this, noteId).getText()), "text/html", "utf-8", null);
+        }
     }
 
     @OnClick(R.id.coachNoteDetailsModButton)
@@ -56,14 +49,16 @@ public class CoachNoteDetailsActivity extends AppCompatActivity {
     public void delNote(){
         if(noteId != -1){
             CoachNoteRepository.deleteCoachNote(getApplicationContext(), CoachNoteRepository.findById(this, noteId));
-            Intent intent = new Intent(getApplicationContext(), CoachNoteListActivity.class);
-            startActivity(intent);
-            finish();
+            moveToCoachNoteList();
         }
     }
 
     @Override
     public void onBackPressed(){
+        moveToCoachNoteList();
+    }
+
+    public void moveToCoachNoteList(){
         Intent intent = new Intent(getApplicationContext(),CoachNoteListActivity.class);
         startActivity(intent);
         finish();

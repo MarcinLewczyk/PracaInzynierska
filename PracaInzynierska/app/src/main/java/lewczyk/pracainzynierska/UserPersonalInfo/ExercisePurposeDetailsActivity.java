@@ -22,35 +22,28 @@ import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeDetailsActivity extends AppCompatActivity {
     private long purposeId;
-    @BindView(R.id.exercisePurposeTextView)
-    TextView purposeTitle;
-    @BindView(R.id.exercisePurposeCurrTextView)
-    TextView purposeState;
-    private ForeignCollection<ExercisePurposeArchive> archive;
+    @BindView(R.id.exercisePurposeTextView) TextView purposeTitle;
+    @BindView(R.id.exercisePurposeCurrTextView) TextView purposeState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_purpose_details);
-        Intent intent = getIntent();
-        purposeId = intent.getLongExtra("purposeId", -1);
-
         ButterKnife.bind(this);
-
         loadStrings();
     }
 
     private void loadStrings() {
+        Intent intent = getIntent();
+        purposeId = intent.getLongExtra("purposeId", -1);
         setTitle(getString(R.string.purpose_details));
-        String msg = getString(R.string.no_data);
-
         if(purposeId == -1){
-            purposeTitle.setText(msg);
+            purposeTitle.setText(getString(R.string.no_data));
         } else {
             ExercisePurpose tmp = ExercisePurposeRepository.findById(this, purposeId);
+            ForeignCollection<ExercisePurposeArchive> archive = tmp.getPurposesArchive();
             purposeTitle.setText(tmp.getExercisePurpose());
             purposeState.setText(tmp.getCurrentState());
-            archive = tmp.getPurposesArchive();
             ArrayList<ExercisePurposeArchive> toAdapter = new ArrayList<>();
             for(ExercisePurposeArchive e: archive){
                 toAdapter.add(e);
@@ -76,14 +69,16 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
     public void delExercisePurpose(){
         if(purposeId != -1){
             ExercisePurposeRepository.deleteExercisePurpose(getApplicationContext(), ExercisePurposeRepository.findById(this, purposeId));
-            Intent intent = new Intent(getApplicationContext(), ExercisePurposeListActivity.class);
-            startActivity(intent);
-            finish();
+            moveToPurposeList();
         }
     }
 
     @Override
     public void onBackPressed(){
+        moveToPurposeList();
+    }
+
+    private void moveToPurposeList(){
         Intent intent = new Intent(getApplicationContext(), ExercisePurposeListActivity.class);
         startActivity(intent);
         finish();

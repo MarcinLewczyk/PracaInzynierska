@@ -46,7 +46,7 @@ public class CoachExerciseAdapter extends ArrayAdapter<Exercise> {
         }
 
         if(dataModel.getExerciseName().length() >= 25){
-            viewHolder.exerciseDesc.setText(dataModel.getExerciseName().substring(0,30));
+            viewHolder.exerciseDesc.setText(dataModel.getExerciseName().substring(0,25));
         } else {
             viewHolder.exerciseDesc.setText(dataModel.getExerciseName());
         }
