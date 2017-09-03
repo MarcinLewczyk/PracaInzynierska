@@ -29,7 +29,6 @@ public class CoachExerciseListActivity extends AppCompatActivity{
     @BindView(R.id.coachExerciseListView) ListView exercisesList;
     private String selectedDifficult, selectedEquipment, selectedType;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +49,9 @@ public class CoachExerciseListActivity extends AppCompatActivity{
         equipmentCategories.add(nothing);
         typeCategories.add(nothing);
 
-        ArrayAdapter<String> difficultAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, difficultCategories);
-        ArrayAdapter<String> equipmentAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, equipmentCategories);
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, typeCategories);
+        ArrayAdapter<String> difficultAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultCategories);
+        ArrayAdapter<String> equipmentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, equipmentCategories);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, typeCategories);
 
         difficultAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         equipmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -75,7 +74,7 @@ public class CoachExerciseListActivity extends AppCompatActivity{
     @OnClick(R.id.coachExerciseAddButton)
     public void addNewExercise(){
         Intent intent = new Intent(getApplicationContext(), CoachNewExerciseActivity.class);
-        intent.putExtra("noteId", -1L);
+        intent.putExtra("exerciseId", -1);
         startActivity(intent);
         finish();
     }

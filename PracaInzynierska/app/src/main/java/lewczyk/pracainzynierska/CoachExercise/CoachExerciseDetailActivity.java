@@ -32,14 +32,14 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_coach_exercise_detail);
         ButterKnife.bind(this);
         Intent intent = getIntent();
-        exerciseId = intent.getLongExtra("exerciseId", -1L);
+        exerciseId = intent.getLongExtra("exerciseId", -1);
         loadStrings();
     }
 
     private void loadStrings() {
         setTitle(getString(R.string.exercise_details));
         String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
-        if(exerciseId == -1L){
+        if(exerciseId == -1){
             demonstration.loadData(String.format(htmlParam, getString(R.string.no_data)), "text/html", "utf-8");
         } else {
             Exercise exercise = ExerciseRepository.findById(this, exerciseId);
@@ -48,7 +48,7 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
             difficultLevel.setText(DifficultLevelRepository.findById(this, exercise.getDifficultLevel().getId()).getName());
             equipmentRequirement.setText(EquipmentRequirementRepository.findById(this, exercise.getEquipmentRequirement().getId()).getName());
             exerciseType.setText(ExerciseTypeRepository.findById(this, exercise.getExerciseType().getId()).getName());
-            demonstration.loadData(String.format(htmlParam, exercise.getDemonstration()), "text/html", "utf-8");
+            demonstration.loadDataWithBaseURL(null, String.format(htmlParam, exercise.getDemonstration()), "text/html", "utf-8", null);
         }
     }
 
@@ -56,7 +56,7 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
     public void moveToExerciseMod(){
         if(exerciseId != -1){
             Intent intent = new Intent(getApplicationContext(), CoachNewExerciseActivity.class);
-            intent.putExtra("noteId", exerciseId);
+            intent.putExtra("exerciseId", exerciseId);
             startActivity(intent);
             finish();
         }

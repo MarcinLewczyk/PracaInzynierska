@@ -71,8 +71,6 @@ public class CoachNoteEditActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), CoachNoteListActivity.class);
-        startActivity(intent);
-        finish();
+        moveToCoachNoteList();
     }
 }

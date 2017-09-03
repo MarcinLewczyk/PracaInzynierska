@@ -31,6 +31,11 @@ public class ExerciseRepository {
         databaseHelper.getExerciseDao().create(exercise);
     }
 
+    public static void updateExercise(Context context, Exercise exercise){
+        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
+        databaseHelper.getExerciseDao().update(exercise);
+    }
+
     public static void deleteExercise(Context context, Exercise exercise){
         OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
         databaseHelper.getExerciseDao().delete(exercise);
@@ -81,28 +86,4 @@ public class ExerciseRepository {
         }
         return filteredList;
     }
-
-    //Delete after tests
-    public static List<Exercise> findAllWithFilter(Context context, ExerciseType exerciseType,
-                                                   DifficultLevel difficultLevel, EquipmentRequirement equipmentRequirement){
-
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        List<Exercise> filteredList = new ArrayList<>();
-
-        QueryBuilder<Exercise, Long> qb = databaseHelper.getExerciseDao().queryBuilder();
-        Where where = qb.where();
-        try {
-            where.eq(Exercise.DIFF_LEVEL_COLUMN_NAME, difficultLevel.getName());
-            where.and();
-            where.eq(Exercise.EQUIPMENT_REQ_COLUMN_NAME, equipmentRequirement.getName());
-            where.and();
-            where.eq(Exercise.EXERCISE_TYPE_COLUMN_NAME, exerciseType.getName());
-            filteredList = databaseHelper.getExerciseDao().query(qb.prepare());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return filteredList;
-    }
-
 }

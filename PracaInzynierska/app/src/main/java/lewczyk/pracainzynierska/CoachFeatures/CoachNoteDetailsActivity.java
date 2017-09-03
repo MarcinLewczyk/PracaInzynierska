@@ -30,10 +30,10 @@ public class CoachNoteDetailsActivity extends AppCompatActivity {
 
         String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
         if(noteId == -1){
-            noteDetails.loadData(String.format(htmlParam, msg), "text/html", "utf-8");
+            noteDetails.loadDataWithBaseURL(null, String.format(htmlParam, msg), "text/html", "utf-8", null);
         } else {
             msg = CoachNoteRepository.findById(this, noteId).getText();
-            noteDetails.loadData(String.format(htmlParam, msg), "text/html", "utf-8");
+            noteDetails.loadDataWithBaseURL(null, String.format(htmlParam, msg), "text/html", "utf-8", null);
         }
     }
 

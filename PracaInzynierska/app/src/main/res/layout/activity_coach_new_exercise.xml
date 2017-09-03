@@ -1,9 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.CoachExercise.CoachNewExerciseActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/coachNewExerciseNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="20dp"
+        android:text="@string/exercise_name"/>
+
+    <EditText
+        android:id="@+id/coachNewExerciseNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/coachNewExerciseNameTextView">
+    </EditText>
+
+    <TextView
+        android:id="@+id/coachNewExerciseMusclePartTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/muscle_part"
+        android:textSize="20dp"
+        android:layout_below="@id/coachNewExerciseNameEditText"/>
+
+    <EditText
+        android:id="@+id/coachNewExerciseMusclePartEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachNewExerciseMusclePartTextView">
+    </EditText>
+
+    <TextView
+        android:id="@+id/coachNewExerciseDifficultLevelTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/difficult_level"
+        android:textSize="20dp"
+        android:layout_below="@id/coachNewExerciseMusclePartEditText"/>
+
+    <Spinner
+        android:id="@+id/coachNewExerciseDifficultLevelSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachNewExerciseDifficultLevelTextView"/>
+
+    <TextView
+        android:id="@+id/coachNewExerciseEquipmentRequirementTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/equipment_requirement"
+        android:textSize="20dp"
+        android:layout_below="@id/coachNewExerciseDifficultLevelSpinner"/>
+
+    <Spinner
+        android:id="@+id/coachNewExerciseEquipmentRequirementSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachNewExerciseEquipmentRequirementTextView"/>
+
+    <TextView
+        android:id="@+id/coachNewExerciseTypeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exercise_type"
+        android:textSize="20dp"
+        android:layout_below="@id/coachNewExerciseEquipmentRequirementSpinner"/>
+
+    <Spinner
+        android:id="@+id/coachNewExerciseTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachNewExerciseTypeTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseDemonstrationDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/demonstration"
+        android:textSize="20dp"
+        android:layout_below="@id/coachNewExerciseTypeSpinner"/>
+
+    <EditText
+        android:id="@+id/coachNewExerciseDemonstrationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseDemonstrationDetailTextView">
+    </EditText>
+
+    <Button
+        android:id="@+id/coachNewExerciseAddButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
