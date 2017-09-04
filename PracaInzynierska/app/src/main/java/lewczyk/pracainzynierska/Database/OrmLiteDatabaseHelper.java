@@ -119,6 +119,7 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         ExerciseArchiveRepository.addExerciseArchive(context, new ExerciseArchive(3, 4, 3.5, "20170831", 150, ex1));
 
+        ExerciseToDoRepository.addExerciseToDo(context, new ExerciseToDo(5,5,5.0, "20170904", ex1));
     }
 
     private void createTrainingPlanData() {

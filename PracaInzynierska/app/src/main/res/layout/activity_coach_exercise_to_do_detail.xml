@@ -1,9 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoDetailActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/coachExerciseToDoNameTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="20dp"
+        android:text="@string/exercise_name"/>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/coachExerciseToDoNameTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoMusclePartTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/muscle_part"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseToDoNameTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoMusclePartTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseToDoMusclePartTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoDateTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseToDoMusclePartTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoDateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseToDoDateTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoSeriesTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/series"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseToDoDateTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoSeriesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseToDoSeriesTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoRepeatsTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/repeats_in_set"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseToDoSeriesTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoRepeatsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseToDoRepeatsTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoLoadTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/load"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseToDoRepeatsTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoLoadTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseToDoLoadTitleTextView"/>
+
+    <Button
+        android:id="@+id/coachExerciseToDoDelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

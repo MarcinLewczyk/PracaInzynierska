@@ -76,4 +76,5 @@
     <string name="add_new_exercise">Utwórz nowe ćwiczenie</string>
     <string name="edit_exercise">Edytuj ćwiczenie</string>
     <string name="less_tahn_1000_characters">Pole musi zawierać mniej niż 1000 znaków</string>
+    <string name="exercise_to_do_details">Zadane ćwiczenie - szczegóły</string>
 </resources>

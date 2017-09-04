@@ -20,12 +20,13 @@ public class CoachExerciseToDoListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_exercise_to_do);
-        setTitle(getString(R.string.exercises_list_to_do));
-
+        setViewSettings();
         ButterKnife.bind(this);
+    }
 
+    private void setViewSettings() {
+        setTitle(getString(R.string.exercises_list_to_do));
         ListView exercisesList = (ListView) findViewById(R.id.coachExerciseToDoListView);
-
         ArrayList<ExerciseToDo> coachExerciseToDoList = (ArrayList) ExerciseToDoRepository.findAll(this);
         CoachExerciseToDoAdapter adapter = new CoachExerciseToDoAdapter(coachExerciseToDoList, this);
         exercisesList.setAdapter(adapter);
