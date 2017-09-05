@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoNewActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <Spinner
+        android:id="@+id/coachExerciseToDoDifficultLevelSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <Spinner
+        android:id="@+id/coachExerciseToDoEquipmentRequirementSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseToDoDifficultLevelSpinner"/>
+
+    <Spinner
+        android:id="@+id/coachExerciseToDoTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseToDoEquipmentRequirementSpinner"/>
+
+    <Button
+        android:id="@+id/coachExerciseToDoListSearchButton"
+        android:layout_below="@+id/coachExerciseToDoTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/search"/>
+
+    <ListView
+        android:id="@+id/coachExerciseToDoListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coachExerciseToDoListSearchButton">
+    </ListView>
+
+</RelativeLayout>

@@ -77,4 +77,10 @@
     <string name="edit_exercise">Edytuj ćwiczenie</string>
     <string name="less_tahn_1000_characters">Pole musi zawierać mniej niż 1000 znaków</string>
     <string name="exercise_to_do_details">Zadane ćwiczenie - szczegóły</string>
+    <string name="choose_exercise_to_do">Wybierz ćwiczenie do zadania</string>
+    <string name="set_exercise_to_do_params">Ustaw parametry zadawanego ćwiczenie</string>
+    <string name="day">Dzień</string>
+    <string name="month">Miesiąc</string>
+    <string name="tap_to_choose_date">Dotknij aby wybrać datę</string>
+    <string name="must_be_integer">Musi być to liczba całkowita</string>
 </resources>

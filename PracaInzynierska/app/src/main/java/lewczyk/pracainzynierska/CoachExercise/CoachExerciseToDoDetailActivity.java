@@ -70,6 +70,9 @@ public class CoachExerciseToDoDetailActivity extends AppCompatActivity {
     }
 
     private String transformStringDateToDateFormat(String dateBeforeTransformation){
+        if(dateBeforeTransformation.equals("")){
+            return "";
+        }
         return dateBeforeTransformation.substring(0,4)+"."+dateBeforeTransformation.substring(4,6)+"."+dateBeforeTransformation.substring(6,8);
     }
 }

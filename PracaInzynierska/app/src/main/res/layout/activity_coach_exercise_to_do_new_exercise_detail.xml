@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoNewExerciseDetailActivity">
+
+    <TextView
+        android:id="@+id/coachExerciseToDoNameTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="20dp"
+        android:text="@string/exercise_name"/>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/coachExerciseToDoNameTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoDateTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/day"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseToDoNameTextView"/>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoDateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tap_to_choose_date"
+        android:layout_below="@+id/coachExerciseToDoDateTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoSeriesTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/series"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseToDoDateTextView"/>
+
+    <EditText
+        android:id="@+id/coachExerciseToDoSeriesEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_below="@+id/coachExerciseToDoSeriesTitleTextView">
+    </EditText>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoRepeatsTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/repeats_in_set"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseToDoSeriesEditText"/>
+
+    <EditText
+        android:id="@+id/coachExerciseToDoRepeatsEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_below="@+id/coachExerciseToDoRepeatsTitleTextView">
+    </EditText>
+
+    <TextView
+        android:id="@+id/coachExerciseToDoLoadTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/load"
+        android:textSize="20dp"
+        android:layout_below="@id/coachExerciseToDoRepeatsEditText"/>
+
+    <EditText
+        android:id="@+id/coachExerciseToDoLoadEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/coachExerciseToDoLoadTitleTextView"/>
+
+    <Button
+        android:id="@+id/coachExerciseToDoAddButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

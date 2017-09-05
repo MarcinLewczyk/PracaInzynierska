@@ -11,16 +11,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseDetailActivity;
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseListActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoNewActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoNewExerciseDetailActivity;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.R;
 
-public class CoachExerciseAdapter extends ArrayAdapter<Exercise> {
+public class CoachExerciseToDoExerciseListAdapter extends ArrayAdapter<Exercise> {
     private Context context;
 
-    public CoachExerciseAdapter(ArrayList<Exercise> exercises, Context context){
-        super(context, R.layout.single_list_text_view, exercises);
+    public CoachExerciseToDoExerciseListAdapter(ArrayList<Exercise> filteredExerciseToDo, Context context){
+        super(context, R.layout.single_list_text_view, filteredExerciseToDo);
         this.context = context;
     }
 
@@ -54,14 +54,14 @@ public class CoachExerciseAdapter extends ArrayAdapter<Exercise> {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CoachExerciseDetailActivity.class);
+                Intent intent = new Intent(view.getContext(), CoachExerciseToDoNewExerciseDetailActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("exerciseId", dataModel.getId());
+                intent.putExtra("exerciseToDoId", dataModel.getId());
                 view.getContext().startActivity(intent);
 
                 //Without this, after back button pressed, adapter's list could show data that have been deleted
                 // which could lead to nullPointer
-                ((CoachExerciseListActivity)context).finish();
+                ((CoachExerciseToDoNewActivity)context).finish();
             }
         });
         return convertView;

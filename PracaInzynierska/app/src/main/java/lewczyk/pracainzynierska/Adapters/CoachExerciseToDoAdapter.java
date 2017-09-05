@@ -55,7 +55,11 @@ public class CoachExerciseToDoAdapter extends ArrayAdapter<ExerciseToDo>{
             viewHolder.exerciseTextView.setText(exercise.getExerciseName());
         }
         String datePreFormat = dataModel.getDate();
-        viewHolder.dateTextView.setText(datePreFormat.substring(0,4)+"."+datePreFormat.substring(4,6)+"."+datePreFormat.substring(6,8));
+        if(datePreFormat.length() == 0){
+            viewHolder.dateTextView.setText("");
+        } else {
+            viewHolder.dateTextView.setText(datePreFormat.substring(0,4)+"."+datePreFormat.substring(4,6)+"."+datePreFormat.substring(6,8));
+        }
 
         viewHolder.layout.setOnClickListener(new View.OnClickListener(){
 
