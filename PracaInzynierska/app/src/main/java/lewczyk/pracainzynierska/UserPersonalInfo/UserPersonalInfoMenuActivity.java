@@ -23,14 +23,14 @@ public class UserPersonalInfoMenuActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.exercisePurposeListButton)
-    public void moveToExercisePurposeList(){
-        Intent intent = new Intent(getApplicationContext(), ExercisePurposeListActivity.class);
+    public void exercisePurposeButtonPressed(){
+        Intent intent = new Intent(this, ExercisePurposeListActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.bodyParametersListButton)
-    public void moveToBodyParameterList(){
-        Intent intent = new Intent(getApplicationContext(), BodyParameterListActivity.class);
+    public void bodyParametersButtonPressed(){
+        Intent intent = new Intent(this, BodyParameterListActivity.class);
         startActivity(intent);
     }
 }

@@ -78,7 +78,7 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
     @OnClick(R.id.bodyParameterModButton)
     public void modyficationButtonPressed(){
         if(validateParameter()){
-            Intent intent = new Intent(getApplicationContext(), BodyParameterEditActivity.class);
+            Intent intent = new Intent(this, BodyParameterEditActivity.class);
             intent.putExtra("parameterId", parameterId);
             startActivity(intent);
             finish();
@@ -98,7 +98,7 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
     }
 
     private void deleteCurrentBodyParameter() {
-        BodyParameterRepository.deleteBodyParameter(getApplicationContext(), BodyParameterRepository.findById(this, parameterId));
+        BodyParameterRepository.deleteBodyParameter(this, BodyParameterRepository.findById(this, parameterId));
     }
 
 
@@ -108,7 +108,7 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
     }
 
     private void moveToBodyParametersList(){
-        Intent intent = new Intent(getApplicationContext(), BodyParameterListActivity.class);
+        Intent intent = new Intent(this, BodyParameterListActivity.class);
         startActivity(intent);
         finish();
     }

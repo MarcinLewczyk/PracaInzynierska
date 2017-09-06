@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Adapters.ExercisePurposeAdapter;
@@ -15,6 +16,7 @@ import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeListActivity extends AppCompatActivity {
+    @BindView(R.id.exercisePurposeListView) ListView exercisePurposesListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,15 +28,18 @@ public class ExercisePurposeListActivity extends AppCompatActivity {
 
     private void setViewSettings() {
         setTitle(R.string.exercise_purposes);
-        ListView exercisePurposesListView = (ListView) findViewById(R.id.exercisePurposeListView);
+        loadExercisePurposeArchive();
+    }
+
+    private void loadExercisePurposeArchive() {
         ArrayList<ExercisePurpose> exercisePurposesList = (ArrayList) ExercisePurposeRepository.findAll(this);
         ExercisePurposeAdapter adapter = new ExercisePurposeAdapter(exercisePurposesList, this);
         exercisePurposesListView.setAdapter(adapter);
     }
 
     @OnClick(R.id.exercisePurposeAddButton)
-    public void moveToEditExercisePurpose(){
-        Intent intent = new Intent(getApplicationContext(), ExercisePurposeEditActivity.class);
+    public void editButtonPressed(){
+        Intent intent = new Intent(this, ExercisePurposeEditActivity.class);
         intent.putExtra("purposeId", -1);
         startActivity(intent);
         finish();

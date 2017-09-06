@@ -40,7 +40,7 @@ public class BodyParameterEditActivity extends AppCompatActivity {
     }
 
     private BodyParameter loadBodyParameter() {
-        return BodyParameterRepository.findById(getApplicationContext(), parameterId);
+        return BodyParameterRepository.findById(this, parameterId);
     }
 
     private boolean validateParameterId() {
@@ -54,7 +54,7 @@ public class BodyParameterEditActivity extends AppCompatActivity {
 
     @OnClick(R.id.bodyParameterEditSaveButton)
     public void saveButtonPressed(){
-        if(validateFields() && validateParameterId()){
+        if(validateFields() && !validateParameterId()){
             try{
                 addBodyParameter();
                 moveToBodyParameterListActivity();
@@ -82,7 +82,7 @@ public class BodyParameterEditActivity extends AppCompatActivity {
         edited.getParametersArchive().add(new BodyParameterArchive(edited.getCircumference(), edited));
         edited.setMuscleName(parameterName.getText().toString());
         edited.setCircumference(Double.parseDouble(parameterState.getText().toString()));
-        BodyParameterRepository.updateBodyParameter(getApplicationContext(), edited);
+        BodyParameterRepository.updateBodyParameter(this, edited);
     }
 
     private boolean validateFields() {
@@ -121,7 +121,7 @@ public class BodyParameterEditActivity extends AppCompatActivity {
     }
 
     private void moveToBodyParameterListActivity(){
-        Intent intent = new Intent(getApplicationContext(), BodyParameterListActivity.class);
+        Intent intent = new Intent(this, BodyParameterListActivity.class);
         startActivity(intent);
         finish();
     }

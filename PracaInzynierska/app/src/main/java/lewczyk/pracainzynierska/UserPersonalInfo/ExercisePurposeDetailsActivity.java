@@ -44,20 +44,24 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
             purposeTitle.setText(getString(R.string.no_data));
         } else if(validatePurposeId()){
             ExercisePurpose loadedPurpose = loadExercisePurpose();
-            ForeignCollection<ExercisePurposeArchive> archive = loadedPurpose.getPurposesArchive();
-            //// TODO: 06.09.2017 more refactor 
             purposeTitle.setText(loadedPurpose.getExercisePurpose());
             purposeState.setText(loadedPurpose.getCurrentState());
-            ArrayList<ExercisePurposeArchive> toAdapter = new ArrayList<>();
-            for(ExercisePurposeArchive e: archive){
-                toAdapter.add(e);
-            }
-            Collections.reverse(toAdapter);
-            ListView exercisePurposesArchiveListView = (ListView) findViewById(R.id.exercisePurposeArchiveListView);
-            ExercisePurposeArchiveAdapter adapter = new ExercisePurposeArchiveAdapter(toAdapter, this);
-            exercisePurposesArchiveListView.setAdapter(adapter);
+            loadArchiveList(loadedPurpose);
         }
     }
+
+    private void loadArchiveList(ExercisePurpose loadedPurpose) {
+        ForeignCollection<ExercisePurposeArchive> archive = loadedPurpose.getPurposesArchive();
+        ArrayList<ExercisePurposeArchive> toAdapter = new ArrayList<>();
+        for(ExercisePurposeArchive e: archive){
+            toAdapter.add(e);
+        }
+        Collections.reverse(toAdapter);
+        ListView exercisePurposesArchiveListView = (ListView) findViewById(R.id.exercisePurposeArchiveListView);
+        ExercisePurposeArchiveAdapter adapter = new ExercisePurposeArchiveAdapter(toAdapter, this);
+        exercisePurposesArchiveListView.setAdapter(adapter);
+    }
+
 
     private ExercisePurpose loadExercisePurpose() {
         return ExercisePurposeRepository.findById(this, purposeId);
@@ -73,9 +77,9 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.exercisePurposeModButton)
-    public void moveToExercisePurposeEdit(){
-        if(purposeId != -1){
-            Intent intent = new Intent(getApplicationContext(), ExercisePurposeEditActivity.class);
+    public void editButtonPressed(){
+        if(validatePurposeId()){
+            Intent intent = new Intent(this, ExercisePurposeEditActivity.class);
             intent.putExtra("purposeId", purposeId);
             startActivity(intent);
             finish();
@@ -83,9 +87,9 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.exercisePurposeDelButton)
-    public void delExercisePurpose(){
-        if(purposeId != -1){
-            ExercisePurposeRepository.deleteExercisePurpose(getApplicationContext(), ExercisePurposeRepository.findById(this, purposeId));
+    public void delButtonPressed(){
+        if(validatePurposeId()){
+            ExercisePurposeRepository.deleteExercisePurpose(this, loadExercisePurpose());
             moveToPurposeList();
         }
     }
@@ -96,7 +100,7 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
     }
 
     private void moveToPurposeList(){
-        Intent intent = new Intent(getApplicationContext(), ExercisePurposeListActivity.class);
+        Intent intent = new Intent(this, ExercisePurposeListActivity.class);
         startActivity(intent);
         finish();
     }

@@ -27,28 +27,44 @@ public class ExercisePurposeEditActivity extends AppCompatActivity {
     }
 
     private void setViewSettings() {
-        Intent intent = getIntent();
-        purposeId = intent.getLongExtra("purposeId", -1);
-        if(purposeId == -1){
+        loadIntent();
+        if(!validatePurposeId()){
             setTitle(getString(R.string.create_new_purpose));
         } else {
             setTitle(getString(R.string.edit_purpose));
-            ExercisePurpose exercisePurpose = ExercisePurposeRepository.findById(getApplicationContext(), purposeId);
+            ExercisePurpose exercisePurpose = loadExercisePurpose();
             purpose.setText(exercisePurpose.getExercisePurpose());
             currentState.setText(exercisePurpose.getCurrentState());
         }
     }
 
+    private ExercisePurpose loadExercisePurpose(){
+        return ExercisePurposeRepository.findById(this, purposeId);
+    }
+
+    private void loadIntent() {
+        Intent intent = getIntent();
+        purposeId = intent.getLongExtra("purposeId", -1);
+    }
+
+    private boolean validatePurposeId(){
+        return purposeId != -1;
+    }
+
     @OnClick(R.id.exercisePurposeEditSaveButton)
-    public void save(){
-        if(validateFields() && purposeId == -1){
-            ExercisePurposeRepository.addExercisePurpose(getApplicationContext(),
-                    new ExercisePurpose(purpose.getText().toString(), currentState.getText().toString()));
+    public void saveButtonPressed(){
+        if(validateFields() && !validatePurposeId()){
+            addExercisePurpose();
             moveToExercisePurposeList();
-        } else if(validateFields() && purposeId != -1){
+        } else if(validateFields() && validatePurposeId()){
             updateExercisePurpose();
             moveToExercisePurposeList();
         }
+    }
+
+    private void addExercisePurpose() {
+        ExercisePurposeRepository.addExercisePurpose(this,
+                new ExercisePurpose(purpose.getText().toString(), currentState.getText().toString()));
     }
 
     private void updateExercisePurpose() {
@@ -56,7 +72,7 @@ public class ExercisePurposeEditActivity extends AppCompatActivity {
         edited.getPurposesArchive().add(new ExercisePurposeArchive(edited.getCurrentState(), edited));
         edited.setExercisePurpose(purpose.getText().toString());
         edited.setCurrentState(currentState.getText().toString());
-        ExercisePurposeRepository.updateExercisePurpose(getApplicationContext(), edited);
+        ExercisePurposeRepository.updateExercisePurpose(this, edited);
     }
 
     private boolean validateFields() {
@@ -90,7 +106,7 @@ public class ExercisePurposeEditActivity extends AppCompatActivity {
     }
 
     private void moveToExercisePurposeList(){
-        Intent intent = new Intent(getApplicationContext(), ExercisePurposeListActivity.class);
+        Intent intent = new Intent(this, ExercisePurposeListActivity.class);
         startActivity(intent);
         finish();
     }
