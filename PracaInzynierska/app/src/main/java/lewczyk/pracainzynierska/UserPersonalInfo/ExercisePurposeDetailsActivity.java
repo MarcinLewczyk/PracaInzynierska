@@ -30,20 +30,24 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_purpose_details);
         ButterKnife.bind(this);
-        loadStrings();
+        setViewSettings();
     }
 
-    private void loadStrings() {
-        Intent intent = getIntent();
-        purposeId = intent.getLongExtra("purposeId", -1);
+    private void setViewSettings() {
         setTitle(getString(R.string.purpose_details));
-        if(purposeId == -1){
+        loadIntent();
+        loadViewContent();
+    }
+
+    private void loadViewContent() {
+        if(!validatePurposeId()){
             purposeTitle.setText(getString(R.string.no_data));
-        } else {
-            ExercisePurpose tmp = ExercisePurposeRepository.findById(this, purposeId);
-            ForeignCollection<ExercisePurposeArchive> archive = tmp.getPurposesArchive();
-            purposeTitle.setText(tmp.getExercisePurpose());
-            purposeState.setText(tmp.getCurrentState());
+        } else if(validatePurposeId()){
+            ExercisePurpose loadedPurpose = loadExercisePurpose();
+            ForeignCollection<ExercisePurposeArchive> archive = loadedPurpose.getPurposesArchive();
+            //// TODO: 06.09.2017 more refactor 
+            purposeTitle.setText(loadedPurpose.getExercisePurpose());
+            purposeState.setText(loadedPurpose.getCurrentState());
             ArrayList<ExercisePurposeArchive> toAdapter = new ArrayList<>();
             for(ExercisePurposeArchive e: archive){
                 toAdapter.add(e);
@@ -53,6 +57,19 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
             ExercisePurposeArchiveAdapter adapter = new ExercisePurposeArchiveAdapter(toAdapter, this);
             exercisePurposesArchiveListView.setAdapter(adapter);
         }
+    }
+
+    private ExercisePurpose loadExercisePurpose() {
+        return ExercisePurposeRepository.findById(this, purposeId);
+    }
+
+    private boolean validatePurposeId(){
+        return purposeId != -1;
+    }
+
+    private void loadIntent() {
+        Intent intent = getIntent();
+        purposeId = intent.getLongExtra("purposeId", -1);
     }
 
     @OnClick(R.id.exercisePurposeModButton)

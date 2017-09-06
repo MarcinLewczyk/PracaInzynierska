@@ -24,41 +24,60 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
     private long parameterId;
     @BindView(R.id.bodyParameterTextView) TextView parameterTitle;
     @BindView(R.id.bodyParameterCurrTextView) TextView parameterState;
+    @BindView(R.id.bodyParameterArchiveListView) ListView archive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_body_parameter_details);
         ButterKnife.bind(this);
-        loadStrings();
+        setViewSettings();
     }
 
-    private void loadStrings() {
+    private void setViewSettings() {
+        loadIntent();
+        loadViewContent();
+    }
+
+    private void loadIntent() {
         Intent intent = getIntent();
         parameterId = intent.getLongExtra("parameterId", -1);
-        setTitle(getString(R.string.parameter_detail));
+    }
 
-        if(parameterId == -1){
+    private void loadViewContent() {
+        setTitle(getString(R.string.parameter_detail));
+        if(!validateParameter()){
             parameterTitle.setText(getString(R.string.no_data));
         } else {
-            BodyParameter tmp = BodyParameterRepository.findById(this, parameterId);
-            parameterTitle.setText(tmp.getMuscleName());
-            parameterState.setText(Double.toString(tmp.getCircumference()));
-            ForeignCollection<BodyParameterArchive> archive = tmp.getParametersArchive();
-            ArrayList<BodyParameterArchive> toAdapter = new ArrayList<>();
-            for(BodyParameterArchive e: archive){
-                toAdapter.add(e);
-            }
-            Collections.reverse(toAdapter);
-            ListView bodyParametersArchiveListView = (ListView) findViewById(R.id.bodyParameterArchiveListView);
-            BodyParameterArchiveAdapter adapter = new BodyParameterArchiveAdapter(toAdapter, this);
-            bodyParametersArchiveListView.setAdapter(adapter);
+            BodyParameter loadedBodyParameter = loadBodyParameter();
+            parameterTitle.setText(loadedBodyParameter.getMuscleName());
+            parameterState.setText(Double.toString(loadedBodyParameter.getCircumference()));
+            loadArchiveList(loadedBodyParameter);
         }
     }
 
+    private BodyParameter loadBodyParameter() {
+        return BodyParameterRepository.findById(this, parameterId);
+    }
+
+    private void loadArchiveList(BodyParameter loadedBodyParameter) {
+        ForeignCollection<BodyParameterArchive> bodyParameterArchive = loadedBodyParameter.getParametersArchive();
+        BodyParameterArchiveAdapter adapter = new BodyParameterArchiveAdapter(getReversedArchive(bodyParameterArchive), this);
+        archive.setAdapter(adapter);
+    }
+
+    private ArrayList getReversedArchive(ForeignCollection<BodyParameterArchive> bodyParameterArchive) {
+        ArrayList<BodyParameterArchive> listToReverse = new ArrayList<>();
+        for(BodyParameterArchive e: bodyParameterArchive){
+            listToReverse.add(e);
+        }
+        Collections.reverse(listToReverse);
+        return listToReverse;
+    }
+
     @OnClick(R.id.bodyParameterModButton)
-    public void moveToBodyParameterEdit(){
-        if(parameterId != -1){
+    public void modyficationButtonPressed(){
+        if(validateParameter()){
             Intent intent = new Intent(getApplicationContext(), BodyParameterEditActivity.class);
             intent.putExtra("parameterId", parameterId);
             startActivity(intent);
@@ -67,12 +86,21 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.bodyParameterDelButton)
-    public void delBodyParameter(){
-        if(parameterId != -1){
-            BodyParameterRepository.deleteBodyParameter(getApplicationContext(), BodyParameterRepository.findById(this, parameterId));
+    public void deleteButtonPressed(){
+        if(validateParameter()){
+            deleteCurrentBodyParameter();
             moveToBodyParametersList();
         }
     }
+
+    private boolean validateParameter(){
+        return parameterId != -1;
+    }
+
+    private void deleteCurrentBodyParameter() {
+        BodyParameterRepository.deleteBodyParameter(getApplicationContext(), BodyParameterRepository.findById(this, parameterId));
+    }
+
 
     @Override
     public void onBackPressed(){

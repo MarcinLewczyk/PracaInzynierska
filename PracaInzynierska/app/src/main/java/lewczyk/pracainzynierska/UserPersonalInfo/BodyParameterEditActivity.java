@@ -28,30 +28,40 @@ public class BodyParameterEditActivity extends AppCompatActivity {
     }
 
     private void setViewSettings() {
-        Intent intent = getIntent();
-        parameterId = intent.getLongExtra("parameterId", -1);
-        if(parameterId == -1){
+        loadIntent();
+        if(!validateParameterId()){
             setTitle(R.string.add_new_body_parameter);
         } else {
             setTitle(getString(R.string.edit_parameter));
-            BodyParameter bodyparameter = BodyParameterRepository.findById(getApplicationContext(), parameterId);
-            parameterName.setText(bodyparameter.getMuscleName());
-            parameterState.setText(Double.toString(bodyparameter.getCircumference()));
+            BodyParameter bodyParameter = loadBodyParameter();
+            parameterName.setText(bodyParameter.getMuscleName());
+            parameterState.setText(Double.toString(bodyParameter.getCircumference()));
         }
     }
 
+    private BodyParameter loadBodyParameter() {
+        return BodyParameterRepository.findById(getApplicationContext(), parameterId);
+    }
+
+    private boolean validateParameterId() {
+        return parameterId != -1;
+    }
+
+    private void loadIntent() {
+        Intent intent = getIntent();
+        parameterId = intent.getLongExtra("parameterId", -1);
+    }
+
     @OnClick(R.id.bodyParameterEditSaveButton)
-    public void save(){
-        validateFields();
-        if(validateFields() && parameterId == -1){
+    public void saveButtonPressed(){
+        if(validateFields() && validateParameterId()){
             try{
-                BodyParameterRepository.addBodyParameter(getApplicationContext(),
-                        new BodyParameter(parameterName.getText().toString(), Double.parseDouble(parameterState.getText().toString())));
+                addBodyParameter();
                 moveToBodyParameterListActivity();
             }catch(NumberFormatException e){
                 parameterState.setError(getString(R.string.must_be_floating_point));
             }
-        } else if(validateFields() && parameterId != -1){
+        } else if(validateFields() && validateParameterId()){
             try{
                 updateBodyParameter();
                 moveToBodyParameterListActivity();
@@ -61,8 +71,14 @@ public class BodyParameterEditActivity extends AppCompatActivity {
         }
     }
 
+    private void addBodyParameter() {
+        BodyParameterRepository.addBodyParameter(this,
+                new BodyParameter(parameterName.getText().toString(),
+                        Double.parseDouble(parameterState.getText().toString())));
+    }
+
     private void updateBodyParameter(){
-        BodyParameter edited = BodyParameterRepository.findById(this, parameterId);
+        BodyParameter edited = loadBodyParameter();
         edited.getParametersArchive().add(new BodyParameterArchive(edited.getCircumference(), edited));
         edited.setMuscleName(parameterName.getText().toString());
         edited.setCircumference(Double.parseDouble(parameterState.getText().toString()));

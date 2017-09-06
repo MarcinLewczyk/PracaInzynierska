@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Adapters.BodyParameterAdapter;
@@ -15,6 +16,7 @@ import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
 import lewczyk.pracainzynierska.R;
 
 public class BodyParameterListActivity extends AppCompatActivity {
+    @BindView(R.id.bodyParameterListView) ListView bodyParameterListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +28,19 @@ public class BodyParameterListActivity extends AppCompatActivity {
 
     private void setViewSettings() {
         setTitle(getString(R.string.parameters));
-        ListView bodyParameterListView = (ListView) findViewById(R.id.bodyParameterListView);
+        loadBodyParameterList();
+    }
+
+    private void loadBodyParameterList() {
         ArrayList<BodyParameter> bodyParametersList = (ArrayList) BodyParameterRepository.findAll(this);
         BodyParameterAdapter adapter = new BodyParameterAdapter(bodyParametersList, this);
         bodyParameterListView.setAdapter(adapter);
     }
 
     @OnClick(R.id.bodyParameterAddButton)
-    public void moveToEditBodyParameter(){
+    public void editButtonPressed(){
         Intent intent = new Intent(getApplicationContext(), BodyParameterEditActivity.class);
-        intent.putExtra("parameterId", -1L);
+        intent.putExtra("parameterId", -1);
         startActivity(intent);
         finish();
     }
