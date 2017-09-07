@@ -21,6 +21,7 @@ import lewczyk.pracainzynierska.DatabaseTables.ExercisePurposeArchive;
 import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeDetailsActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
     private long purposeId;
     @BindView(R.id.exercisePurposeTextView) TextView purposeTitle;
     @BindView(R.id.exercisePurposeCurrTextView) TextView purposeState;
@@ -68,12 +69,12 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
     }
 
     private boolean validatePurposeId(){
-        return purposeId != -1;
+        return purposeId != DEFAULT_ID;
     }
 
     private void loadIntent() {
         Intent intent = getIntent();
-        purposeId = intent.getLongExtra("purposeId", -1);
+        purposeId = intent.getLongExtra("purposeId", DEFAULT_ID);
     }
 
     @OnClick(R.id.exercisePurposeModButton)

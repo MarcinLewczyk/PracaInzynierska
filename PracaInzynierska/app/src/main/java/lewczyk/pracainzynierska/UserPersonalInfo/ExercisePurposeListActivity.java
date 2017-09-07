@@ -16,6 +16,7 @@ import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeListActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
     @BindView(R.id.exercisePurposeListView) ListView exercisePurposesListView;
 
     @Override
@@ -40,7 +41,7 @@ public class ExercisePurposeListActivity extends AppCompatActivity {
     @OnClick(R.id.exercisePurposeAddButton)
     public void editButtonPressed(){
         Intent intent = new Intent(this, ExercisePurposeEditActivity.class);
-        intent.putExtra("purposeId", -1);
+        intent.putExtra("purposeId", DEFAULT_ID);
         startActivity(intent);
         finish();
     }

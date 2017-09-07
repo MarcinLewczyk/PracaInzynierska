@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Adapters.UserNoteAdapter;
@@ -15,6 +16,7 @@ import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 import lewczyk.pracainzynierska.R;
 
 public class UserNoteListActivity extends AppCompatActivity {
+    @BindView(R.id.userNoteListView) ListView notesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +28,17 @@ public class UserNoteListActivity extends AppCompatActivity {
 
     private void setViewSettings() {
         setTitle(R.string.notes);
-        ListView notesList = (ListView) findViewById(R.id.userNoteListView);
+        loadUserNotesList();
+    }
+
+    private void loadUserNotesList() {
         ArrayList<UserNote> userNoteList = (ArrayList) UserNoteRepository.findAll(this);
         UserNoteAdapter adapter = new UserNoteAdapter(userNoteList, this);
         notesList.setAdapter(adapter);
     }
 
     @OnClick(R.id.userNoteAddButton)
-    public void addNewNote(){
+    public void addNewNoteButtonPressed(){
         Intent intent = new Intent(getApplicationContext(), UserNoteEditActivity.class);
         intent.putExtra("noteId", -1L);
         startActivity(intent);

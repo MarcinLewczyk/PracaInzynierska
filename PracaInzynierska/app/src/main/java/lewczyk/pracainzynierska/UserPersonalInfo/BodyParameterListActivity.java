@@ -16,6 +16,7 @@ import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
 import lewczyk.pracainzynierska.R;
 
 public class BodyParameterListActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
     @BindView(R.id.bodyParameterListView) ListView bodyParameterListView;
 
     @Override
@@ -40,7 +41,7 @@ public class BodyParameterListActivity extends AppCompatActivity {
     @OnClick(R.id.bodyParameterAddButton)
     public void editButtonPressed(){
         Intent intent = new Intent(this, BodyParameterEditActivity.class);
-        intent.putExtra("parameterId", -1);
+        intent.putExtra("parameterId", DEFAULT_ID);
         startActivity(intent);
         finish();
     }

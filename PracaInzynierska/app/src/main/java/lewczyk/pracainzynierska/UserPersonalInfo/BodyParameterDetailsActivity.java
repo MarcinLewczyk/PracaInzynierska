@@ -21,6 +21,8 @@ import lewczyk.pracainzynierska.DatabaseTables.BodyParameterArchive;
 import lewczyk.pracainzynierska.R;
 
 public class BodyParameterDetailsActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
+
     private long parameterId;
     @BindView(R.id.bodyParameterTextView) TextView parameterTitle;
     @BindView(R.id.bodyParameterCurrTextView) TextView parameterState;
@@ -41,7 +43,7 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
 
     private void loadIntent() {
         Intent intent = getIntent();
-        parameterId = intent.getLongExtra("parameterId", -1);
+        parameterId = intent.getLongExtra("parameterId", DEFAULT_ID);
     }
 
     private void loadViewContent() {
@@ -94,7 +96,7 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
     }
 
     private boolean validateParameter(){
-        return parameterId != -1;
+        return parameterId != DEFAULT_ID;
     }
 
     private void deleteCurrentBodyParameter() {

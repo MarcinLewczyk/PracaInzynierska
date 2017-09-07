@@ -15,6 +15,10 @@ import lewczyk.pracainzynierska.DatabaseTables.BodyParameterArchive;
 import lewczyk.pracainzynierska.R;
 
 public class BodyParameterEditActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
+    private int PARAMETERS_MINIMUM_LENGTH = 0;
+    private int PARAMETER_STATE_MAX_LENGTH = 10;
+    private int PARAMETER_NAME_MAX_LENGTH = 100;
     private long parameterId;
     @BindView(R.id.bodyParameterEditText) EditText parameterName;
     @BindView(R.id.bodyParameterCurrentEditText) EditText parameterState;
@@ -44,12 +48,12 @@ public class BodyParameterEditActivity extends AppCompatActivity {
     }
 
     private boolean validateParameterId() {
-        return parameterId != -1;
+        return parameterId != DEFAULT_ID;
     }
 
     private void loadIntent() {
         Intent intent = getIntent();
-        parameterId = intent.getLongExtra("parameterId", -1);
+        parameterId = intent.getLongExtra("parameterId", DEFAULT_ID);
     }
 
     @OnClick(R.id.bodyParameterEditSaveButton)
@@ -90,10 +94,10 @@ public class BodyParameterEditActivity extends AppCompatActivity {
     }
 
     private boolean validateParameterState() {
-        if(parameterState.getText().length() == 0){
+        if(parameterState.getText().length() == PARAMETERS_MINIMUM_LENGTH){
             parameterState.setError(getString(R.string.more_than_0_characters_required));
             return false;
-        } else if(parameterState.getText().length() >= 10) {
+        } else if(parameterState.getText().length() >= PARAMETER_STATE_MAX_LENGTH) {
             parameterState.setError(getString(R.string.less_than_10));
             return false;
         } else {
@@ -103,10 +107,10 @@ public class BodyParameterEditActivity extends AppCompatActivity {
     }
 
     private boolean validateParameterName() {
-        if(parameterName.getText().length() == 0){
+        if(parameterName.getText().length() == PARAMETERS_MINIMUM_LENGTH){
             parameterName.setError(getString(R.string.more_than_0_characters_required));
             return false;
-        } else if(parameterName.getText().length() >= 100) {
+        } else if(parameterName.getText().length() >= PARAMETER_NAME_MAX_LENGTH) {
             parameterName.setError(getString(R.string.less_than_100));
             return false;
         } else {

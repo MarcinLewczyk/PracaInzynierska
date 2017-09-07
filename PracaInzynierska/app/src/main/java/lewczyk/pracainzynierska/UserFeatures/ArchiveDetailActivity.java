@@ -14,6 +14,7 @@ import lewczyk.pracainzynierska.DatabaseTables.ExerciseArchive;
 import lewczyk.pracainzynierska.R;
 
 public class ArchiveDetailActivity extends AppCompatActivity {
+    private long archiveId;
     @BindView(R.id.exerciseArchiveExerciseNameTextView) TextView exerciseName;
     @BindView(R.id.exerciseArchiveMusclePartTextView) TextView musclePart;
     @BindView(R.id.exerciseArchiveExerciseDateTextView) TextView date;
@@ -36,20 +37,44 @@ public class ArchiveDetailActivity extends AppCompatActivity {
     }
 
     private void loadStrings() {
-        Intent intent = getIntent();
-        Long archiveId = intent.getLongExtra("exerciseArchiveId", -1);
-        if(archiveId != -1){
-            ExerciseArchive exerciseArchive = ExerciseArchiveRepository.findById(this, archiveId);
-            Exercise exercise = ExerciseRepository.findById(this, exerciseArchive.getExercise().getId());
-            exerciseName.setText(exercise.getExerciseName());
-            musclePart.setText(exercise.getMusclePart());
-            String datePreFormat = exerciseArchive.getDate();
-            date.setText(datePreFormat.substring(0,4)+"."+datePreFormat.substring(4,6)+"."+datePreFormat.substring(6,8));
-            time.setText(String.valueOf(exerciseArchive.getTime()) + "sec");
-            series.setText(String.valueOf(exerciseArchive.getSeries()));
-            repeats.setText(String.valueOf(exerciseArchive.getRepeats()));
-            load.setText(String.valueOf(exerciseArchive.getLoad()));
+        loadIntent();
+        if(validateArchiveId()){
+            loadTextViewsContent();
         }
+    }
+
+    private void loadTextViewsContent() {
+        ExerciseArchive exerciseArchive = loadExerciseArchive();
+        Exercise exercise = loadExercise(exerciseArchive);
+        exerciseName.setText(exercise.getExerciseName());
+        musclePart.setText(exercise.getMusclePart());
+        date.setText(transformStringDateToDateFormat(exerciseArchive.getDate()));
+        time.setText(String.valueOf(exerciseArchive.getTime()) + getString(R.string.seconds));
+        series.setText(String.valueOf(exerciseArchive.getSeries()));
+        repeats.setText(String.valueOf(exerciseArchive.getRepeats()));
+        load.setText(String.valueOf(exerciseArchive.getLoad()));
+    }
+
+    private void loadIntent() {
+        Intent intent = getIntent();
+        archiveId = intent.getLongExtra("exerciseArchiveId", -1);
+    }
+
+    private boolean validateArchiveId(){
+        return archiveId != -1;
+    }
+
+    private Exercise loadExercise(ExerciseArchive exerciseArchive){
+        return ExerciseRepository.findById(this, exerciseArchive.getExercise().getId());
+    }
+
+    private ExerciseArchive loadExerciseArchive(){
+        return ExerciseArchiveRepository.findById(this, archiveId);
+    }
+
+    private String transformStringDateToDateFormat(String dateBeforeTransformation){
+        return dateBeforeTransformation.substring(0,4) +
+                "." + dateBeforeTransformation.substring(4,6) + "." + dateBeforeTransformation.substring(6,8);
     }
 
     @Override

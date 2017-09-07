@@ -14,6 +14,10 @@ import lewczyk.pracainzynierska.DatabaseTables.ExercisePurposeArchive;
 import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeEditActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
+    private int PURPOSE_AND_STATE_MINIMUM_LENGTH = 0;
+    private int STATE_MAX_LENGTH = 50;
+    private int PURPOSE_MAX_LENGTH = 100;
     private long purposeId;
     @BindView(R.id.exercisePurposeEditText) EditText purpose;
     @BindView(R.id.exercisePurposeCurrentEditText) EditText currentState;
@@ -44,11 +48,11 @@ public class ExercisePurposeEditActivity extends AppCompatActivity {
 
     private void loadIntent() {
         Intent intent = getIntent();
-        purposeId = intent.getLongExtra("purposeId", -1);
+        purposeId = intent.getLongExtra("purposeId", DEFAULT_ID);
     }
 
     private boolean validatePurposeId(){
-        return purposeId != -1;
+        return purposeId != DEFAULT_ID;
     }
 
     @OnClick(R.id.exercisePurposeEditSaveButton)
@@ -80,10 +84,10 @@ public class ExercisePurposeEditActivity extends AppCompatActivity {
     }
 
     private boolean validateCurrentState() {
-        if(currentState.getText().length() == 0){
+        if(currentState.getText().length() == PURPOSE_AND_STATE_MINIMUM_LENGTH){
             currentState.setError(getString(R.string.more_than_0_characters_required));
             return false;
-        } else if(currentState.getText().length() >= 50){
+        } else if(currentState.getText().length() >= STATE_MAX_LENGTH){
             currentState.setError(getString(R.string.less_than_50));
             return false;
         }else {
@@ -93,10 +97,10 @@ public class ExercisePurposeEditActivity extends AppCompatActivity {
     }
 
     private boolean validatePurpose() {
-        if(purpose.getText().length() == 0){
+        if(purpose.getText().length() == PURPOSE_AND_STATE_MINIMUM_LENGTH){
             purpose.setError(getString(R.string.more_than_0_characters_required));
             return false;
-        } else if(purpose.getText().length() >= 50){
+        } else if(purpose.getText().length() >= PURPOSE_MAX_LENGTH){
             purpose.setError(getString(R.string.less_than_50));
             return false;
         } else {
