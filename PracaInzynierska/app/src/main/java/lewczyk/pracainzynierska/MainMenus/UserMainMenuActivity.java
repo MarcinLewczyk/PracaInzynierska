@@ -27,26 +27,26 @@ public class UserMainMenuActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.userExerciseButton)
-    public void moveToUserExerciseMenu(){
-        Intent intent = new Intent(getApplicationContext(), UserExerciseMenuActivity.class);
+    public void userExerciseListButtonPressed(){
+        Intent intent = new Intent(this, UserExerciseMenuActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.userNotesMainMenuButton)
-    public void moveToUserNotesList(){
-        Intent intent = new Intent(getApplicationContext(), UserNoteListActivity.class);
+    public void userNotesListButtonPressed(){
+        Intent intent = new Intent(this, UserNoteListActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.userPersonalInfoButton)
-    public void moveToUserPersonalInfo(){
-        Intent intent = new Intent(getApplicationContext(), UserPersonalInfoMenuActivity.class);
+    public void userPersonalInfoButtonPressed(){
+        Intent intent = new Intent(this, UserPersonalInfoMenuActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.userArchiveButton)
-    public void moveToUserArchive(){
-        Intent intent = new Intent(getApplicationContext(), ArchiveListActivity.class);
+    public void userArchiveButtonPressed(){
+        Intent intent = new Intent(this, ArchiveListActivity.class);
         startActivity(intent);
     }
 }

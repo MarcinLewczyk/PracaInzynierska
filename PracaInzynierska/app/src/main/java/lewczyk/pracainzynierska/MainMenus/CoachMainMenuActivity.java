@@ -26,20 +26,20 @@ public class CoachMainMenuActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.coachExerciseToDoButton)
-    public void moveToExerciseToDo(){
-        Intent intent = new Intent(getApplicationContext(), CoachExerciseToDoListActivity.class);
+    public void exerciseToDoButtonPressed(){
+        Intent intent = new Intent(this, CoachExerciseToDoListActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.coachExerciseListButton)
-    public void moveToExerciseList(){
-        Intent intent = new Intent(getApplicationContext(), CoachExerciseListActivity.class);
+    public void exerciseListButtonPressed(){
+        Intent intent = new Intent(this, CoachExerciseListActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.coachNotesListButton)
-    public void moveToNotesList(){
-        Intent intent = new Intent(getApplicationContext(), CoachNoteListActivity.class);
+    public void notesListButtonPressed(){
+        Intent intent = new Intent(this, CoachNoteListActivity.class);
         startActivity(intent);
     }
 }

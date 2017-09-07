@@ -16,6 +16,7 @@ import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 import lewczyk.pracainzynierska.R;
 
 public class UserNoteListActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
     @BindView(R.id.userNoteListView) ListView notesList;
 
     @Override
@@ -38,9 +39,9 @@ public class UserNoteListActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.userNoteAddButton)
-    public void addNewNoteButtonPressed(){
-        Intent intent = new Intent(getApplicationContext(), UserNoteEditActivity.class);
-        intent.putExtra("noteId", -1L);
+    public void addNoteButtonPressed(){
+        Intent intent = new Intent(this, UserNoteEditActivity.class);
+        intent.putExtra("noteId", DEFAULT_ID);
         startActivity(intent);
         finish();
     }

@@ -9,9 +9,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Database.UserNoteRepository;
+import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 import lewczyk.pracainzynierska.R;
 
 public class UserNoteDetailsActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
     private long noteId;
     @BindView(R.id.noteDetailsWebView) WebView noteDetails;
 
@@ -21,7 +23,6 @@ public class UserNoteDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_note_details);
         ButterKnife.bind(this);
         setViewSettings();
-        loadStrings();
     }
 
     private void setViewSettings() {
@@ -30,21 +31,24 @@ public class UserNoteDetailsActivity extends AppCompatActivity {
     }
 
     private void loadStrings() {
-        Intent intent = getIntent();
-        noteId = intent.getLongExtra("noteId", -1);
-
+        loadIntent();
         String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
-        if(noteId == -1){
+        if(!validateNoteId()){
             noteDetails.loadData(String.format(htmlParam, getString(R.string.no_data)), "text/html", "utf-8");
         } else {
-            noteDetails.loadData(String.format(htmlParam, UserNoteRepository.findById(this, noteId).getText()), "text/html", "utf-8");
+            noteDetails.loadData(String.format(htmlParam, loadUserNote().getText()), "text/html", "utf-8");
         }
     }
 
+    private void loadIntent() {
+        Intent intent = getIntent();
+        noteId = intent.getLongExtra("noteId", DEFAULT_ID);
+    }
+
     @OnClick(R.id.noteDetailsModButton)
-    public void moveToNoteMod(){
-        if(noteId != -1){
-            Intent intent = new Intent(getApplicationContext(), UserNoteEditActivity.class);
+    public void modButtonPressed(){
+        if(validateNoteId()){
+            Intent intent = new Intent(this, UserNoteEditActivity.class);
             intent.putExtra("noteId", noteId);
             startActivity(intent);
             finish();
@@ -52,11 +56,19 @@ public class UserNoteDetailsActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.noteDetailsDelButton)
-    public void delNote(){
-        if(noteId != -1){
-            UserNoteRepository.deleteUserNote(getApplicationContext(), UserNoteRepository.findById(this, noteId));
+    public void deleteNoteButtonPressed(){
+        if(validateNoteId()){
+            UserNoteRepository.deleteUserNote(this, loadUserNote());
             moveToUserNoteList();
         }
+    }
+
+    private UserNote loadUserNote(){
+        return UserNoteRepository.findById(this, noteId);
+    }
+
+    private boolean validateNoteId(){
+        return noteId != DEFAULT_ID;
     }
 
     @Override
@@ -65,7 +77,7 @@ public class UserNoteDetailsActivity extends AppCompatActivity {
     }
 
     private void moveToUserNoteList(){
-        Intent intent = new Intent(getApplicationContext(),UserNoteListActivity.class);
+        Intent intent = new Intent(this, UserNoteListActivity.class);
         startActivity(intent);
         finish();
     }

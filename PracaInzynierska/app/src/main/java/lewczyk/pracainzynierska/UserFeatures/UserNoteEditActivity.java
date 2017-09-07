@@ -13,6 +13,9 @@ import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 import lewczyk.pracainzynierska.R;
 
 public class UserNoteEditActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
+    private int NOTE_MINIMUM_LENGTH = 0;
+    private int NOTE_MAXIMUM_LENGTH = 300;
     private long noteId;
     @BindView(R.id.userNoteEditText) EditText userNoteEditText;
 
@@ -25,40 +28,52 @@ public class UserNoteEditActivity extends AppCompatActivity {
     }
 
     private void setViewSettings() {
-        Intent intent = getIntent();
-        noteId = intent.getLongExtra("noteId", -1);
-        if(noteId == -1){
+        loadIntent();
+        if(!validateNoteId()){
             setTitle(getString(R.string.create_new_note));
         } else {
             setTitle(getString(R.string.edit_note));
-            userNoteEditText.setText(UserNoteRepository.findById(getApplicationContext(), noteId).getText());
+            userNoteEditText.setText(loadUserNote().getText());
         }
+    }
+
+    private void loadIntent() {
+        Intent intent = getIntent();
+        noteId = intent.getLongExtra("noteId", DEFAULT_ID);
     }
 
     @OnClick(R.id.userNoteEditSaveButton)
     public void save(){
-        if(validateFields() && noteId == -1){
-            UserNoteRepository.addUserNote(getApplicationContext(), new UserNote(userNoteEditText.getText().toString()));
+        if(validateFields() && validateNoteId()){
+            UserNoteRepository.addUserNote(this, new UserNote(userNoteEditText.getText().toString()));
             moveToUserNoteList();
-        } else if(validateFields() && noteId != -1){
-            UserNote edited = UserNoteRepository.findById(this, noteId);
+        } else if(validateFields() && validateNoteId()){
+            UserNote edited = loadUserNote();
             edited.setText(userNoteEditText.getText().toString());
-            UserNoteRepository.updateUserNote(getApplicationContext(), edited);
+            UserNoteRepository.updateUserNote(this, edited);
             moveToUserNoteList();
         }
     }
 
+    private UserNote loadUserNote(){
+        return UserNoteRepository.findById(this, noteId);
+    }
+
+    private boolean validateNoteId(){
+        return noteId != DEFAULT_ID;
+    }
+
     private void moveToUserNoteList(){
-        Intent intent = new Intent(getApplicationContext(), UserNoteListActivity.class);
+        Intent intent = new Intent(this, UserNoteListActivity.class);
         startActivity(intent);
         finish();
     }
 
     private boolean validateFields() {
-        if(userNoteEditText.getText().length() == 0){
+        if(userNoteEditText.getText().length() == NOTE_MINIMUM_LENGTH){
             userNoteEditText.setError(getString(R.string.more_than_0_characters_required));
             return false;
-        } else if(userNoteEditText.getText().length() >= 300) {
+        } else if(userNoteEditText.getText().length() >= NOTE_MAXIMUM_LENGTH) {
             userNoteEditText.setError(getString(R.string.less_than_300));
             return false;
         } else {

@@ -24,14 +24,14 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.userButton)
-    public void moveToUserMainMenu(){
-        Intent intent = new Intent(getApplicationContext(), UserMainMenuActivity.class);
+    public void userButtonPressed(){
+        Intent intent = new Intent(this, UserMainMenuActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.coachButton)
-    public void moveToCoachMainMenu(){
-        Intent intent = new Intent(getApplicationContext(), CoachMainMenuActivity.class);
+    public void coachButtonPressed(){
+        Intent intent = new Intent(this, CoachMainMenuActivity.class);
         startActivity(intent);
     }
 }

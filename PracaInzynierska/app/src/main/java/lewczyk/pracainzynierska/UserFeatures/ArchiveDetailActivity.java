@@ -14,6 +14,7 @@ import lewczyk.pracainzynierska.DatabaseTables.ExerciseArchive;
 import lewczyk.pracainzynierska.R;
 
 public class ArchiveDetailActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
     private long archiveId;
     @BindView(R.id.exerciseArchiveExerciseNameTextView) TextView exerciseName;
     @BindView(R.id.exerciseArchiveMusclePartTextView) TextView musclePart;
@@ -57,11 +58,11 @@ public class ArchiveDetailActivity extends AppCompatActivity {
 
     private void loadIntent() {
         Intent intent = getIntent();
-        archiveId = intent.getLongExtra("exerciseArchiveId", -1);
+        archiveId = intent.getLongExtra("exerciseArchiveId", DEFAULT_ID);
     }
 
     private boolean validateArchiveId(){
-        return archiveId != -1;
+        return archiveId != DEFAULT_ID;
     }
 
     private Exercise loadExercise(ExerciseArchive exerciseArchive){
@@ -79,7 +80,7 @@ public class ArchiveDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(),ArchiveListActivity.class);
+        Intent intent = new Intent(this, ArchiveListActivity.class);
         startActivity(intent);
         finish();
     }
