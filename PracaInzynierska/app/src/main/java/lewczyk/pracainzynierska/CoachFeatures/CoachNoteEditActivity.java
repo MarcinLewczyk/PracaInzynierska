@@ -13,6 +13,9 @@ import lewczyk.pracainzynierska.DatabaseTables.CoachNote;
 import lewczyk.pracainzynierska.R;
 
 public class CoachNoteEditActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
+    private int COACH_NOTE_MINIMUM_LENGTH = 0;
+    private int COACH_NOTE_MAXIMUM_LENGTH = 300;
     private long noteId;
     @BindView(R.id.coachNoteEditText) EditText coachNoteEditText;
 
@@ -25,40 +28,52 @@ public class CoachNoteEditActivity extends AppCompatActivity {
     }
 
     private void setViewSettings() {
-        Intent intent = getIntent();
-        noteId = intent.getLongExtra("noteId", -1);
-        if(noteId == -1){
+        loadIntent();
+        if(!validateId()){
             setTitle(getString(R.string.create_new_note));
         } else {
             setTitle(getString(R.string.edit_note));
-            coachNoteEditText.setText(CoachNoteRepository.findById(getApplicationContext(), noteId).getText());
+            coachNoteEditText.setText(loadCoachNote().getText());
         }
+    }
+
+    private void loadIntent() {
+        Intent intent = getIntent();
+        noteId = intent.getLongExtra("noteId", DEFAULT_ID);
     }
 
     @OnClick(R.id.coachNoteEditSaveButton)
-    public void save(){
-        if(validateFields() && noteId == -1){
-            CoachNoteRepository.addCoachNote(getApplicationContext(), new CoachNote(coachNoteEditText.getText().toString()));
+    public void saveButtonPressed(){
+        if(validateFields() && !validateId()){
+            CoachNoteRepository.addCoachNote(this, new CoachNote(coachNoteEditText.getText().toString()));
             moveToCoachNoteList();
-        } else if(validateFields() && noteId != -1){
-            CoachNote edited = CoachNoteRepository.findById(this, noteId);
+        } else if(validateFields() && validateId()){
+            CoachNote edited = loadCoachNote();
             edited.setText(coachNoteEditText.getText().toString());
-            CoachNoteRepository.updateCoachNote(getApplicationContext(), edited);
+            CoachNoteRepository.updateCoachNote(this, edited);
             moveToCoachNoteList();
         }
     }
 
+    private CoachNote loadCoachNote() {
+        return CoachNoteRepository.findById(this, noteId);
+    }
+
+    private boolean validateId() {
+        return noteId != DEFAULT_ID;
+    }
+
     private void moveToCoachNoteList(){
-        Intent intent = new Intent(getApplicationContext(), CoachNoteListActivity.class);
+        Intent intent = new Intent(this, CoachNoteListActivity.class);
         startActivity(intent);
         finish();
     }
 
     private boolean validateFields() {
-        if(coachNoteEditText.getText().length() == 0){
+        if(coachNoteEditText.getText().length() == COACH_NOTE_MINIMUM_LENGTH){
             coachNoteEditText.setError(getString(R.string.more_than_0_characters_required));
             return false;
-        } else if(coachNoteEditText.getText().length() >= 300) {
+        } else if(coachNoteEditText.getText().length() >= COACH_NOTE_MAXIMUM_LENGTH) {
             coachNoteEditText.setError(getString(R.string.less_than_300));
             return false;
         } else {

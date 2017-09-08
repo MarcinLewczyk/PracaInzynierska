@@ -43,8 +43,8 @@ public class UserNoteEditActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.userNoteEditSaveButton)
-    public void save(){
-        if(validateFields() && validateNoteId()){
+    public void saveButtonPressed(){
+        if(validateFields() && !validateNoteId()){
             UserNoteRepository.addUserNote(this, new UserNote(userNoteEditText.getText().toString()));
             moveToUserNoteList();
         } else if(validateFields() && validateNoteId()){

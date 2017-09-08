@@ -9,9 +9,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Database.CoachNoteRepository;
+import lewczyk.pracainzynierska.DatabaseTables.CoachNote;
 import lewczyk.pracainzynierska.R;
 
 public class CoachNoteDetailsActivity extends AppCompatActivity {
+    private int DEFAULT_ID = 1;
     private long noteId;
     @BindView(R.id.coachNoteDetailsWebView) WebView noteDetails;
 
@@ -20,37 +22,54 @@ public class CoachNoteDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_note_details);
         ButterKnife.bind(this);
+        setViewSettings();
+    }
+
+    private void setViewSettings() {
+        setTitle(R.string.note_details);
         loadStrings();
     }
 
     private void loadStrings() {
-        setTitle(R.string.note_details);
-        Intent intent = getIntent();
-        noteId = intent.getLongExtra("noteId", -1);
+        loadIntent();
         String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
-        if(noteId == -1){
+        if(!validateId()){
             noteDetails.loadDataWithBaseURL(null, String.format(htmlParam, getString(R.string.no_data)), "text/html", "utf-8", null);
         } else {
-            noteDetails.loadDataWithBaseURL(null, String.format(htmlParam, CoachNoteRepository.findById(this, noteId).getText()), "text/html", "utf-8", null);
+            noteDetails.loadDataWithBaseURL(null, String.format(htmlParam, loadNote().getText()), "text/html", "utf-8", null);
         }
     }
 
+    private void loadIntent() {
+        Intent intent = getIntent();
+        noteId = intent.getLongExtra("noteId", DEFAULT_ID);
+    }
+
     @OnClick(R.id.coachNoteDetailsModButton)
-    public void moveToNoteMod(){
-        if(noteId != -1){
-            Intent intent = new Intent(getApplicationContext(), CoachNoteEditActivity.class);
+    public void modyficationButtonPressed(){
+        if(validateId()){
+            Intent intent = new Intent(this, CoachNoteEditActivity.class);
             intent.putExtra("noteId", noteId);
             startActivity(intent);
             finish();
         }
     }
 
+
     @OnClick(R.id.coachNoteDetailsDelButton)
-    public void delNote(){
-        if(noteId != -1){
-            CoachNoteRepository.deleteCoachNote(getApplicationContext(), CoachNoteRepository.findById(this, noteId));
+    public void deleteNoteButtonPressed(){
+        if(validateId()){
+            CoachNoteRepository.deleteCoachNote(this, loadNote());
             moveToCoachNoteList();
         }
+    }
+
+    private CoachNote loadNote() {
+        return CoachNoteRepository.findById(this, noteId);
+    }
+
+    private boolean validateId() {
+        return noteId != DEFAULT_ID;
     }
 
     @Override
@@ -59,7 +78,7 @@ public class CoachNoteDetailsActivity extends AppCompatActivity {
     }
 
     public void moveToCoachNoteList(){
-        Intent intent = new Intent(getApplicationContext(),CoachNoteListActivity.class);
+        Intent intent = new Intent(this,CoachNoteListActivity.class);
         startActivity(intent);
         finish();
     }

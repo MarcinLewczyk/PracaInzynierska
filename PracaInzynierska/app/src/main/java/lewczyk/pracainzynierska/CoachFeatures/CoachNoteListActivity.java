@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Adapters.CoachNoteAdapter;
@@ -15,6 +16,8 @@ import lewczyk.pracainzynierska.DatabaseTables.CoachNote;
 import lewczyk.pracainzynierska.R;
 
 public class CoachNoteListActivity extends AppCompatActivity {
+    private int DEFAULT_ID = 1;
+    @BindView(R.id.coachNoteListView) ListView notesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +29,19 @@ public class CoachNoteListActivity extends AppCompatActivity {
 
     private void setViewSettings() {
         setTitle(getString(R.string.notes));
-        ListView notesList = (ListView) findViewById(R.id.coachNoteListView);
+        loadNotesList();
+    }
+
+    private void loadNotesList(){
         ArrayList<CoachNote> coachNoteList = (ArrayList) CoachNoteRepository.findAll(this);
         CoachNoteAdapter adapter = new CoachNoteAdapter(coachNoteList, this);
         notesList.setAdapter(adapter);
     }
 
     @OnClick(R.id.coachNoteAddButton)
-    public void addNewNote(){
+    public void addNewNoteButtonPressed(){
         Intent intent = new Intent(getApplicationContext(), CoachNoteEditActivity.class);
-        intent.putExtra("noteId", -1L);
+        intent.putExtra("noteId", DEFAULT_ID);
         startActivity(intent);
         finish();
     }

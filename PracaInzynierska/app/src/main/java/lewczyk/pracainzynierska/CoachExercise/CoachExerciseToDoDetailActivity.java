@@ -15,6 +15,7 @@ import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.R;
 
 public class CoachExerciseToDoDetailActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
     private long exerciseToDoId;
     @BindView(R.id.coachExerciseToDoNameTextView) TextView exerciseName;
     @BindView(R.id.coachExerciseToDoMusclePartTextView) TextView musclePart;
@@ -34,12 +35,11 @@ public class CoachExerciseToDoDetailActivity extends AppCompatActivity {
 
     private void setViewSettings() {
         setTitle(getString(R.string.exercise_to_do_details));
-        Intent intent = getIntent();
-        exerciseToDoId = intent.getLongExtra("exerciseToDoId", -1);
-        if(exerciseToDoId == -1){
+        loadIntent();
+        if(!validateId()){
             exerciseName.setText(R.string.no_data);
         } else {
-            ExerciseToDo exerciseToDo = ExerciseToDoRepository.findById(this, exerciseToDoId);
+            ExerciseToDo exerciseToDo = loadExerciseToDo();
             Exercise exercise = ExerciseRepository.findById(this, exerciseToDo.getExercise().getId());
             exerciseName.setText(exercise.getExerciseName());
             musclePart.setText(exercise.getMusclePart());
@@ -50,12 +50,25 @@ public class CoachExerciseToDoDetailActivity extends AppCompatActivity {
         }
     }
 
+    private void loadIntent() {
+        Intent intent = getIntent();
+        exerciseToDoId = intent.getLongExtra("exerciseToDoId", DEFAULT_ID);
+    }
+
     @OnClick(R.id.coachExerciseToDoDelButton)
     public void delExerciseToDo(){
-        if(exerciseToDoId != -1){
-            ExerciseToDoRepository.deleteExerciseToDo(this, ExerciseToDoRepository.findById(this, exerciseToDoId));
+        if(validateId()){
+            ExerciseToDoRepository.deleteExerciseToDo(this, loadExerciseToDo());
             moveToExerciseToDoList();
         }
+    }
+
+    private ExerciseToDo loadExerciseToDo() {
+        return ExerciseToDoRepository.findById(this, exerciseToDoId);
+    }
+
+    private boolean validateId() {
+        return exerciseToDoId != DEFAULT_ID;
     }
 
     @Override
@@ -73,6 +86,8 @@ public class CoachExerciseToDoDetailActivity extends AppCompatActivity {
         if(dateBeforeTransformation.equals("")){
             return "";
         }
-        return dateBeforeTransformation.substring(0,4)+"."+dateBeforeTransformation.substring(4,6)+"."+dateBeforeTransformation.substring(6,8);
+        return dateBeforeTransformation.substring(0,4) + "." +
+                dateBeforeTransformation.substring(4,6) + "." +
+                dateBeforeTransformation.substring(6,8);
     }
 }

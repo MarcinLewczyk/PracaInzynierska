@@ -64,6 +64,7 @@ public class CoachExerciseListActivity extends AppCompatActivity{
         equipmentSpinner.setAdapter(equipmentAdapter);
         typeSpinner.setAdapter(typeAdapter);
 
+        // Setting "no filter" on spinners
         difficultSpinner.setSelection(difficultCategories.size() - 1);
         equipmentSpinner.setSelection(equipmentCategories.size() - 1);
         typeSpinner.setSelection(typeCategories.size() - 1);
@@ -75,17 +76,19 @@ public class CoachExerciseListActivity extends AppCompatActivity{
     }
 
     @OnClick(R.id.coachExerciseAddButton)
-    public void addNewExercise(){
-        Intent intent = new Intent(getApplicationContext(), CoachNewExerciseActivity.class);
+    public void addButtonPressed(){
+        Intent intent = new Intent(this, CoachNewExerciseActivity.class);
         intent.putExtra("exerciseId", -1);
         startActivity(intent);
         finish();
     }
 
     @OnClick(R.id.coachExerciseListSearchButton)
-    public void searchButton(){
-        ArrayList<Exercise> coachExerciseList = (ArrayList) ExerciseRepository.filterList(ExerciseRepository.findAll(this),
-                ExerciseTypeRepository.findByName(this, selectedType), DifficultLevelRepository.findByName(this, selectedDifficult),
+    public void searchButtonPressed(){
+        ArrayList<Exercise> coachExerciseList = (ArrayList) ExerciseRepository.filterList(
+                ExerciseRepository.findAll(this),
+                ExerciseTypeRepository.findByName(this, selectedType),
+                DifficultLevelRepository.findByName(this, selectedDifficult),
                 EquipmentRequirementRepository.findByName(this, selectedEquipment));
         setListViewContent(coachExerciseList);
     }

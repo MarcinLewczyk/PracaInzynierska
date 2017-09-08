@@ -17,6 +17,8 @@ import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.R;
 
 public class CoachExerciseDetailActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
+
     private long exerciseId;
     @BindView(R.id.coachExerciseNameTextView) TextView exerciseName;
     @BindView(R.id.coachExerciseMusclePartTextView) TextView musclePart;
@@ -31,18 +33,21 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_exercise_detail);
         ButterKnife.bind(this);
+        setViewSettings();
+    }
+
+    private void setViewSettings() {
+        setTitle(getString(R.string.exercise_details));
         loadStrings();
     }
 
     private void loadStrings() {
-        Intent intent = getIntent();
-        exerciseId = intent.getLongExtra("exerciseId", -1);
-        setTitle(getString(R.string.exercise_details));
+        loadIntent();
         String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
-        if(exerciseId == -1){
+        if(!validateId()){
             demonstration.loadData(String.format(htmlParam, getString(R.string.no_data)), "text/html", "utf-8");
         } else {
-            Exercise exercise = ExerciseRepository.findById(this, exerciseId);
+            Exercise exercise = loadExercise();
             exerciseName.setText(exercise.getExerciseName());
             musclePart.setText(exercise.getMusclePart());
             difficultLevel.setText(DifficultLevelRepository.findById(this, exercise.getDifficultLevel().getId()).getName());
@@ -52,10 +57,15 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
         }
     }
 
+    private void loadIntent() {
+        Intent intent = getIntent();
+        exerciseId = intent.getLongExtra("exerciseId", DEFAULT_ID);
+    }
+
     @OnClick(R.id.coachExerciseModButton)
-    public void moveToExerciseMod(){
-        if(exerciseId != -1){
-            Intent intent = new Intent(getApplicationContext(), CoachNewExerciseActivity.class);
+    public void modyficationButtonPressed(){
+        if(validateId()){
+            Intent intent = new Intent(this, CoachNewExerciseActivity.class);
             intent.putExtra("exerciseId", exerciseId);
             startActivity(intent);
             finish();
@@ -63,11 +73,19 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.coachExerciseDelButton)
-    public void delExercise(){
-        if(exerciseId != -1){
-            ExerciseRepository.deleteExercise(getApplicationContext(), ExerciseRepository.findById(this, exerciseId));
+    public void deleteButtonPressed(){
+        if(validateId()){
+            ExerciseRepository.deleteExercise(this, loadExercise());
             moveToCoachExerciseListActivity();
         }
+    }
+
+    private Exercise loadExercise(){
+        return ExerciseRepository.findById(this, exerciseId);
+    }
+
+    private boolean validateId() {
+        return exerciseId != DEFAULT_ID;
     }
 
     @Override
@@ -76,7 +94,7 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
     }
 
     public void moveToCoachExerciseListActivity(){
-        Intent intent = new Intent(getApplicationContext(), CoachExerciseListActivity.class);
+        Intent intent = new Intent(this, CoachExerciseListActivity.class);
         startActivity(intent);
         finish();
     }
