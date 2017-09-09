@@ -42,14 +42,14 @@ public class CoachExerciseToDoNewActivity extends AppCompatActivity {
     }
 
     private void setSpinnersContent() {
-        String nothing = getString(R.string.no_filter);
+        String noFilter = getString(R.string.no_filter);
         List<String> difficultCategories = (ArrayList) DifficultLevelRepository.findAllNames(this);
         List<String> equipmentCategories = (ArrayList) EquipmentRequirementRepository.findAllNames(this);
         List<String> typeCategories = (ArrayList) ExerciseTypeRepository.findAllNames(this);
 
-        difficultCategories.add(nothing);
-        equipmentCategories.add(nothing);
-        typeCategories.add(nothing);
+        difficultCategories.add(noFilter);
+        equipmentCategories.add(noFilter);
+        typeCategories.add(noFilter);
 
         ArrayAdapter<String> difficultAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultCategories);
         ArrayAdapter<String> equipmentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, equipmentCategories);
@@ -68,17 +68,18 @@ public class CoachExerciseToDoNewActivity extends AppCompatActivity {
         typeSpinner.setSelection(typeCategories.size() - 1);
     }
 
-    private void setListViewContent(ArrayList<Exercise> coachExerciseList) {
-        CoachExerciseToDoExerciseListAdapter adapter = new CoachExerciseToDoExerciseListAdapter(coachExerciseList, this);
-        exercisesList.setAdapter(adapter);
-    }
-
     @OnClick(R.id.coachExerciseToDoListSearchButton)
     public void searchButton(){
         ArrayList<Exercise> coachExerciseList = (ArrayList) ExerciseRepository.filterList(ExerciseRepository.findAll(this),
-                ExerciseTypeRepository.findByName(this, selectedType), DifficultLevelRepository.findByName(this, selectedDifficult),
+                ExerciseTypeRepository.findByName(this, selectedType),
+                DifficultLevelRepository.findByName(this, selectedDifficult),
                 EquipmentRequirementRepository.findByName(this, selectedEquipment));
         setListViewContent(coachExerciseList);
+    }
+
+    private void setListViewContent(ArrayList<Exercise> coachExerciseList) {
+        CoachExerciseToDoExerciseListAdapter adapter = new CoachExerciseToDoExerciseListAdapter(coachExerciseList, this);
+        exercisesList.setAdapter(adapter);
     }
 
     @OnItemSelected(R.id.coachExerciseToDoDifficultLevelSpinner)

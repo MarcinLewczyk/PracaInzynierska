@@ -24,6 +24,8 @@ import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.R;
 
 public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivity {
+    private int DEFAULT_ID = -1;
+    private int FIELDS_MINIMUM_LENGTH = 0;
     @BindView(R.id.coachExerciseToDoNameTextView) TextView exerciseName;
     @BindView(R.id.coachExerciseToDoDateTextView) TextView date;
     @BindView(R.id.coachExerciseToDoSeriesEditText) EditText series;
@@ -41,18 +43,26 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
     }
 
     private void setViewSettings() {
-        Intent intent = getIntent();
-        exerciseId = intent.getLongExtra("exerciseToDoId", -1);
         setTitle(getString(R.string.set_exercise_to_do_params));
+        loadIntent();
         setCalendarDatePicker();
         loadExerciseName();
     }
 
+    private void loadIntent(){
+        Intent intent = getIntent();
+        exerciseId = intent.getLongExtra("exerciseToDoId", DEFAULT_ID);
+    }
+
     private void loadExerciseName() {
-        if(exerciseId != -1){
-            Exercise exercise = ExerciseRepository.findById(this, exerciseId);
+        if(validateId()){
+            Exercise exercise = loadExercise();
             exerciseName.setText(exercise.getExerciseName());
         }
+    }
+
+    private boolean validateId(){
+        return exerciseId != DEFAULT_ID;
     }
 
     private void setCalendarDatePicker() {
@@ -87,20 +97,29 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
     }
 
     @OnClick(R.id.coachExerciseToDoAddButton)
-    public void addExerciseToDo(){
+    public void addExerciseToDoButtonPressed(){
         if(validateFields()){
-            ExerciseToDoRepository.addExerciseToDo(this, new ExerciseToDo(Integer.parseInt(series.getText().toString()),
-                    Integer.parseInt(repeats.getText().toString()), Double.parseDouble(load.getText().toString()),
-                    transformDateToString(), ExerciseRepository.findById(this, exerciseId)));
+            ExerciseToDoRepository.addExerciseToDo(this,
+                    new ExerciseToDo(
+                            Integer.parseInt(series.getText().toString()),
+                            Integer.parseInt(repeats.getText().toString()),
+                            Double.parseDouble(load.getText().toString()),
+                            transformDateToString(), loadExercise()));
             moveToExerciseToDoListActivity();
         }
+    }
+
+    private Exercise loadExercise() {
+        return ExerciseRepository.findById(this, exerciseId);
     }
 
     private String transformDateToString(){
         if(date.getText().toString().equals(getString(R.string.tap_to_choose_date))){
             return "";
         }
-        return date.getText().toString().substring(0,4) + date.getText().toString().substring(5,7) + date.getText().toString().substring(8,10);
+        return  date.getText().toString().substring(0,4) +
+                date.getText().toString().substring(5,7) +
+                date.getText().toString().substring(8,10);
     }
 
     private boolean validateFields(){
@@ -108,7 +127,7 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
     }
 
     private boolean validateLoad() {
-        if(load.getText().toString().length() == 0){
+        if(load.getText().toString().length() == FIELDS_MINIMUM_LENGTH){
             load.setText("0.0");
         }
         try{
@@ -121,7 +140,7 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
     }
 
     private boolean validateRepeats() {
-        if(repeats.getText().toString().length() == 0){
+        if(repeats.getText().toString().length() == FIELDS_MINIMUM_LENGTH){
             repeats.setText("0");
         }
         try{
@@ -134,7 +153,7 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
     }
 
     private boolean validateSeries() {
-        if(series.getText().toString().length() == 0){
+        if(series.getText().toString().length() == FIELDS_MINIMUM_LENGTH){
             series.setText("0");
         }
         try{
