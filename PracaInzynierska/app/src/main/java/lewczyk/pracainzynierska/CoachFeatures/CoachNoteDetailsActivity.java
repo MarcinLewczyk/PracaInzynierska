@@ -46,7 +46,7 @@ public class CoachNoteDetailsActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.coachNoteDetailsModButton)
-    public void modyficationButtonPressed(){
+    public void modificationButtonPressed(){
         if(validateId()){
             Intent intent = new Intent(this, CoachNoteEditActivity.class);
             intent.putExtra("noteId", noteId);
@@ -54,7 +54,6 @@ public class CoachNoteDetailsActivity extends AppCompatActivity {
             finish();
         }
     }
-
 
     @OnClick(R.id.coachNoteDetailsDelButton)
     public void deleteNoteButtonPressed(){

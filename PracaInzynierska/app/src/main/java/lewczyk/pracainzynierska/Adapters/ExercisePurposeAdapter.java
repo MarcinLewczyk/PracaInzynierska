@@ -32,9 +32,7 @@ public class ExercisePurposeAdapter extends ArrayAdapter<ExercisePurpose> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ExercisePurpose dataModel = getItem(position);
-
         ViewHolder viewHolder;
-
         if(convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_list_text_view, parent, false);

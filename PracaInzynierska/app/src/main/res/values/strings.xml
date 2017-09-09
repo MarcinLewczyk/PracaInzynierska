@@ -84,4 +84,11 @@
     <string name="tap_to_choose_date">Dotknij aby wybrać datę</string>
     <string name="must_be_integer">Musi być to liczba całkowita</string>
     <string name="seconds">sekund</string>
+    <string name="exercise_plans">Plany treningowe</string>
+    <string name="execute_exercise">Wykonaj ćwiczenie</string>
+    <string name="set_exercise_parameters">Ustal parametry ćwiczenia</string>
+    <string name="training_plans">Plany treningowe</string>
+    <string name="exercises_in_training_plan">Cwiczenia w planie treningowym</string>
+    <string name="series_shorter">Serie</string>
+    <string name="repeats">Powtórzenia</string>
 </resources>

@@ -25,9 +25,7 @@ public class BodyParameterArchiveAdapter extends ArrayAdapter<BodyParameterArchi
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final BodyParameterArchive dataModel = getItem(position);
-
         ViewHolder viewHolder;
-
         if(convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_list_text_view, parent, false);

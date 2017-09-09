@@ -88,7 +88,7 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.exercisePurposeDelButton)
-    public void delButtonPressed(){
+    public void deleteButtonPressed(){
         if(validatePurposeId()){
             ExercisePurposeRepository.deleteExercisePurpose(this, loadExercisePurpose());
             moveToPurposeList();

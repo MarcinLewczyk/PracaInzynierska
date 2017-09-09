@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lewczyk.pracainzynierska.UserExercise.UserExerciseListActivity">
+
+    <Spinner
+        android:id="@+id/userExerciseDifficultLevelSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
+    <Spinner
+        android:id="@+id/userExerciseEquipmentRequirementSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userExerciseDifficultLevelSpinner"/>
+
+    <Spinner
+        android:id="@+id/userExerciseTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userExerciseEquipmentRequirementSpinner"/>
+
+    <Button
+        android:id="@+id/userExerciseListSearchButton"
+        android:layout_below="@+id/userExerciseTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/search"/>
+
+    <ListView
+        android:id="@+id/userExerciseListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userExerciseListSearchButton">
+    </ListView>
+
+</RelativeLayout>

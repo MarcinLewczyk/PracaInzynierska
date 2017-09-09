@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="lewczyk.pracainzynierska.UserExercise.UserExerciseDetailActivity">
+
+    <TextView
+        android:id="@+id/userExerciseNameDetailTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="20dp"
+        android:text="@string/exercise_name"/>
+
+    <TextView
+        android:id="@+id/userExerciseNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userExerciseNameDetailTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/userExerciseMusclePartDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/muscle_part"
+        android:textSize="20dp"
+        android:layout_below="@id/userExerciseNameTextView"/>
+
+    <TextView
+        android:id="@+id/userExerciseMusclePartTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userExerciseMusclePartDetailTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/userExerciseDifficultLevelDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/difficult_level"
+        android:textSize="20dp"
+        android:layout_below="@id/userExerciseMusclePartTextView"/>
+
+    <TextView
+        android:id="@+id/userExerciseDifficultLevelTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userExerciseDifficultLevelDetailTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/userExerciseEquipmentRequirementDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/equipment_requirement"
+        android:textSize="20dp"
+        android:layout_below="@id/userExerciseDifficultLevelTextView"/>
+
+    <TextView
+        android:id="@+id/userExerciseEquipmentRequirementTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userExerciseEquipmentRequirementDetailTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/userExerciseExerciseTypeDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exercise_type"
+        android:textSize="20dp"
+        android:layout_below="@id/userExerciseEquipmentRequirementTextView"/>
+
+    <TextView
+        android:id="@+id/userExerciseExerciseTypeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userExerciseExerciseTypeDetailTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/userExerciseDemonstrationDetailTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/demonstration"
+        android:textSize="20dp"
+        android:layout_below="@id/userExerciseExerciseTypeTextView"/>
+
+    <WebView
+        android:id="@+id/userExerciseDemonstrationWebView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userExerciseDemonstrationDetailTextView"
+        android:background="@android:color/transparent">
+    </WebView>
+
+    <Button
+        android:id="@+id/userExerciseExecuteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/set_exercise_parameters"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

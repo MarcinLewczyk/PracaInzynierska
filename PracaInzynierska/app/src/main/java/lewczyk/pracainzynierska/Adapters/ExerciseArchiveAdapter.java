@@ -35,9 +35,7 @@ public class ExerciseArchiveAdapter extends ArrayAdapter<ExerciseArchive>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ExerciseArchive dataModel = getItem(position);
-
         ViewHolder viewHolder;
-
         if(convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.double_list_text_view, parent, false);
@@ -56,7 +54,6 @@ public class ExerciseArchiveAdapter extends ArrayAdapter<ExerciseArchive>{
         }
         String datePreFormat = dataModel.getDate();
         viewHolder.dateTextView.setText(transformStringDateToDateFormat(datePreFormat));
-
         viewHolder.layout.setOnClickListener(new View.OnClickListener(){
 
             @Override

@@ -1,2 +1,2 @@
-Adapters refactor
-Less layouts
+User exercises data presentation
+User exercise with sensors logic

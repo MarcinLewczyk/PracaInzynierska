@@ -11,55 +11,55 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
+import lewczyk.pracainzynierska.DatabaseTables.TrainingPlan;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterDetailsActivity;
-import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterListActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExercisePlanExerciseListActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExercisePlanListActivity;
 
-public class BodyParameterAdapter extends ArrayAdapter<BodyParameter> {
+public class TrainingPlanAdapter extends ArrayAdapter<TrainingPlan> {
     private Context context;
 
-    public BodyParameterAdapter(ArrayList<BodyParameter> bodyParameter, Context context) {
-        super(context, R.layout.single_list_text_view, bodyParameter);
+    public TrainingPlanAdapter(ArrayList<TrainingPlan> plans, Context context){
+        super(context, R.layout.single_list_text_view, plans);
         this.context = context;
     }
 
     private static class ViewHolder{
-        TextView bodyParameterTextView;
+        TextView planName;
         LinearLayout layout;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final BodyParameter dataModel = getItem(position);
+        final TrainingPlan dataModel = getItem(position);
         ViewHolder viewHolder;
         if(convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_list_text_view, parent, false);
-            viewHolder.bodyParameterTextView = convertView.findViewById(R.id.listTitleTextView);
+            viewHolder.planName = convertView.findViewById(R.id.listTitleTextView);
             viewHolder.layout = convertView.findViewById(R.id.notesLinearLayout);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if(dataModel.getMuscleName().length() >= 25){
-            viewHolder.bodyParameterTextView.setText(dataModel.getMuscleName().substring(0,25));
+        if(dataModel.getName().length() >= 25){
+            viewHolder.planName.setText(dataModel.getName().substring(0,25));
         } else {
-            viewHolder.bodyParameterTextView.setText(dataModel.getMuscleName());
+            viewHolder.planName.setText(dataModel.getName());
         }
         viewHolder.layout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), BodyParameterDetailsActivity.class);
+                Intent intent = new Intent(view.getContext(), UserExercisePlanExerciseListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("parameterId", dataModel.getId());
+                intent.putExtra("planId", dataModel.getId());
                 view.getContext().startActivity(intent);
 
                 //Without this, after back button pressed, adapter's list could show data that have been deleted
                 // which could lead to nullPointer
-                ((BodyParameterListActivity)context).finish();
+                ((UserExercisePlanListActivity)context).finish();
             }
         });
         return convertView;

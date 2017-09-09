@@ -23,6 +23,7 @@ import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.R;
 
 public class CoachExerciseListActivity extends AppCompatActivity{
+    private int DEFAULT_ID = -1;
     @BindView(R.id.coachExerciseDifficultLevelSpinner) Spinner difficultSpinner;
     @BindView(R.id.coachExerciseEquipmentRequirementSpinner) Spinner equipmentSpinner;
     @BindView(R.id.coachExerciseTypeSpinner) Spinner typeSpinner;
@@ -70,15 +71,10 @@ public class CoachExerciseListActivity extends AppCompatActivity{
         typeSpinner.setSelection(typeCategories.size() - 1);
     }
 
-    private void setListViewContent(ArrayList<Exercise> coachExerciseList) {
-        CoachExerciseAdapter adapter = new CoachExerciseAdapter(coachExerciseList, this);
-        exercisesList.setAdapter(adapter);
-    }
-
     @OnClick(R.id.coachExerciseAddButton)
     public void addButtonPressed(){
         Intent intent = new Intent(this, CoachNewExerciseActivity.class);
-        intent.putExtra("exerciseId", -1);
+        intent.putExtra("exerciseId", DEFAULT_ID);
         startActivity(intent);
         finish();
     }
@@ -91,6 +87,11 @@ public class CoachExerciseListActivity extends AppCompatActivity{
                 DifficultLevelRepository.findByName(this, selectedDifficult),
                 EquipmentRequirementRepository.findByName(this, selectedEquipment));
         setListViewContent(coachExerciseList);
+    }
+
+    private void setListViewContent(ArrayList<Exercise> coachExerciseList) {
+        CoachExerciseAdapter adapter = new CoachExerciseAdapter(coachExerciseList, this);
+        exercisesList.setAdapter(adapter);
     }
 
     @OnItemSelected(R.id.coachExerciseDifficultLevelSpinner)

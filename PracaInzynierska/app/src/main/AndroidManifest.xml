@@ -40,7 +40,15 @@
         <activity android:name=".CoachExercise.CoachExerciseToDoNewActivity" />
         <activity android:name=".CoachExercise.CoachNewExerciseActivity" />
         <activity android:name=".CoachExercise.CoachExerciseDetailActivity" />
-        <activity android:name=".CoachExercise.CoachExerciseToDoNewExerciseDetailActivity"></activity>
+        <activity android:name=".CoachExercise.CoachExerciseToDoNewExerciseDetailActivity" />
+        <activity android:name=".UserExercise.UserExerciseToDoListActivity" />
+        <activity android:name=".UserExercise.UserExerciseToDoDetailActivity" />
+        <activity android:name=".UserExercise.UserExercisePlanListActivity" />
+        <activity android:name=".UserExercise.UserExerciseListActivity" />
+        <activity android:name=".UserExercise.UserExerciseDetailActivity" />
+        <activity android:name=".UserExercise.UserExerciseParametersActivity" />
+        <activity android:name=".UserExercise.UserExercisePlanExerciseListActivity" />
+        <activity android:name=".UserExercise.ExecuteExerciseActivity"></activity>
     </application>
 
 </manifest>

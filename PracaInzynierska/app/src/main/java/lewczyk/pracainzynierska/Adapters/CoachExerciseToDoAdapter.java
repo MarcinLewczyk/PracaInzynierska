@@ -35,9 +35,7 @@ public class CoachExerciseToDoAdapter extends ArrayAdapter<ExerciseToDo>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ExerciseToDo dataModel = getItem(position);
-
         ViewHolder viewHolder;
-
         if(convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.double_list_text_view, parent, false);

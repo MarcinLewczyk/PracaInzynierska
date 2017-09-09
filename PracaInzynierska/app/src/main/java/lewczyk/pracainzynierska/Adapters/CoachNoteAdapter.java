@@ -32,9 +32,7 @@ public class CoachNoteAdapter extends ArrayAdapter<CoachNote> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final CoachNote dataModel = getItem(position);
-
         ViewHolder viewHolder;
-
         if(convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_list_text_view, parent, false);
@@ -50,7 +48,6 @@ public class CoachNoteAdapter extends ArrayAdapter<CoachNote> {
         } else {
             viewHolder.noteDesc.setText(dataModel.getText());
         }
-
         viewHolder.layout.setOnClickListener(new View.OnClickListener(){
 
             @Override

@@ -41,7 +41,7 @@ public class CoachExerciseToDoListActivity extends AppCompatActivity {
     @OnClick(R.id.coachExerciseToDoAddButton)
     public void addNewExerciseToDo(){
         Intent intent = new Intent(this, CoachExerciseToDoNewActivity.class);
-        intent.putExtra("exerciseToDoId", -DEFAULT_ID);
+        intent.putExtra("exerciseToDoId", DEFAULT_ID);
         startActivity(intent);
         finish();
     }

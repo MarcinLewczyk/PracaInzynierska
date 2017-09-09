@@ -25,9 +25,7 @@ public class ExercisePurposeArchiveAdapter extends ArrayAdapter<ExercisePurposeA
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ExercisePurposeArchive dataModel = getItem(position);
-
         ViewHolder viewHolder;
-
         if(convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_list_text_view, parent, false);

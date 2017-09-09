@@ -36,10 +36,20 @@ public class ExerciseInTrainingPlanRepository {
         databaseHelper.getExerciseInTrainingPlanDao().delete(exerciseInTrainingPlan);
     }
 
+    public static ExerciseInTrainingPlan findByGivenTrainingPlanAndExercise(Context context, TrainingPlan trainingPlan, Exercise exercise){
+        List<ExerciseInTrainingPlan> exerciseInTrainingPlan = findAll(context);
+        for(ExerciseInTrainingPlan e: exerciseInTrainingPlan){
+            if(e.getExercise().getId() == exercise.getId() && e.getTrainingPlan().getId() == trainingPlan.getId()){
+                return e;
+            }
+        }
+        return null;
+    }
+
     public static List<Exercise> findAllWithGivenTrainingPlan(Context context, TrainingPlan trainingPlan){
         OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
         List<Exercise> filteredList = new ArrayList<>();
-        List<ExerciseInTrainingPlan> tmp = databaseHelper.getExerciseInTrainingPlanDao().queryForAll();
+        List<ExerciseInTrainingPlan> tmp = findAll(context);
         for(ExerciseInTrainingPlan e: tmp){
             if(e.getTrainingPlan().getId() == trainingPlan.getId()){
                 filteredList.add(e.getExercise());

@@ -22,7 +22,6 @@ import lewczyk.pracainzynierska.R;
 
 public class BodyParameterDetailsActivity extends AppCompatActivity {
     private int DEFAULT_ID = -1;
-
     private long parameterId;
     @BindView(R.id.bodyParameterTextView) TextView parameterTitle;
     @BindView(R.id.bodyParameterCurrTextView) TextView parameterState;
@@ -78,7 +77,7 @@ public class BodyParameterDetailsActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.bodyParameterModButton)
-    public void modyficationButtonPressed(){
+    public void modificationButtonPressed(){
         if(validateParameter()){
             Intent intent = new Intent(this, BodyParameterEditActivity.class);
             intent.putExtra("parameterId", parameterId);

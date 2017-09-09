@@ -1,4 +1,4 @@
-package lewczyk.pracainzynierska.CoachExercise;
+package lewczyk.pracainzynierska.UserExercise;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -16,32 +16,31 @@ import lewczyk.pracainzynierska.Database.ExerciseTypeRepository;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.R;
 
-public class CoachExerciseDetailActivity extends AppCompatActivity {
+public class UserExerciseDetailActivity extends AppCompatActivity {
     private int DEFAULT_ID = -1;
     private long exerciseId;
-    @BindView(R.id.coachExerciseNameTextView) TextView exerciseName;
-    @BindView(R.id.coachExerciseMusclePartTextView) TextView musclePart;
-    @BindView(R.id.coachExerciseDifficultLevelTextView) TextView difficultLevel;
-    @BindView(R.id.coachExerciseEquipmentRequirementTextView) TextView equipmentRequirement;
-    @BindView(R.id.coachExerciseExerciseTypeTextView) TextView exerciseType;
-    @BindView(R.id.coachExerciseDemonstrationWebView) WebView demonstration;
-
+    @BindView(R.id.userExerciseNameTextView) TextView exerciseName;
+    @BindView(R.id.userExerciseMusclePartTextView) TextView musclePart;
+    @BindView(R.id.userExerciseDifficultLevelTextView) TextView difficultLevel;
+    @BindView(R.id.userExerciseEquipmentRequirementTextView) TextView equipmentRequirement;
+    @BindView(R.id.userExerciseExerciseTypeTextView) TextView exerciseType;
+    @BindView(R.id.userExerciseDemonstrationWebView) WebView demonstration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coach_exercise_detail);
+        setContentView(R.layout.activity_user_exercise_detail);
         ButterKnife.bind(this);
         setViewSettings();
     }
 
     private void setViewSettings() {
         setTitle(getString(R.string.exercise_details));
+        loadIntent();
         loadStrings();
     }
 
     private void loadStrings() {
-        loadIntent();
         String htmlParam = "<html><body style=\"text-align:justify;column-fill: balance;column-count: 1;column-width: 50px\"> %s </body></Html>";
         if(!validateId()){
             demonstration.loadData(String.format(htmlParam, getString(R.string.no_data)), "text/html", "utf-8");
@@ -61,24 +60,6 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
         exerciseId = intent.getLongExtra("exerciseId", DEFAULT_ID);
     }
 
-    @OnClick(R.id.coachExerciseModButton)
-    public void modificationButtonPressed(){
-        if(validateId()){
-            Intent intent = new Intent(this, CoachNewExerciseActivity.class);
-            intent.putExtra("exerciseId", exerciseId);
-            startActivity(intent);
-            finish();
-        }
-    }
-
-    @OnClick(R.id.coachExerciseDelButton)
-    public void deleteButtonPressed(){
-        if(validateId()){
-            ExerciseRepository.deleteExercise(this, loadExercise());
-            moveToCoachExerciseListActivity();
-        }
-    }
-
     private Exercise loadExercise(){
         return ExerciseRepository.findById(this, exerciseId);
     }
@@ -87,13 +68,19 @@ public class CoachExerciseDetailActivity extends AppCompatActivity {
         return exerciseId != DEFAULT_ID;
     }
 
-    @Override
-    public void onBackPressed(){
-        moveToCoachExerciseListActivity();
+    @OnClick(R.id.userExerciseExecuteButton)
+    public void exerciseExecuteButtonPressed(){
+        if(validateId()){
+            Intent intent = new Intent(this, UserExerciseParametersActivity.class);
+            intent.putExtra("exerciseId", exerciseId);
+            startActivity(intent);
+            finish();
+        }
     }
 
-    public void moveToCoachExerciseListActivity(){
-        Intent intent = new Intent(this, CoachExerciseListActivity.class);
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, UserExerciseListActivity.class);
         startActivity(intent);
         finish();
     }
