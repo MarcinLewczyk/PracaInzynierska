@@ -47,7 +47,6 @@ public class ExerciseInTrainingPlanRepository {
     }
 
     public static List<Exercise> findAllWithGivenTrainingPlan(Context context, TrainingPlan trainingPlan){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
         List<Exercise> filteredList = new ArrayList<>();
         List<ExerciseInTrainingPlan> tmp = findAll(context);
         for(ExerciseInTrainingPlan e: tmp){

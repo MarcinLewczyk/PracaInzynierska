@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import lewczyk.pracainzynierska.Data.ActivityOrigin;
 import lewczyk.pracainzynierska.Database.ExerciseInTrainingPlanRepository;
 import lewczyk.pracainzynierska.Database.ExerciseRepository;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
@@ -37,8 +38,8 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Exercise dataModel = getItem(position);
-        final ExerciseInTrainingPlan exerciseInTrainingPlan = ExerciseInTrainingPlanRepository.findByGivenTrainingPlanAndExercise(context, trainingPlan, dataModel);
+        final Exercise exerciseObjectWithIdOnly = getItem(position);
+        final ExerciseInTrainingPlan exerciseInTrainingPlan = ExerciseInTrainingPlanRepository.findByGivenTrainingPlanAndExercise(context, trainingPlan, exerciseObjectWithIdOnly);
         ViewHolder viewHolder;
         if(convertView == null) {
             viewHolder = new ViewHolder();
@@ -52,7 +53,7 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Exercise exercise = ExerciseRepository.findById(context, dataModel.getId());
+        Exercise exercise = ExerciseRepository.findById(context, exerciseObjectWithIdOnly.getId());
         if(exercise.getExerciseName().length() >= 25){
             viewHolder.exerciseName.setText(exercise.getExerciseName().substring(0,25));
         } else {
@@ -68,7 +69,8 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ExecuteExerciseActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("exerciseId", dataModel.getId());
+                intent.putExtra("exerciseId", exerciseObjectWithIdOnly.getId());
+                intent.putExtra("from", ActivityOrigin.UserExercisePlanExerciseListActivity.which);
                 view.getContext().startActivity(intent);
 
                 //Without this, after back button pressed, adapter's list could show data that have been deleted

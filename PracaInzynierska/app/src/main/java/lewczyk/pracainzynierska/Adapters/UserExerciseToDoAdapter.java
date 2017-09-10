@@ -11,24 +11,24 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoListActivity;
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoDetailActivity;
 import lewczyk.pracainzynierska.Database.ExerciseRepository;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.R;
+import lewczyk.pracainzynierska.UserExercise.UserExerciseToDoDetailActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExerciseToDoListActivity;
 
-public class CoachExerciseToDoAdapter extends ArrayAdapter<ExerciseToDo>{
+public class UserExerciseToDoAdapter extends ArrayAdapter<ExerciseToDo>{
     private Context context;
 
-    public CoachExerciseToDoAdapter(ArrayList<ExerciseToDo> bodyParameter, Context context){
-        super(context, R.layout.double_list_text_view, bodyParameter);
+    public UserExerciseToDoAdapter(ArrayList<ExerciseToDo> plans, Context context){
+        super(context, R.layout.double_list_text_view, plans);
         this.context = context;
     }
 
     private static class ViewHolder{
-        TextView exerciseTextView;
-        TextView dateTextView;
+        TextView exerciseName;
+        TextView exerciseDate;
         LinearLayout layout;
     }
 
@@ -39,8 +39,8 @@ public class CoachExerciseToDoAdapter extends ArrayAdapter<ExerciseToDo>{
         if(convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.double_list_text_view, parent, false);
-            viewHolder.exerciseTextView = convertView.findViewById(R.id.listTitleDoubleTextView);
-            viewHolder.dateTextView = convertView.findViewById(R.id.listSecondPlaceDoubleTextView);
+            viewHolder.exerciseName = convertView.findViewById(R.id.listTitleDoubleTextView);
+            viewHolder.exerciseDate = convertView.findViewById(R.id.listSecondPlaceDoubleTextView);
             viewHolder.layout = convertView.findViewById(R.id.doubleListLinearLayout);
             convertView.setTag(viewHolder);
         } else {
@@ -48,29 +48,28 @@ public class CoachExerciseToDoAdapter extends ArrayAdapter<ExerciseToDo>{
         }
         Exercise exercise = ExerciseRepository.findById(context, dataModel.getExercise().getId());
         if(exercise.getExerciseName().length() >= 25){
-            viewHolder.exerciseTextView.setText(exercise.getExerciseName().substring(0,25));
+            viewHolder.exerciseName.setText(exercise.getExerciseName().substring(0,25));
         } else {
-            viewHolder.exerciseTextView.setText(exercise.getExerciseName());
+            viewHolder.exerciseName.setText(exercise.getExerciseName());
         }
         String datePreFormat = dataModel.getDate();
-        if(datePreFormat.length() == 0){
-            viewHolder.dateTextView.setText("");
-        } else {
-            viewHolder.dateTextView.setText(transformStringDateToDateFormat(datePreFormat));
+        if(datePreFormat.length() > 0){
+            viewHolder.exerciseDate.setText(transformStringDateToDateFormat(datePreFormat));
+        } else if(datePreFormat.length() == 0){
+            viewHolder.exerciseDate.setText(R.string.any);
         }
-
         viewHolder.layout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CoachExerciseToDoDetailActivity.class);
+                Intent intent = new Intent(view.getContext(), UserExerciseToDoDetailActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("exerciseToDoId", dataModel.getId());
                 view.getContext().startActivity(intent);
 
                 //Without this, after back button pressed, adapter's list could show data that have been deleted
                 // which could lead to nullPointer
-                ((CoachExerciseToDoListActivity)context).finish();
+                ((UserExerciseToDoListActivity)context).finish();
             }
         });
         return convertView;

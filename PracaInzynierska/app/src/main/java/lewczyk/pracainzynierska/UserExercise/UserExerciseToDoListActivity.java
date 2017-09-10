@@ -2,11 +2,19 @@ package lewczyk.pracainzynierska.UserExercise;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 
+import java.util.ArrayList;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import lewczyk.pracainzynierska.Adapters.UserExerciseToDoAdapter;
+import lewczyk.pracainzynierska.Database.ExerciseToDoRepository;
+import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.R;
 
 public class UserExerciseToDoListActivity extends AppCompatActivity {
+    @BindView(R.id.userExerciseToDoListView) ListView exercisesToDoListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +26,12 @@ public class UserExerciseToDoListActivity extends AppCompatActivity {
 
     private void setViewSettings() {
         setTitle(getString(R.string.exercises_list_to_do));
-        setListViewContent();
+        setListContent();
     }
 
-    private void setListViewContent() {
-
+    private void setListContent() {
+        ArrayList<ExerciseToDo> exercises = (ArrayList) ExerciseToDoRepository.findAll(this);
+        UserExerciseToDoAdapter adapter = new UserExerciseToDoAdapter(exercises , this);
+        exercisesToDoListView.setAdapter(adapter);
     }
 }
