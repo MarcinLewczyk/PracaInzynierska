@@ -48,7 +48,6 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
     private RuntimeExceptionDao<TrainingPlan, Long> trainingPlanDao;
     private RuntimeExceptionDao<ExerciseInTrainingPlan, Long> exerciseInTrainingPlanDao;
 
-
     private OrmLiteDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
         this.context = context;
