@@ -9,13 +9,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.BodyParameterRepository;
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameterArchive;
 import lewczyk.pracainzynierska.R;
 
 public class BodyParameterEditActivity extends AppCompatActivity {
-    private int DEFAULT_ID = -1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private int PARAMETERS_MINIMUM_LENGTH = 0;
     private int PARAMETER_STATE_MAX_LENGTH = 10;
     private int PARAMETER_NAME_MAX_LENGTH = 100;

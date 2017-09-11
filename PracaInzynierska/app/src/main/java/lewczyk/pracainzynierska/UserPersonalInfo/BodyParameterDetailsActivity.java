@@ -15,13 +15,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Adapters.BodyParameterArchiveAdapter;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.BodyParameterRepository;
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameterArchive;
 import lewczyk.pracainzynierska.R;
 
 public class BodyParameterDetailsActivity extends AppCompatActivity {
-    private int DEFAULT_ID = -1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private long parameterId;
     @BindView(R.id.bodyParameterTextView) TextView parameterTitle;
     @BindView(R.id.bodyParameterCurrTextView) TextView parameterState;

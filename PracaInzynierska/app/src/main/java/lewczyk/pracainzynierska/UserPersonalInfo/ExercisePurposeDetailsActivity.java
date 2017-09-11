@@ -15,13 +15,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Adapters.ExercisePurposeArchiveAdapter;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.ExercisePurposeRepository;
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurposeArchive;
 import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeDetailsActivity extends AppCompatActivity {
-    private int DEFAULT_ID = -1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private long purposeId;
     @BindView(R.id.exercisePurposeTextView) TextView purposeTitle;
     @BindView(R.id.exercisePurposeCurrTextView) TextView purposeState;

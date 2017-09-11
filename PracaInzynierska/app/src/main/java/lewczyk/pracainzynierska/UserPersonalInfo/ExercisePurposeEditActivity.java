@@ -8,13 +8,14 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.ExercisePurposeRepository;
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurposeArchive;
 import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeEditActivity extends AppCompatActivity {
-    private int DEFAULT_ID = -1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private int PURPOSE_AND_STATE_MINIMUM_LENGTH = 0;
     private int STATE_MAX_LENGTH = 50;
     private int PURPOSE_MAX_LENGTH = 100;

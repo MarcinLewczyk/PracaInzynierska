@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.DifficultLevelRepository;
 import lewczyk.pracainzynierska.Database.EquipmentRequirementRepository;
 import lewczyk.pracainzynierska.Database.ExerciseRepository;
@@ -25,7 +26,7 @@ import lewczyk.pracainzynierska.DatabaseTables.ExerciseType;
 import lewczyk.pracainzynierska.R;
 
 public class CoachNewExerciseActivity extends AppCompatActivity {
-    private int DEFAULT_ID = -1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private int FIELDS_MINIMUM_LENGTH = 0;
     private int DEMONSTRATION_MAXIMUM_LENGTH = 1000;
     private int MUSCLE_PART_MAXIMUM_LENGTH = 100;

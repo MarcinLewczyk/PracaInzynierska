@@ -11,12 +11,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Adapters.ExercisePurposeAdapter;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.ExercisePurposeRepository;
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 import lewczyk.pracainzynierska.R;
 
 public class ExercisePurposeListActivity extends AppCompatActivity {
-    private int DEFAULT_ID = -1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     @BindView(R.id.exercisePurposeListView) ListView exercisePurposesListView;
 
     @Override

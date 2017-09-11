@@ -8,12 +8,13 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.UserNoteRepository;
 import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 import lewczyk.pracainzynierska.R;
 
 public class UserNoteEditActivity extends AppCompatActivity {
-    private int DEFAULT_ID = -1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private int NOTE_MINIMUM_LENGTH = 0;
     private int NOTE_MAXIMUM_LENGTH = 300;
     private long noteId;

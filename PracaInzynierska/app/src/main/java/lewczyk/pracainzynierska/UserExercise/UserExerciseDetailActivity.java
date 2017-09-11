@@ -9,6 +9,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.DifficultLevelRepository;
 import lewczyk.pracainzynierska.Database.EquipmentRequirementRepository;
 import lewczyk.pracainzynierska.Database.ExerciseRepository;
@@ -17,7 +18,7 @@ import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.R;
 
 public class UserExerciseDetailActivity extends AppCompatActivity {
-    private int DEFAULT_ID = -1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private long exerciseId;
     @BindView(R.id.userExerciseNameTextView) TextView exerciseName;
     @BindView(R.id.userExerciseMusclePartTextView) TextView musclePart;

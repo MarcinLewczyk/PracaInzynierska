@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lewczyk.pracainzynierska.Adapters.ExerciseInTrainingPlanAdapter;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.ExerciseInTrainingPlanRepository;
 import lewczyk.pracainzynierska.Database.TrainingPlanRepository;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
@@ -17,7 +18,7 @@ import lewczyk.pracainzynierska.DatabaseTables.TrainingPlan;
 import lewczyk.pracainzynierska.R;
 
 public class UserExercisePlanExerciseListActivity extends AppCompatActivity {
-    private int DEFAULT_ID = -1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private long planId;
     @BindView(R.id.userExerciseInTrainingPlanListView) ListView exercisesListView;
 

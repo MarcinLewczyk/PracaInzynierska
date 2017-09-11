@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import lewczyk.pracainzynierska.Adapters.CoachExerciseAdapter;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.DifficultLevelRepository;
 import lewczyk.pracainzynierska.Database.EquipmentRequirementRepository;
 import lewczyk.pracainzynierska.Database.ExerciseRepository;
@@ -23,7 +24,7 @@ import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.R;
 
 public class CoachExerciseListActivity extends AppCompatActivity{
-    private int DEFAULT_ID = -1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     @BindView(R.id.coachExerciseDifficultLevelSpinner) Spinner difficultSpinner;
     @BindView(R.id.coachExerciseEquipmentRequirementSpinner) Spinner equipmentSpinner;
     @BindView(R.id.coachExerciseTypeSpinner) Spinner typeSpinner;

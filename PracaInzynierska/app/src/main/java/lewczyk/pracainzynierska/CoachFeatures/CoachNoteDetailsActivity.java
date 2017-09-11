@@ -8,12 +8,13 @@ import android.webkit.WebView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.CoachNoteRepository;
 import lewczyk.pracainzynierska.DatabaseTables.CoachNote;
 import lewczyk.pracainzynierska.R;
 
 public class CoachNoteDetailsActivity extends AppCompatActivity {
-    private int DEFAULT_ID = 1;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private long noteId;
     @BindView(R.id.coachNoteDetailsWebView) WebView noteDetails;
 
