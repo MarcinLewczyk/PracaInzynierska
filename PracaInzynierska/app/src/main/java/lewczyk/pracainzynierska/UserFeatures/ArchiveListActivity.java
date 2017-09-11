@@ -1,5 +1,6 @@
 package lewczyk.pracainzynierska.UserFeatures;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -11,6 +12,7 @@ import butterknife.BindView;
 import lewczyk.pracainzynierska.Adapters.ExerciseArchiveAdapter;
 import lewczyk.pracainzynierska.Database.ExerciseArchiveRepository;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseArchive;
+import lewczyk.pracainzynierska.MainMenus.UserMainMenuActivity;
 import lewczyk.pracainzynierska.R;
 
 public class ArchiveListActivity extends AppCompatActivity {
@@ -33,5 +35,12 @@ public class ArchiveListActivity extends AppCompatActivity {
         Collections.reverse(exerciseArchives);
         ExerciseArchiveAdapter adapter = new ExerciseArchiveAdapter(exerciseArchives, this);
         archiveList.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, UserMainMenuActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

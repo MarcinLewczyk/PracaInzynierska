@@ -127,14 +127,14 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
         return validateSeries() && validateRepeats() && validateLoad();
     }
 
-    private boolean validateLoad() {
-        if(load.getText().toString().length() == FIELDS_MINIMUM_LENGTH){
-            load.setText("0.0");
+    private boolean validateSeries() {
+        if(series.getText().toString().length() == FIELDS_MINIMUM_LENGTH){
+            series.setText("0");
         }
         try{
-            Double.parseDouble(load.getText().toString());
+            Integer.parseInt(series.getText().toString());
         }catch(NumberFormatException e){
-            load.setError(getString(R.string.must_be_floating_point));
+            series.setError(getString(R.string.must_be_integer));
             return false;
         }
         return true;
@@ -153,14 +153,14 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
         return true;
     }
 
-    private boolean validateSeries() {
-        if(series.getText().toString().length() == FIELDS_MINIMUM_LENGTH){
-            series.setText("0");
+    private boolean validateLoad() {
+        if(load.getText().toString().length() == FIELDS_MINIMUM_LENGTH){
+            load.setText("0.0");
         }
         try{
-            Integer.parseInt(series.getText().toString());
+            Double.parseDouble(load.getText().toString());
         }catch(NumberFormatException e){
-            series.setError(getString(R.string.must_be_integer));
+            load.setError(getString(R.string.must_be_floating_point));
             return false;
         }
         return true;

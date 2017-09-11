@@ -92,4 +92,7 @@
     <string name="series_shorter">Serie</string>
     <string name="repeats">Powtórzenia</string>
     <string name="any">Dowolna</string>
+    <string name="dialog_message">Do działania aplikacji wymagane są wcześniejsze pozwolenia.</string>
+    <string name="warning">Uwaga</string>
+    <string name="ok">Ok</string>
 </resources>

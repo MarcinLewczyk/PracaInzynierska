@@ -1,8 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.UserExercise.UserExerciseParametersActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/userExerciseNameTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="20dp"
+        android:text="@string/exercise_name"/>
+
+    <TextView
+        android:id="@+id/userExerciseNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userExerciseNameTitleTextView">
+    </TextView>
+
+    <TextView
+        android:id="@+id/userExerciseSeriesTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/series"
+        android:textSize="20dp"
+        android:layout_below="@id/userExerciseNameTextView"/>
+
+    <EditText
+        android:id="@+id/userExerciseSeriesEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_below="@+id/userExerciseSeriesTitleTextView">
+    </EditText>
+
+    <TextView
+        android:id="@+id/userExerciseRepeatsTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/repeats_in_set"
+        android:textSize="20dp"
+        android:layout_below="@id/userExerciseSeriesEditText"/>
+
+    <EditText
+        android:id="@+id/userExerciseRepeatsEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_below="@+id/userExerciseRepeatsTitleTextView">
+    </EditText>
+
+    <TextView
+        android:id="@+id/userExerciseLoadTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/load"
+        android:textSize="20dp"
+        android:layout_below="@id/userExerciseRepeatsEditText"/>
+
+    <EditText
+        android:id="@+id/userExerciseLoadEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/userExerciseLoadTitleTextView"/>
+
+    <Button
+        android:id="@+id/userExerciseAddButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/execute_exercise"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
