@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import lewczyk.pracainzynierska.Adapters.ExerciseArchiveAdapter;
 import lewczyk.pracainzynierska.Database.ExerciseArchiveRepository;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseArchive;
@@ -22,6 +23,7 @@ public class ArchiveListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive_list);
+        ButterKnife.bind(this);
         setViewSettings();
     }
 
