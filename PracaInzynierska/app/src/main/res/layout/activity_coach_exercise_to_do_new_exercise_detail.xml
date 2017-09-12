@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:hint="@string/series"
         android:layout_below="@+id/coachExerciseToDoSeriesTitleTextView">
     </EditText>
 
@@ -65,6 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:hint="@string/repeats_in_set"
         android:layout_below="@+id/coachExerciseToDoRepeatsTitleTextView">
     </EditText>
 
@@ -81,6 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
+        android:hint="@string/load"
         android:layout_below="@+id/coachExerciseToDoLoadTitleTextView"/>
 
     <Button

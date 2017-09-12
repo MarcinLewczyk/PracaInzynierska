@@ -17,6 +17,8 @@
         android:id="@+id/bodyParameterEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/parameters_name"
         android:layout_below="@+id/bodyParameterEditTitleTextView"/>
 
     <TextView
@@ -31,6 +33,8 @@
         android:id="@+id/bodyParameterCurrentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="@string/parameter_s_current_state_decimal_number"
         android:layout_below="@+id/bodyParameterEditCurrentTextView"/>
 
     <Button

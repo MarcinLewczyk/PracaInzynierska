@@ -95,4 +95,8 @@
     <string name="dialog_message">Do działania aplikacji wymagane są wcześniejsze pozwolenia.</string>
     <string name="warning">Uwaga</string>
     <string name="ok">Ok</string>
+    <string name="parameters_name">Nazwa parametru</string>
+    <string name="parameter_s_current_state_decimal_number">Wartość parametru, liczba zmienno przecinkowa</string>
+    <string name="enter_note_content">Wprowadź treść notatki</string>
+    <string name="enter_current_state">Wprowadź aktualny stan</string>
 </resources>

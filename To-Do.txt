@@ -1,3 +1,2 @@
-Hints to edittexts
-Inputtypes to editexts
+
 User exercise with sensors logic

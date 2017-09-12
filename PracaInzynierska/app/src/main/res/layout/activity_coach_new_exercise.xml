@@ -17,6 +17,8 @@
         android:id="@+id/coachNewExerciseNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/exercise_name"
         android:layout_below="@id/coachNewExerciseNameTextView">
     </EditText>
 
@@ -32,6 +34,8 @@
         android:id="@+id/coachNewExerciseMusclePartEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/muscle_part"
         android:layout_below="@+id/coachNewExerciseMusclePartTextView">
     </EditText>
 
@@ -89,6 +93,8 @@
         android:id="@+id/coachNewExerciseDemonstrationEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/demonstration"
         android:layout_below="@+id/coachExerciseDemonstrationDetailTextView">
     </EditText>
 
