@@ -50,6 +50,7 @@ public class CoachNewExerciseActivity extends AppCompatActivity {
 
     private void setViewSettings() {
         loadIntent();
+        setSpinnersContent();
         if(!validateId()){
             setTitle(getString(R.string.create_new_exercise));
         } else {
@@ -68,7 +69,7 @@ public class CoachNewExerciseActivity extends AppCompatActivity {
         exerciseName.setText(exercise.getExerciseName());
         musclePart.setText(exercise.getMusclePart());
         demonstration.setText(exercise.getDemonstration());
-        setSpinnersContent();
+
         difficultSpinner.setSelection(difficultSpinnerPosition(exercise));
         equipmentSpinner.setSelection(equipmentSpinnerPosition(exercise));
         typeSpinner.setSelection(typeSpinnerPosition(exercise));
