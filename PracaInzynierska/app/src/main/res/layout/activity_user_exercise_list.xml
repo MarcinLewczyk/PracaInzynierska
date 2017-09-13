@@ -31,11 +31,27 @@
         android:background="@android:color/transparent"
         android:text="@string/search"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userExerciseListLinearLayout"
+        android:weightSum="0.5"
+        android:layout_below="@+id/userExerciseListSearchButton">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical"
+            android:textSize="13dp"
+            android:layout_marginLeft="15dp"
+            android:text="@string/exercise_name"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+
     <ListView
         android:id="@+id/userExerciseListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/userExerciseListSearchButton">
+        android:layout_below="@+id/userExerciseListLinearLayout">
     </ListView>
 
 </RelativeLayout>

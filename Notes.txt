@@ -2,3 +2,7 @@ Przy przejœciach do ekranu z logik¹ trzeba jakoœ zaznaczyæ z którego ekranu siê 
 potrzebne do póŸniejszego powrotu np. w planie treningowym 
 (tutaj te¿ przekazanie powrotne które æwiczenie siê wykona³o ¿eby zaznaczyæ to 
 jakoœ na ekranie(np. kolor t³a) podobnie w zadanych æwiczeniach)
+
+
+
+ekran zadawania cwiczen, nie dzia³a spinner i dodawanie bez spinnerów

@@ -99,4 +99,5 @@
     <string name="parameter_s_current_state_decimal_number">Wartość parametru, liczba zmienno przecinkowa</string>
     <string name="enter_note_content">Wprowadź treść notatki</string>
     <string name="enter_current_state">Wprowadź aktualny stan</string>
+    <string name="plans_name">Nazwa planu</string>
 </resources>
