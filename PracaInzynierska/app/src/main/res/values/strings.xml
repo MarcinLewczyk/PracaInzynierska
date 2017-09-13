@@ -100,4 +100,6 @@
     <string name="enter_note_content">Wprowadź treść notatki</string>
     <string name="enter_current_state">Wprowadź aktualny stan</string>
     <string name="plans_name">Nazwa planu</string>
+    <string name="archival_circumference">Obwód archiwalny</string>
+    <string name="archival_exercise_purpose">Archiwalny cel ćwiczenia</string>
 </resources>

@@ -1,3 +1,1 @@
-Labels above lists
-	-> UserPersonalInfo
 User exercise with sensors logic
