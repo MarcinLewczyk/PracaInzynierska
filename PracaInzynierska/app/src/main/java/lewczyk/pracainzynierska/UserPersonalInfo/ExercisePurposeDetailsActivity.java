@@ -64,7 +64,6 @@ public class ExercisePurposeDetailsActivity extends AppCompatActivity {
         exercisePurposesArchiveListView.setAdapter(adapter);
     }
 
-
     private ExercisePurpose loadExercisePurpose() {
         return ExercisePurposeRepository.findById(this, purposeId);
     }
