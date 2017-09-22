@@ -22,7 +22,7 @@ podci¹gniêcia na dr¹zku - akcelerometr jak w przysiadach.
 
 Sensory:
 Spróbowaæ po³¹czyæ dzia³anie akcelerometra i "kompasu" w celu lepszego pomiaru. ¯yroskop ma³o spotykany(czyt. nie mam w telefonie) wiêc mo¿na raczej odpuœciæ.
-Czujnik zbli¿eniowy, jeœli tylko bêdzie ³apa³ do ~15-20 cm, powinien siê sprawdziæ w wiêkszoœci æwiczeñ. 
+Czujnik zbli¿eniowy, jeœli tylko bêdzie ³apa³ do ~15-20 cm, powinien siê sprawdziæ w wiêkszoœci æwiczeñ. (£apie 5 cm max. ma³o dobrze)
 
 
 
