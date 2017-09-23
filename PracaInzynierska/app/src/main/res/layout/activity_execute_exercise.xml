@@ -1,8 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="lewczyk.pracainzynierska.UserExercise.ExecuteExerciseActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/exerciseToExecuteTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|center_horizontal"/>
+
+    <TextView
+        android:id="@+id/exerciseToExecuteSeriesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exerciseToExecuteTitleTextView"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/exerciseToExecuteRepeatsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exerciseToExecuteSeriesTextView"
+        android:textSize="20dp"
+        android:gravity="center_vertical|center_horizontal"/>
+
+    <TextView
+        android:id="@+id/exerciseToExecuteTimerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_below="@+id/exerciseToExecuteRepeatsTextView"/>
+
+    <Button
+        android:id="@+id/endOfSetButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_above="@+id/startStopExerciseButton"
+        android:text="@string/end_of_set" />
+
+    <Button
+        android:id="@+id/startStopExerciseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true"
+        android:text="@string/end_of_exercise" />
+</RelativeLayout>

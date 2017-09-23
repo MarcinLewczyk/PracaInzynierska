@@ -21,6 +21,9 @@ public class Exercise {
     @DatabaseField(canBeNull = false, width = 1000)
     private String demonstration;
 
+    @DatabaseField
+    private double sensorParameter;
+
     @DatabaseField(foreign = true, canBeNull = false, columnName = DIFF_LEVEL_COLUMN_NAME)
     private DifficultLevel difficultLevel;
 
@@ -40,6 +43,7 @@ public class Exercise {
         this.difficultLevel = difficultLevel;
         this.equipmentRequirement = equipmentRequirement;
         this.exerciseType = exerciseType;
+        sensorParameter = 0;
     }
 
     public long getId() {
@@ -92,5 +96,13 @@ public class Exercise {
 
     public void setExerciseType(ExerciseType exerciseType) {
         this.exerciseType = exerciseType;
+    }
+
+    public double getSensorParameter() {
+        return sensorParameter;
+    }
+
+    public void setSensorParameter(double sensorParameter) {
+        this.sensorParameter = sensorParameter;
     }
 }

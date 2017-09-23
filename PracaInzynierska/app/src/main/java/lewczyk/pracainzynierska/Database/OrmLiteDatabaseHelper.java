@@ -119,6 +119,15 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
         ExerciseArchiveRepository.addExerciseArchive(context, new ExerciseArchive(3, 4, 3.5, "20170831", 150, ex1));
 
         ExerciseToDoRepository.addExerciseToDo(context, new ExerciseToDo(5,5,5.0, "20170904", ex1));
+
+
+        /* exercises using sensors */
+
+        Exercise pushup = new Exercise("Pompka", "Plecy i klatka", "Połóż urządzenie na ziemi. Połóż się na brzuchu z urządzeniem pod czołem. " +
+                "Ugnij ręce na wysokości barków i wykonuj ruch prostująć ręce w łokciach. Urządzenie zliczy powtórzenia gdy zbliżysz czoło do niego na odległość 5 cm", beginer, noEq, strength_exercise);
+        pushup.setSensorParameter(5.0);
+
+        ExerciseRepository.addExercise(context, pushup);
     }
 
     private void createTrainingPlanData() {

@@ -102,4 +102,8 @@
     <string name="plans_name">Nazwa planu</string>
     <string name="archival_circumference">Obwód archiwalny</string>
     <string name="archival_exercise_purpose">Archiwalny cel ćwiczenia</string>
+    <string name="exercise_screen">Ekran ćwiczenia</string>
+    <string name="end_of_exercise">Koniec ćwiczenia</string>
+    <string name="end_of_set">Koniec serii</string>
+    <string name="begin_exercise">Rozpocznij ćwiczenie</string>
 </resources>

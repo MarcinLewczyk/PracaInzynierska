@@ -111,6 +111,9 @@ width=1000
 canBeNull=false
 # --field-end--
 # --field-start--
+fieldName=sensorParameter
+# --field-end--
+# --field-start--
 fieldName=difficultLevel
 columnName=difficult
 canBeNull=false

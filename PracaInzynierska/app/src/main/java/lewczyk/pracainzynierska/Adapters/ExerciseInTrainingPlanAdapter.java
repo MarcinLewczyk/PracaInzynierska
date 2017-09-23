@@ -69,6 +69,7 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ExecuteExerciseActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("trainingPlan", trainingPlan.getId());
                 intent.putExtra("exerciseId", exerciseObjectWithIdOnly.getId());
                 intent.putExtra("from", ActivityOrigin.UserExercisePlanExerciseListActivity.which);
                 view.getContext().startActivity(intent);

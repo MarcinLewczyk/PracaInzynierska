@@ -9,20 +9,28 @@ jakoœ na ekranie(np. kolor t³a) podobnie w zadanych æwiczeniach)
 przysiady - akcelerometr(tak jak w przyk³adowej aplikacji shake) - urz¹dzenie do kieszenie(trudniej wykryæ ruch) lub do r¹k - ³atwiej przy zmianie po³o¿enia
 Próba na aplikacji z tutoriala wygl¹da obiecuj¹co.
 
-p¹pki - proximity sensor, telefon przed twarz przy zbli¿eniu nabicie powtórzenia(sprawdziæ czy w praktyce ma sens)
+p¹pki - proximity sensor, telefon przed twarz przy zbli¿eniu nabicie powtórzenia(sprawdziæ czy w praktyce ma sens) - max 5 cm oddalenie wykryte, 
+	mo¿na u¿yæ jeœli u¿ytkownik mia³by dotykaæ twarz¹/ klatk¹ o ziemiê 
 
-skakanka/pajacyki - trzeba by spróbowaæ urzyæ krokomierza skonfigurowanego pod skoki.
+skakanka/pajacyki - trzeba by spróbowaæ urzyæ krokomierza skonfigurowanego pod skoki. - nie ma krokomierza w telefonie - zobaczyæ jak dzia³a z akcelerometrem
 
 Podci¹ganie na krawêdzi sto³u - proximity jak w p¹pce tylko urz¹dzenie pod g³ow¹.
 
-Unoszenie pleców i nóg w le¿eniu na brzuchu - proximity jak w p¹pce.
+Unoszenie pleców i nóg w le¿eniu na brzuchu - proximity jak w p¹pce. - podobnie jak w p¹pce, u¿ytkownik musi zbli¿yæ rêkê na 5 cm do urz¹dzenia.
 
 podci¹gniêcia na dr¹zku - akcelerometr jak w przysiadach.
 
+bieganie - tracker ruchu uzytkownika, mierzenie dystansu i czasu co pozwoli opbliczyæ œredni¹ prêdkoœæ.
+
 
 Sensory:
-Spróbowaæ po³¹czyæ dzia³anie akcelerometra i "kompasu" w celu lepszego pomiaru. ¯yroskop ma³o spotykany(czyt. nie mam w telefonie) wiêc mo¿na raczej odpuœciæ.
+Spróbowaæ po³¹czyæ dzia³anie akcelerometra i "kompasu" w celu lepszego pomiaru - problematyczne bo sporo matematyki co mo¿e opóŸniæ dzia³anie oraz wiêkszoœæ 
+	przyk³adów w internecie korzysta z ¿yroskopu, którego nie mam. 
+GPS - zobaczyæ jak sprawdza siê kod z tutorialu.
+¯yroskop ma³o spotykany(czyt. nie mam w telefonie) wiêc mo¿na raczej odpuœciæ.
 Czujnik zbli¿eniowy, jeœli tylko bêdzie ³apa³ do ~15-20 cm, powinien siê sprawdziæ w wiêkszoœci æwiczeñ. (£apie 5 cm max. ma³o dobrze)
+Czujnik magnetyczny raczej siê nie sprawdzi.
+
 
 
 
