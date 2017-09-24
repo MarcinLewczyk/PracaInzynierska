@@ -123,11 +123,15 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         /* exercises using sensors */
 
-        Exercise pushup = new Exercise("Pompka", "Plecy i klatka", "Połóż urządzenie na ziemi. Połóż się na brzuchu z urządzeniem pod czołem. " +
+        Exercise pushup = new Exercise(context.getString(R.string.push_up), "Plecy i klatka", "Połóż urządzenie na ziemi. Połóż się na brzuchu z urządzeniem pod czołem. " +
                 "Ugnij ręce na wysokości barków i wykonuj ruch prostująć ręce w łokciach. Urządzenie zliczy powtórzenia gdy zbliżysz czoło do niego na odległość 5 cm", beginer, noEq, strength_exercise);
         pushup.setSensorParameter(5.0);
 
+        Exercise squat = new Exercise(context.getString(R.string.squat), "Uda i pośladki", "Trzymaj urządzenie w ręce i wykonuj przysiady", beginer, noEq, strength_exercise);
+        squat.setSensorParameter(1.5);
+
         ExerciseRepository.addExercise(context, pushup);
+        ExerciseRepository.addExercise(context, squat);
     }
 
     private void createTrainingPlanData() {

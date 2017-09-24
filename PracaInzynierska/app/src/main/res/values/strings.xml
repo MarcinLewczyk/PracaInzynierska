@@ -106,4 +106,7 @@
     <string name="end_of_exercise">Koniec ćwiczenia</string>
     <string name="end_of_set">Koniec serii</string>
     <string name="begin_exercise">Rozpocznij ćwiczenie</string>
+    <string name="stop_exercise">Przerwij ćwiczenia</string>
+    <string name="push_up">Pompka</string>
+    <string name="squat">Przysiad</string>
 </resources>

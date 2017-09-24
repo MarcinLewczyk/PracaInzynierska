@@ -3,15 +3,15 @@ potrzebne do póŸniejszego powrotu np. w planie treningowym
 (tutaj te¿ przekazanie powrotne które æwiczenie siê wykona³o ¿eby zaznaczyæ to 
 jakoœ na ekranie(np. kolor t³a) podobnie w zadanych æwiczeniach)
 
-
+Gdy koñczy siê seria to wstrzymanie licznika czasu cwiczenia i licznik czasu przerwy ze wstrzymaniem dzia³ania czujników.
 
 æwiczenia:
 przysiady - akcelerometr(tak jak w przyk³adowej aplikacji shake) - urz¹dzenie do kieszenie(trudniej wykryæ ruch) lub do r¹k - ³atwiej przy zmianie po³o¿enia
 Próba na aplikacji z tutoriala wygl¹da obiecuj¹co.
-
+porobione
 p¹pki - proximity sensor, telefon przed twarz przy zbli¿eniu nabicie powtórzenia(sprawdziæ czy w praktyce ma sens) - max 5 cm oddalenie wykryte, 
 	mo¿na u¿yæ jeœli u¿ytkownik mia³by dotykaæ twarz¹/ klatk¹ o ziemiê 
-
+porobione
 skakanka/pajacyki - trzeba by spróbowaæ urzyæ krokomierza skonfigurowanego pod skoki. - nie ma krokomierza w telefonie - zobaczyæ jak dzia³a z akcelerometrem
 
 Podci¹ganie na krawêdzi sto³u - proximity jak w p¹pce tylko urz¹dzenie pod g³ow¹.
@@ -30,6 +30,10 @@ GPS - zobaczyæ jak sprawdza siê kod z tutorialu.
 ¯yroskop ma³o spotykany(czyt. nie mam w telefonie) wiêc mo¿na raczej odpuœciæ.
 Czujnik zbli¿eniowy, jeœli tylko bêdzie ³apa³ do ~15-20 cm, powinien siê sprawdziæ w wiêkszoœci æwiczeñ. (£apie 5 cm max. ma³o dobrze)
 Czujnik magnetyczny raczej siê nie sprawdzi.
+
+
+
+
 
 
 
