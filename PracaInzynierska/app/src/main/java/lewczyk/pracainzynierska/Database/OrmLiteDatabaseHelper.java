@@ -130,8 +130,12 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
         Exercise squat = new Exercise(context.getString(R.string.squat), "Uda i pośladki", "Trzymaj urządzenie w ręce i wykonuj przysiady", beginer, noEq, strength_exercise);
         squat.setSensorParameter(1.5);
 
+        Exercise tablePull = new Exercise(context.getString(R.string.table_pull), "Plecy i klatka", "Opis to do", beginer, smallEq, strength_exercise);
+        tablePull.setSensorParameter(5.0);
+
         ExerciseRepository.addExercise(context, pushup);
         ExerciseRepository.addExercise(context, squat);
+        ExerciseRepository.addExercise(context, tablePull);
     }
 
     private void createTrainingPlanData() {
