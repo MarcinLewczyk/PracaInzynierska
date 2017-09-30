@@ -110,4 +110,11 @@
     <string name="push_up">Pompka</string>
     <string name="squat">Przysiad</string>
     <string name="table_pull">Podciaganie na krawędzi stołu</string>
+    <string name="arms_and_legs_raise_lie_on_belly">Unoszenie pleców i nóg w leżeniu na brzuchu</string>
+    <string name="pull_up">Podciągnięcie na drążku</string>
+    <string name="Push_up_demonstration">Połóż urządzenie na ziemi. Wykonaj podpór przodem, z urzadzeniem na wysokości czoła. Dłonie ustaw nieco szerzej niż szerokość barków, na wysokosci klatki piersiowej. Ugnij ramiona i wykonuj ruch prostująć ręce w łokciach. Urządzenie zliczy powtórzenia gdy zbliżysz czoło do niego na odległość 5 cm.</string>
+    <string name="squat_demonstration">Trzymaj urządzenie w ręce i wykonuj przysiady. Urządzenie zlicza przysiady z maksymalną częstotliwością 1 na 3 sekundy.</string>
+    <string name="table_pull_demonstration">Połóż się na plecach pod stołem. Połóż urzadzenie pod szyją. Chwyć za krawędź stołu szerokim nachwytem i unieś tułów jak najwyżej, trzymając stopy na ziemi. Ciało cały czas utrzymuj w jednej linii. Urządzenie zliczy powtórzenia gdy zbliżysz szyję do niego na odległość 5 cm.</string>
+    <string name="arms_legs_raise_demonstration">Połóż się na brzuchu, połóż urządzenie pod czołem, nogi wyprostowane trzymaj razem, ręce splecione na karku łokciami na zewnątrz. Następnie powoli wykonaj odgięcie tułowia maksymalnie do góry, z jednoczesnym uniesieniem nóg. Powli wracaj do pozycji wyjściowej. Urządzenie zliczy powtórzenie gry zbliżysz czoło na odległość 5 cm.</string>
+    <string name="pull_up_demonstration">Złap drążek nachwytem. Szerokość chwytu zgodna z poleceniem trenera. Wykonaj zwis na lekko zgiętych rękach. Podciągaj się na lekko zgiętych rękach, tak aby klatka znalazła się jak najbliżej drążka. Opuść się do pozycji wyjściowej.</string>
 </resources>

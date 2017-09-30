@@ -12,16 +12,19 @@ porobione
 p¹pki - proximity sensor, telefon przed twarz przy zbli¿eniu nabicie powtórzenia(sprawdziæ czy w praktyce ma sens) - max 5 cm oddalenie wykryte, 
 	mo¿na u¿yæ jeœli u¿ytkownik mia³by dotykaæ twarz¹/ klatk¹ o ziemiê 
 porobione
-skakanka/pajacyki - trzeba by spróbowaæ urzyæ krokomierza skonfigurowanego pod skoki. - nie ma krokomierza w telefonie - zobaczyæ jak dzia³a z akcelerometrem
 
 Podci¹ganie na krawêdzi sto³u - proximity jak w p¹pce tylko urz¹dzenie pod g³ow¹.
+porobione
 
 Unoszenie pleców i nóg w le¿eniu na brzuchu - proximity jak w p¹pce. - podobnie jak w p¹pce, u¿ytkownik musi zbli¿yæ rêkê na 5 cm do urz¹dzenia.
+porobione
 
 podci¹gniêcia na dr¹zku - akcelerometr jak w przysiadach.
+porobione
 
 bieganie - tracker ruchu uzytkownika, mierzenie dystansu i czasu co pozwoli opbliczyæ œredni¹ prêdkoœæ.
 
+skakanka/pajacyki - trzeba by spróbowaæ urzyæ krokomierza skonfigurowanego pod skoki. - nie ma krokomierza w telefonie - zobaczyæ jak dzia³a z akcelerometrem
 
 Sensory:
 Spróbowaæ po³¹czyæ dzia³anie akcelerometra i "kompasu" w celu lepszego pomiaru - problematyczne bo sporo matematyki co mo¿e opóŸniæ dzia³anie oraz wiêkszoœæ 

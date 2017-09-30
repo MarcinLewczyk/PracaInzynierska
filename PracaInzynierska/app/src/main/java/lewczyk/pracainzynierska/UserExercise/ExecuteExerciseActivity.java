@@ -13,14 +13,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Database.ExerciseArchiveRepository;
 import lewczyk.pracainzynierska.Database.ExerciseInTrainingPlanRepository;
 import lewczyk.pracainzynierska.Database.ExerciseRepository;
 import lewczyk.pracainzynierska.Database.ExerciseToDoRepository;
 import lewczyk.pracainzynierska.Database.TrainingPlanRepository;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
+import lewczyk.pracainzynierska.DatabaseTables.ExerciseArchive;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseInTrainingPlan;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.R;
@@ -39,9 +45,10 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
     private ExerciseInTrainingPlan exerciseInTrainingPlan;
     private long startTime, timeInMilliseconds, timeBuffer, updatedTime, lastSensorUpdate;
     private Handler timerHandler = new Handler();
-    private double sensorParameter;
+    private double sensorParameter, load;
     private boolean exerciseContinues = false;
     private SensorManager sensorManager;
+    private ArrayList<String> exercisesDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +81,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
     private void loadIntentData() {
         Intent intent = getIntent();
         fromActivity = intent.getIntExtra("from", -1);
-
+        exercisesDone = intent.getStringArrayListExtra("exercisesDone");
         switch(fromActivity){
             case 0:
                 exerciseId = intent.getLongExtra("exerciseId", -1);
@@ -167,7 +174,13 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         timerStops();
         startStopExerciseButton.setEnabled(false);
         unregisterSensor();
-        // TODO: 24.09.2017 end of exercise logic 
+        if(confirmEndOfExercise()){
+            goToPreviousActivity();
+        }
+    }
+    // TODO: 30.09.2017 confirm popup
+    private boolean confirmEndOfExercise() {
+        return false;
     }
 
     @OnClick(R.id.startStopExerciseButton)
@@ -211,9 +224,48 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
 
     @Override
     public void onBackPressed(){
-        super.onBackPressed(); // TODO: 24.09.2017 returning to previous screen 
         timerStops();
-        finish();
+        goToPreviousActivity();
+    }
+
+    private void goToPreviousActivity(){
+        addExerciseToArchive();
+        if(exercisesDone == null){
+            exercisesDone = new ArrayList<>();
+        }
+        exercisesDone.add(String.valueOf(exerciseId));
+        Intent intent;
+        switch(fromActivity){
+            case 0:
+                intent = new Intent(this, UserExercisePlanExerciseListActivity.class);
+                intent.putStringArrayListExtra("exercisesDone", exercisesDone);
+                intent.putExtra("planId", trainingPlanId);
+                startActivity(intent);
+                finish();
+                break;
+            case 1:
+                intent = new Intent(this, UserExerciseListActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case 2:
+                intent = new Intent(this, UserExerciseToDoListActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
+    }
+
+    private void addExerciseToArchive() {
+        int secs = (int) (updatedTime / 1000);
+        ExerciseArchive exerciseArchive = new ExerciseArchive(currentSet, currentRepeat, load, getCurrentDateString(), secs, exercise);
+        ExerciseArchiveRepository.addExerciseArchive(this, exerciseArchive);
+    }
+
+    private String getCurrentDateString(){
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        return df.format(c.getTime());
     }
 
     @Override
@@ -244,6 +296,14 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
             }
             if(exercise.getExerciseName().equals(getString(R.string.table_pull))){
                 sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY), SensorManager.SENSOR_DELAY_NORMAL);
+                timeParameter = 2500;
+            }
+            if(exercise.getExerciseName().equals(getString(R.string.arms_and_legs_raise_lie_on_belly))){
+                sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY), SensorManager.SENSOR_DELAY_NORMAL);
+                timeParameter = 2500;
+            }
+            if(exercise.getExerciseName().equals(getString(R.string.pull_up))){
+                sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
                 timeParameter = 2500;
             }
         }

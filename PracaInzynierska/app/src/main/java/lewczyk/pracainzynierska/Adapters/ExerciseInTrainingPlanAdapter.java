@@ -2,6 +2,7 @@ package lewczyk.pracainzynierska.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,13 @@ import lewczyk.pracainzynierska.UserExercise.UserExercisePlanExerciseListActivit
 public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
     private Context context;
     private TrainingPlan trainingPlan;
+    private ArrayList<String> exercisesDone;
 
-    public ExerciseInTrainingPlanAdapter(ArrayList<Exercise> plans, TrainingPlan trainingPlan, Context context){
+    public ExerciseInTrainingPlanAdapter(ArrayList<Exercise> plans, TrainingPlan trainingPlan, Context context, ArrayList<String> exercisesDone){
         super(context, R.layout.exercise_in_training_plan_details, plans);
         this.context = context;
         this.trainingPlan = trainingPlan;
+        this.exercisesDone = exercisesDone;
     }
 
     private static class ViewHolder{
@@ -63,6 +66,11 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
         viewHolder.series.setText(String.valueOf(exerciseInTrainingPlan.getSeries()));
         viewHolder.repeats.setText(String.valueOf(exerciseInTrainingPlan.getRepeats()));
         viewHolder.load.setText(String.valueOf(exerciseInTrainingPlan.getLoad()));
+
+        if(isExerciseDone(exerciseObjectWithIdOnly.getId())){
+            viewHolder.layout.setBackgroundColor(Color.GREEN);
+        }
+
         viewHolder.layout.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -80,5 +88,17 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
             }
         });
         return convertView;
+    }
+
+    private boolean isExerciseDone(long exerciseId){
+        if(exercisesDone != null){
+            for (String s: exercisesDone) {
+                long id = Long.valueOf(s);
+                if(id == exerciseId){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

@@ -123,19 +123,31 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         /* exercises using sensors */
 
-        Exercise pushup = new Exercise(context.getString(R.string.push_up), "Plecy i klatka", "Połóż urządzenie na ziemi. Połóż się na brzuchu z urządzeniem pod czołem. " +
-                "Ugnij ręce na wysokości barków i wykonuj ruch prostująć ręce w łokciach. Urządzenie zliczy powtórzenia gdy zbliżysz czoło do niego na odległość 5 cm", beginer, noEq, strength_exercise);
+        Exercise pushup = new Exercise(context.getString(R.string.push_up), "Plecy i klatka",
+                context.getString(R.string.Push_up_demonstration), beginer, noEq, strength_exercise);
         pushup.setSensorParameter(5.0);
 
-        Exercise squat = new Exercise(context.getString(R.string.squat), "Uda i pośladki", "Trzymaj urządzenie w ręce i wykonuj przysiady", beginer, noEq, strength_exercise);
+        Exercise squat = new Exercise(context.getString(R.string.squat), "Uda i pośladki",
+                context.getString(R.string.squat_demonstration), beginer, noEq, strength_exercise);
         squat.setSensorParameter(1.5);
 
-        Exercise tablePull = new Exercise(context.getString(R.string.table_pull), "Plecy i klatka", "Opis to do", beginer, smallEq, strength_exercise);
+        Exercise tablePull = new Exercise(context.getString(R.string.table_pull), "Plecy i klatka",
+                context.getString(R.string.table_pull_demonstration), beginer, smallEq, strength_exercise);
         tablePull.setSensorParameter(5.0);
+
+        Exercise armsAndLegsRaise = new Exercise(context.getString(R.string.arms_and_legs_raise_lie_on_belly), "Plecy i brzuch",
+                context.getString(R.string.arms_legs_raise_demonstration), beginer, noEq, strength_exercise);
+        armsAndLegsRaise.setSensorParameter(5.0);
+
+        Exercise pullUp = new Exercise(context.getString(R.string.pull_up), "Plecy i ręce",
+                context.getString(R.string.pull_up_demonstration), intermediate, smallEq, strength_exercise);
+        pullUp.setSensorParameter(1.0);
 
         ExerciseRepository.addExercise(context, pushup);
         ExerciseRepository.addExercise(context, squat);
         ExerciseRepository.addExercise(context, tablePull);
+        ExerciseRepository.addExercise(context, armsAndLegsRaise);
+        ExerciseRepository.addExercise(context, pullUp);
     }
 
     private void createTrainingPlanData() {
@@ -143,7 +155,7 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     private void createExerciseData() {
-      //  ExerciseRepository.addExercise(context, new Exercise("Kaptur", "Szyja", "Hantle w dłonie i wzruszaj ramionami",));
+
     }
 
     private void createExerciseTypeData() {

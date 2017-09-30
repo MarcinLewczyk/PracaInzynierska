@@ -20,6 +20,7 @@ import lewczyk.pracainzynierska.R;
 public class UserExercisePlanExerciseListActivity extends AppCompatActivity {
     private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private long planId;
+    ArrayList<String> exercisesDone;
     @BindView(R.id.userExerciseInTrainingPlanListView) ListView exercisesListView;
 
     @Override
@@ -41,6 +42,7 @@ public class UserExercisePlanExerciseListActivity extends AppCompatActivity {
     private void loadIntent() {
         Intent intent = getIntent();
         planId = intent.getLongExtra("planId", DEFAULT_ID);
+        exercisesDone = intent.getStringArrayListExtra("exercisesDone");
     }
 
     private boolean validateId() {
@@ -49,7 +51,7 @@ public class UserExercisePlanExerciseListActivity extends AppCompatActivity {
 
     private void setListViewContent() {
         ArrayList<Exercise> exercisesInTrainingPlan = (ArrayList) ExerciseInTrainingPlanRepository.findAllWithGivenTrainingPlan(this, loadTrainingPlan());
-        ExerciseInTrainingPlanAdapter adapter = new ExerciseInTrainingPlanAdapter(exercisesInTrainingPlan, loadTrainingPlan(), this);
+        ExerciseInTrainingPlanAdapter adapter = new ExerciseInTrainingPlanAdapter(exercisesInTrainingPlan, loadTrainingPlan(), this, exercisesDone);
         exercisesListView.setAdapter(adapter);
     }
 
