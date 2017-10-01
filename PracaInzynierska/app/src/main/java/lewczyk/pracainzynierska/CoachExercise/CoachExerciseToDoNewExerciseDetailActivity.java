@@ -1,17 +1,27 @@
 package lewczyk.pracainzynierska.CoachExercise;
 
 import android.app.DatePickerDialog;
+
+
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -23,6 +33,7 @@ import lewczyk.pracainzynierska.Database.ExerciseToDoRepository;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.R;
+import lewczyk.pracainzynierska.UserExercise.UserExerciseToDoListActivity;
 
 public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivity {
     private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
@@ -106,6 +117,7 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
                             Integer.parseInt(repeats.getText().toString()),
                             Double.parseDouble(load.getText().toString()),
                             transformDateToString(), loadExercise()));
+            addNotification();
             moveToExerciseToDoListActivity();
         }
     }
@@ -121,6 +133,33 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
         return  date.getText().toString().substring(0,4) +
                 date.getText().toString().substring(5,7) +
                 date.getText().toString().substring(8,10);
+    }
+
+    private void addNotification(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.notification)
+                        .setContentTitle(getString(R.string.exercises))
+                        .setContentText(getString(R.string.exercise_reminder))
+                        .setWhen(dateToLong());
+        Intent notificationIntent = new Intent(this, UserExerciseToDoListActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0, builder.build());
+    }
+
+    private long dateToLong(){
+        String stringDate = date.getText().toString();
+        SimpleDateFormat f = new SimpleDateFormat("yyyy.MM.dd");
+        long milliseconds = 0;
+        try {
+            Date d = f.parse(stringDate);
+            milliseconds = d.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return milliseconds;
     }
 
     private boolean validateFields(){

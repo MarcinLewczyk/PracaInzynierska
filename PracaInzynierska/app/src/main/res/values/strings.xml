@@ -129,4 +129,5 @@
     <string name="no">Nie</string>
     <string name="breaks_time">Czas przerw</string>
     <string name="exercise_time">Czas ćwiczenia</string>
+    <string name="exercise_reminder">Przypomnienie o ćwiczeniach</string>
 </resources>

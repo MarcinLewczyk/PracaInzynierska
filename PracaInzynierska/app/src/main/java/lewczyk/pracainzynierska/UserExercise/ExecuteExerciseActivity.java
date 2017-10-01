@@ -99,6 +99,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
                     exerciseInTrainingPlan = loadExerciseInTrainingPlan();
                     series = exerciseInTrainingPlan.getSeries();
                     repeats = exerciseInTrainingPlan.getRepeats();
+                    load = exerciseInTrainingPlan.getLoad();
                     sensorParameter = exercise.getSensorParameter();
                 }
                 break;
@@ -108,6 +109,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
                     exercise = loadExercise();
                     series = intent.getIntExtra("series", -1);
                     repeats = intent.getIntExtra("repeats", -1);
+                    load = intent.getDoubleExtra("load", 0.0);
                     sensorParameter = exercise.getSensorParameter();
                 }
                 break;
@@ -119,6 +121,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
                     exercise = loadExercise();
                     series = exerciseToDo.getSeries();
                     repeats = exerciseToDo.getRepeats();
+                    load = exerciseToDo.getLoad();
                     sensorParameter = exercise.getSensorParameter();
                 }
                 break;
@@ -158,6 +161,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         repeatsTextView.setText(getString(R.string.repeats) + " " + currentRepeat + "/" + repeats);
         if(repeats != 0 && currentRepeat == repeats){
             endOfSet();
+            repeatsTextView.setText(getString(R.string.repeats) + " " + currentRepeat + "/" + repeats);
         }
     }
 
@@ -309,6 +313,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
                 finish();
                 break;
             case 2:
+                ExerciseToDoRepository.deleteExerciseToDo(this, exerciseToDo);
                 intent = new Intent(this, UserExerciseToDoListActivity.class);
                 startActivity(intent);
                 finish();
