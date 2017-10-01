@@ -38,6 +38,14 @@
         android:gravity="center_vertical|center_horizontal"
         android:layout_below="@+id/exerciseToExecuteRepeatsTextView"/>
 
+    <TextView
+        android:id="@+id/exerciseToExecuteBreakTimerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_below="@+id/exerciseToExecuteTimerTextView"/>
+
     <Button
         android:id="@+id/endOfSetButton"
         android:layout_width="match_parent"

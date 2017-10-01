@@ -64,16 +64,12 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         Log.d("database", "onCreate start");
         recreateTables();
-      /*  createDifficultLevelData();
-        createEquipmentRequirementData();
-        createExerciseTypeData();
-        createExerciseData();
-        createTrainingPlanData();*/
         fillTables();
         Log.d("database", "onCreate end");
     }
 
     private void fillTables() {
+        /*  Exercise Types  */
         ExerciseType warmup = new ExerciseType(context.getString(R.string.warmup));
         ExerciseType cardio = new ExerciseType(context.getString(R.string.cardio));
         ExerciseType strength_exercise = new ExerciseType(context.getString(R.string.strength_exercise));
@@ -82,6 +78,7 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
         ExerciseTypeRepository.addExerciseType(context, cardio);
         ExerciseTypeRepository.addExerciseType(context, strength_exercise);
 
+        /*  Equipment Requirements  */
         EquipmentRequirement noEq = new EquipmentRequirement(context.getString(R.string.no_equipment));
         EquipmentRequirement smallEq = new EquipmentRequirement(context.getString(R.string.small_equipment));
         EquipmentRequirement machine = new EquipmentRequirement(context.getString(R.string.exercise_machines));
@@ -90,6 +87,7 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
         EquipmentRequirementRepository.addEquipmentRequirement(context, smallEq);
         EquipmentRequirementRepository.addEquipmentRequirement(context, machine);
 
+        /*  Difficult Levels    */
         DifficultLevel beginer = new DifficultLevel(context.getString(R.string.beginer));
         DifficultLevel intermediate = new DifficultLevel(context.getString(R.string.intermediate));
         DifficultLevel advanced = new DifficultLevel(context.getString(R.string.advanced));
@@ -98,6 +96,7 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
         DifficultLevelRepository.addDifficultLevel(context, intermediate);
         DifficultLevelRepository.addDifficultLevel(context, advanced);
 
+        /*  test exercises  */
         Exercise ex1 = new Exercise("Kaptury", "Szyja", "Hantle w dłonie i wzruszaj ramionami", beginer, smallEq, strength_exercise);
         Exercise ex2 = new Exercise("Drążek", "Plecy", "Podciągnięcia na drążku", intermediate, noEq, warmup);
         Exercise ex3 = new Exercise("Laweczka", "Klata", "Machanie gryfem", advanced, machine, cardio);
@@ -106,7 +105,7 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
         ExerciseRepository.addExercise(context, ex2);
         ExerciseRepository.addExercise(context, ex3);
 
-        TrainingPlan trainingPlan = new TrainingPlan("Plecy");
+        TrainingPlan trainingPlan = new TrainingPlan(context.getString(R.string.Back_Muscle));
 
         TrainingPlanRepository.addTrainingPlan(context, trainingPlan);
 
@@ -120,26 +119,30 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         ExerciseToDoRepository.addExerciseToDo(context, new ExerciseToDo(5,5,5.0, "20170904", ex1));
 
+        /*  End of test */
 
-        /* exercises using sensors */
+        /*  Exercises using sensors */
 
-        Exercise pushup = new Exercise(context.getString(R.string.push_up), "Plecy i klatka",
+        Exercise pushup = new Exercise(context.getString(R.string.push_up), context.getString(R.string.Chest_Muscle),
                 context.getString(R.string.Push_up_demonstration), beginer, noEq, strength_exercise);
         pushup.setSensorParameter(5.0);
 
-        Exercise squat = new Exercise(context.getString(R.string.squat), "Uda i pośladki",
+        Exercise squat = new Exercise(context.getString(R.string.squat), context.getString(R.string.thighs_muscle),
                 context.getString(R.string.squat_demonstration), beginer, noEq, strength_exercise);
         squat.setSensorParameter(1.5);
 
-        Exercise tablePull = new Exercise(context.getString(R.string.table_pull), "Plecy i klatka",
+        Exercise tablePull = new Exercise(context.getString(R.string.table_pull),
+                context.getString(R.string.Back_Muscle) + " " + context.getString(R.string.and) + " "  + context.getString(R.string.Chest_Muscle),
                 context.getString(R.string.table_pull_demonstration), beginer, smallEq, strength_exercise);
         tablePull.setSensorParameter(5.0);
 
-        Exercise armsAndLegsRaise = new Exercise(context.getString(R.string.arms_and_legs_raise_lie_on_belly), "Plecy i brzuch",
+        Exercise armsAndLegsRaise = new Exercise(context.getString(R.string.arms_and_legs_raise_lie_on_belly),
+                context.getString(R.string.Back_Muscle) + " " + context.getString(R.string.and) + " " + context.getString(R.string.abs_muscle),
                 context.getString(R.string.arms_legs_raise_demonstration), beginer, noEq, strength_exercise);
         armsAndLegsRaise.setSensorParameter(5.0);
 
-        Exercise pullUp = new Exercise(context.getString(R.string.pull_up), "Plecy i ręce",
+        Exercise pullUp = new Exercise(context.getString(R.string.pull_up),
+                context.getString(R.string.Back_Muscle) + " " + context.getString(R.string.and) + " " + context.getString(R.string.arms),
                 context.getString(R.string.pull_up_demonstration), intermediate, smallEq, strength_exercise);
         pullUp.setSensorParameter(1.0);
 
@@ -148,32 +151,6 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
         ExerciseRepository.addExercise(context, tablePull);
         ExerciseRepository.addExercise(context, armsAndLegsRaise);
         ExerciseRepository.addExercise(context, pullUp);
-    }
-
-    private void createTrainingPlanData() {
-
-    }
-
-    private void createExerciseData() {
-
-    }
-
-    private void createExerciseTypeData() {
-        ExerciseTypeRepository.addExerciseType(context, new ExerciseType(context.getString(R.string.warmup)));
-        ExerciseTypeRepository.addExerciseType(context, new ExerciseType(context.getString(R.string.cardio)));
-        ExerciseTypeRepository.addExerciseType(context, new ExerciseType(context.getString(R.string.strength_exercise)));
-    }
-
-    private void createEquipmentRequirementData() {
-        EquipmentRequirementRepository.addEquipmentRequirement(context, new EquipmentRequirement(context.getString(R.string.no_equipment)));
-        EquipmentRequirementRepository.addEquipmentRequirement(context, new EquipmentRequirement(context.getString(R.string.small_equipment)));
-        EquipmentRequirementRepository.addEquipmentRequirement(context, new EquipmentRequirement(context.getString(R.string.exercise_machines)));
-    }
-
-    private void createDifficultLevelData() {
-        DifficultLevelRepository.addDifficultLevel(context, new DifficultLevel(context.getString(R.string.beginer)));
-        DifficultLevelRepository.addDifficultLevel(context, new DifficultLevel(context.getString(R.string.intermediate)));
-        DifficultLevelRepository.addDifficultLevel(context, new DifficultLevel(context.getString(R.string.advanced)));
     }
 
     @Override

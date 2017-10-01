@@ -117,4 +117,16 @@
     <string name="table_pull_demonstration">Połóż się na plecach pod stołem. Połóż urzadzenie pod szyją. Chwyć za krawędź stołu szerokim nachwytem i unieś tułów jak najwyżej, trzymając stopy na ziemi. Ciało cały czas utrzymuj w jednej linii. Urządzenie zliczy powtórzenia gdy zbliżysz szyję do niego na odległość 5 cm.</string>
     <string name="arms_legs_raise_demonstration">Połóż się na brzuchu, połóż urządzenie pod czołem, nogi wyprostowane trzymaj razem, ręce splecione na karku łokciami na zewnątrz. Następnie powoli wykonaj odgięcie tułowia maksymalnie do góry, z jednoczesnym uniesieniem nóg. Powli wracaj do pozycji wyjściowej. Urządzenie zliczy powtórzenie gry zbliżysz czoło na odległość 5 cm.</string>
     <string name="pull_up_demonstration">Złap drążek nachwytem. Szerokość chwytu zgodna z poleceniem trenera. Wykonaj zwis na lekko zgiętych rękach. Podciągaj się na lekko zgiętych rękach, tak aby klatka znalazła się jak najbliżej drążka. Opuść się do pozycji wyjściowej.</string>
+    <string name="Back_Muscle">Plecy</string>
+    <string name="Chest_Muscle">Klatka piersiowa</string>
+    <string name="and">i</string>
+    <string name="abs_muscle">brzuch</string>
+    <string name="arms">ręce</string>
+    <string name="thighs_muscle">Pośladki</string>
+    <string name="confirm">Potwierdzenie</string>
+    <string name="popup_end_exercise_confirm">Czy chcesz zakończyć ćwiczenie?</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="breaks_time">Czas przerw</string>
+    <string name="exercise_time">Czas ćwiczenia</string>
 </resources>

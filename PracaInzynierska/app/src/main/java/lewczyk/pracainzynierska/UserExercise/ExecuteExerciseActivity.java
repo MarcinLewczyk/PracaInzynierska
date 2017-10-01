@@ -1,5 +1,6 @@
 package lewczyk.pracainzynierska.UserExercise;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -7,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +38,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
     @BindView(R.id.exerciseToExecuteSeriesTextView) TextView seriesTextView;
     @BindView(R.id.exerciseToExecuteRepeatsTextView) TextView repeatsTextView;
     @BindView(R.id.exerciseToExecuteTimerTextView) TextView timerTextView;
+    @BindView(R.id.exerciseToExecuteBreakTimerTextView) TextView breakTimerTextView;
     @BindView(R.id.startStopExerciseButton) Button startStopExerciseButton;
     @BindView(R.id.endOfSetButton) Button endOfSetButton;
     private int fromActivity, currentSet, series, currentRepeat, repeats, timeParameter;
@@ -44,7 +47,9 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
     private Exercise exercise;
     private ExerciseInTrainingPlan exerciseInTrainingPlan;
     private long startTime, timeInMilliseconds, timeBuffer, updatedTime, lastSensorUpdate;
+    private long startBreakTime, breakTimeInMilliseconds, breakTimeBuffer, updatedBreakTime;
     private Handler timerHandler = new Handler();
+    private Handler breakTimerHandler = new Handler();
     private double sensorParameter, load;
     private boolean exerciseContinues = false;
     private SensorManager sensorManager;
@@ -75,7 +80,8 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         } else {
             updateRepeatsTextView();
         }
-        timerTextView.setText("0:00:000");
+        timerTextView.setText(getString(R.string.exercise_time) + ": " + "0:00:000");
+        breakTimerTextView.setText(getString(R.string.breaks_time) + ": " +"0:00:000");
     }
 
     private void loadIntentData() {
@@ -136,13 +142,9 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
     @OnClick(R.id.endOfSetButton)
     public void endOfSetButtonPressed(){
         timerStops();
-        currentSet++;
-        currentRepeat = 0;
-        updateSeriesTextView();
+        breakTimerCounts();
+        endOfSet();
         updateRepeatsTextView();
-        if(isEndOfSet()){
-            endOfExercise();
-        }
     }
 
     private void updateSeriesTextView() {
@@ -151,7 +153,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
 
     private void updateRepeatsTextView() {
         repeatsTextView.setText(getString(R.string.repeats) + " " + currentRepeat + "/" + repeats);
-        if(currentRepeat == repeats){
+        if(repeats != 0 && currentRepeat == repeats){
             endOfSet();
         }
     }
@@ -174,39 +176,43 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         timerStops();
         startStopExerciseButton.setEnabled(false);
         unregisterSensor();
-        if(confirmEndOfExercise()){
-            goToPreviousActivity();
-        }
+        confirmEndOfExercise();
     }
-    // TODO: 30.09.2017 confirm popup
-    private boolean confirmEndOfExercise() {
-        return false;
+
+    private void confirmEndOfExercise() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.confirm);
+        builder.setMessage(R.string.popup_end_exercise_confirm);
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                goToPreviousActivity();
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @OnClick(R.id.startStopExerciseButton)
     public void startStopExerciseButtonPressed(){
         if(!exerciseContinues){
             timerCounts();
+            breakTimerStops();
         } else {
             timerStops();
+            breakTimerCounts();
         }
     }
-
-    Runnable updateTimerThread = new Runnable() {
-        @Override
-        public void run() {
-            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-            updatedTime = timeBuffer + timeInMilliseconds;
-            int secs = (int) (updatedTime / 1000);
-            int mins = secs / 60;
-            secs = secs % 60;
-            int milliseconds = (int) (updatedTime % 1000);
-            timerTextView.setText("" + mins + ":"
-                    + String.format("%02d", secs) + ":"
-                    + String.format("%03d", milliseconds));
-            timerHandler.postDelayed(this, 0);
-        }
-    };
 
     private void timerCounts(){
         startTime = SystemClock.uptimeMillis();
@@ -221,6 +227,48 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         startStopExerciseButton.setText(R.string.begin_exercise);
         exerciseContinues = false;
     }
+
+    Runnable updateTimerThread = new Runnable() {
+        @Override
+        public void run() {
+            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+            updatedTime = timeBuffer + timeInMilliseconds;
+            int secs = (int) (updatedTime / 1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            int milliseconds = (int) (updatedTime % 1000);
+            timerTextView.setText(getString(R.string.exercise_time) + ": " + mins + ":"
+                    + String.format("%02d", secs) + ":"
+                    + String.format("%03d", milliseconds));
+            timerHandler.postDelayed(this, 0);
+        }
+    };
+
+    private void breakTimerCounts(){
+        startBreakTime = SystemClock.uptimeMillis();
+        breakTimerHandler.postDelayed(updateBreakTimerThread, 0);
+    }
+
+    private void breakTimerStops(){
+        breakTimeBuffer += timeInMilliseconds;
+        breakTimerHandler.removeCallbacks(updateBreakTimerThread);
+    }
+
+    Runnable updateBreakTimerThread = new Runnable() {
+        @Override
+        public void run() {
+            breakTimeInMilliseconds = SystemClock.uptimeMillis() - startBreakTime;
+            updatedBreakTime = breakTimeBuffer + breakTimeInMilliseconds;
+            int secs = (int) (updatedBreakTime / 1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            int milliseconds = (int) (updatedBreakTime % 1000);
+            breakTimerTextView.setText(getString(R.string.breaks_time) + ": " + mins + ":"
+                    + String.format("%02d", secs) + ":"
+                    + String.format("%03d", milliseconds));
+            breakTimerHandler.postDelayed(this, 0);
+        }
+    };
 
     @Override
     public void onBackPressed(){
