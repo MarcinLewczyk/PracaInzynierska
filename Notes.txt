@@ -1,8 +1,3 @@
-Przy przejœciach do ekranu z logik¹ trzeba jakoœ zaznaczyæ z którego ekranu siê przysz³o -
-potrzebne do póŸniejszego powrotu np. w planie treningowym 
-(tutaj te¿ przekazanie powrotne które æwiczenie siê wykona³o ¿eby zaznaczyæ to 
-jakoœ na ekranie(np. kolor t³a) podobnie w zadanych æwiczeniach)
-
 Gdy koñczy siê seria to wstrzymanie licznika czasu cwiczenia i licznik czasu przerwy ze wstrzymaniem dzia³ania czujników.
 
 æwiczenia:
