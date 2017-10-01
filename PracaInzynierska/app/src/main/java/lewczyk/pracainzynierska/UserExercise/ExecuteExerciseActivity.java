@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
@@ -71,7 +72,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         exerciseTitle.setText(exercise.getExerciseName());
         if(series == 0){
             seriesTextView.setVisibility(View.INVISIBLE);
-            endOfSetButton.setEnabled(false);
+
         } else {
             updateSeriesTextView();
         }
@@ -80,6 +81,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         } else {
             updateRepeatsTextView();
         }
+        endOfSetButton.setEnabled(false);
         timerTextView.setText(getString(R.string.exercise_time) + ": " + "0:00:000");
         breakTimerTextView.setText(getString(R.string.breaks_time) + ": " +"0:00:000");
     }
@@ -141,6 +143,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
 
     @OnClick(R.id.endOfSetButton)
     public void endOfSetButtonPressed(){
+        endOfSetButton.setEnabled(false);
         timerStops();
         breakTimerCounts();
         endOfSet();
@@ -162,6 +165,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         currentSet++;
         currentRepeat = 0;
         updateSeriesTextView();
+        playMotivationSound();
         if(isEndOfSet()){
             endOfExercise();
         }
@@ -179,10 +183,16 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         confirmEndOfExercise();
     }
 
+    private void playMotivationSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.ta_da);
+        mediaPlayer.start();
+    }
+
     private void confirmEndOfExercise() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.confirm);
         builder.setMessage(R.string.popup_end_exercise_confirm);
+        breakTimerStops();
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
             @Override
@@ -208,9 +218,11 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         if(!exerciseContinues){
             timerCounts();
             breakTimerStops();
+            endOfSetButton.setEnabled(true);
         } else {
             timerStops();
             breakTimerCounts();
+            endOfSetButton.setEnabled(false);
         }
     }
 
