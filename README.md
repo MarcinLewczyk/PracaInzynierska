@@ -10,6 +10,8 @@ Mobile application supporting sport trainer.
 http://jakewharton.github.io/butterknife/
 - OrmLite
 http://ormlite.com/
+- Google maps API
+https://developers.google.com/maps/documentation/android-api/
 
 
 # Used sound(copyright free):
