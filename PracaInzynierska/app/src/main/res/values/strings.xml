@@ -130,4 +130,12 @@
     <string name="breaks_time">Czas przerw</string>
     <string name="exercise_time">Czas ćwiczenia</string>
     <string name="exercise_reminder">Przypomnienie o ćwiczeniach</string>
+    <string name="title_activity_tracker">Mapa</string>
+    <string name="permission_refused">Nie udzielono odpowiednich uprawnień</string>
+    <string name="permission_request_title">Wymaga specjalnych uprawnień</string>
+    <string name="app_permission_notice">Uprawnienia są potrzebne do prawidłowego działania aplikacji.</string>
+    <string name="route_distance">Dystans</string>
+    <string name="route_duration">Czas trwania</string>
+    <string name="server_error">Błąd serwera</string>
+    <string name="failed_draw">Empty line path return</string>
 </resources>
