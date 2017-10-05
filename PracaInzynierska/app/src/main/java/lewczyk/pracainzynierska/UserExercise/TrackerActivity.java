@@ -69,7 +69,7 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
 
     private static final int PERMISSION_LOCATION_REQUEST_CODE = 100;
 
-    // TODO: 05.10.2017 connect this activity to exercise list and add exercise database logic
+    // TODO: 05.10.2017 connect this activity to exercise list and add exercise database logic(archive)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -245,7 +245,6 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
             }
             addMarker();
         }
-
     }
 
     private void calculateDistance() {

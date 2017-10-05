@@ -138,4 +138,7 @@
     <string name="route_duration">Czas trwania</string>
     <string name="server_error">Błąd serwera</string>
     <string name="failed_draw">Empty line path return</string>
+    <string name="running">Bieganie</string>
+    <string name="legs_muscle">Nogi</string>
+    <string name="cycling">Jazda na rowerze</string>
 </resources>
