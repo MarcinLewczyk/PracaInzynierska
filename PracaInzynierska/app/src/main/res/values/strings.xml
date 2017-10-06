@@ -94,7 +94,7 @@
     <string name="any">Dowolna</string>
     <string name="dialog_message">Do działania aplikacji wymagane są wcześniejsze pozwolenia.</string>
     <string name="warning">Uwaga</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="parameters_name">Nazwa parametru</string>
     <string name="parameter_s_current_state_decimal_number">Wartość parametru, liczba zmienno przecinkowa</string>
     <string name="enter_note_content">Wprowadź treść notatki</string>
@@ -141,4 +141,6 @@
     <string name="running">Bieganie</string>
     <string name="legs_muscle">Nogi</string>
     <string name="cycling">Jazda na rowerze</string>
+    <string name="enter_distance">Wprowadź dystans(w metrach)</string>
+    <string name="distance_unit">[m]</string>
 </resources>

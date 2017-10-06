@@ -13,7 +13,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/exercise_name"/>
 
             <TextView
@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/muscle_part"/>
 
             <TextView
@@ -35,7 +35,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/date"/>
 
             <TextView
@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/time"/>
 
             <TextView
@@ -55,9 +55,10 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/setNumberArchiveDetailTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/series"/>
 
             <TextView
@@ -66,9 +67,10 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/repeatsNumberArchiveDetailTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/repeats_in_set"/>
 
             <TextView
@@ -77,9 +79,10 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/exerciseArchiveLoadTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="@string/load"/>
 
             <TextView

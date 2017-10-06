@@ -40,11 +40,15 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
     private int FIELDS_MINIMUM_LENGTH = 0;
     @BindView(R.id.coachExerciseToDoNameTextView) TextView exerciseName;
     @BindView(R.id.coachExerciseToDoDateTextView) TextView date;
+    @BindView(R.id.coachExerciseToDoSeriesTitleTextView) TextView seriesTextView;
+    @BindView(R.id.coachExerciseToDoRepeatsTitleTextView) TextView repeatsTextView;
+    @BindView(R.id.coachExerciseToDoLoadTitleTextView) TextView loadTextView;
     @BindView(R.id.coachExerciseToDoSeriesEditText) EditText series;
     @BindView(R.id.coachExerciseToDoRepeatsEditText) EditText repeats;
     @BindView(R.id.coachExerciseToDoLoadEditText) EditText load;
     private Calendar myCalendar = Calendar.getInstance();
     private long exerciseId;
+    private Exercise exercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,16 +63,19 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
         loadIntent();
         setCalendarDatePicker();
         loadExerciseName();
+        if(checkIfMapExercise()){
+            setMapModeUI();
+        }
     }
 
     private void loadIntent(){
         Intent intent = getIntent();
         exerciseId = intent.getLongExtra("exerciseToDoId", DEFAULT_ID);
+        exercise = loadExercise();
     }
 
     private void loadExerciseName() {
         if(validateId()){
-            Exercise exercise = loadExercise();
             exerciseName.setText(exercise.getExerciseName());
         }
     }
@@ -102,6 +109,21 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
         });
     }
 
+    private boolean checkIfMapExercise(){
+        return exercise.getExerciseName().equals(getString(R.string.running)) ||  exercise.getExerciseName().equals(getString(R.string.cycling));
+    }
+
+    private void setMapModeUI(){
+        seriesTextView.setEnabled(false);
+        series.setEnabled(false);
+        series.setHint("");
+        repeatsTextView.setEnabled(false);
+        repeats.setEnabled(false);
+        repeats.setHint("");
+        loadTextView.setText(R.string.enter_distance);
+        load.setHint(R.string.route_distance);
+    }
+
     private void updateLabel() {
         String myFormat = "yyyy.MM.dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
@@ -110,13 +132,23 @@ public class CoachExerciseToDoNewExerciseDetailActivity extends AppCompatActivit
 
     @OnClick(R.id.coachExerciseToDoAddButton)
     public void addExerciseToDoButtonPressed(){
-        if(validateFields()){
+        if(checkIfMapExercise()){
+            if(validateLoad()){
+                ExerciseToDoRepository.addExerciseToDo(this,
+                        new ExerciseToDo(
+                                0, 0,
+                                Double.parseDouble(load.getText().toString()),
+                                transformDateToString(), exercise));
+                addNotification();
+                moveToExerciseToDoListActivity();
+            }
+        } else if(validateFields()){
             ExerciseToDoRepository.addExerciseToDo(this,
                     new ExerciseToDo(
                             Integer.parseInt(series.getText().toString()),
                             Integer.parseInt(repeats.getText().toString()),
                             Double.parseDouble(load.getText().toString()),
-                            transformDateToString(), loadExercise()));
+                            transformDateToString(), exercise));
             addNotification();
             moveToExerciseToDoListActivity();
         }

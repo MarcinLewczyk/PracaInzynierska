@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:text="@string/exercise_name"/>
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/series"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/userExerciseNameTextView"/>
 
     <EditText
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/repeats_in_set"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/userExerciseSeriesEditText"/>
 
     <EditText
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/load"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/userExerciseRepeatsEditText"/>
 
     <EditText

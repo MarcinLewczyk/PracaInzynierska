@@ -20,6 +20,7 @@ import lewczyk.pracainzynierska.DatabaseTables.ExerciseInTrainingPlan;
 import lewczyk.pracainzynierska.DatabaseTables.TrainingPlan;
 import lewczyk.pracainzynierska.R;
 import lewczyk.pracainzynierska.UserExercise.ExecuteExerciseActivity;
+import lewczyk.pracainzynierska.UserExercise.TrackerActivity;
 import lewczyk.pracainzynierska.UserExercise.UserExercisePlanExerciseListActivity;
 
 public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
@@ -56,7 +57,7 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Exercise exercise = ExerciseRepository.findById(context, exerciseObjectWithIdOnly.getId());
+        final Exercise exercise = ExerciseRepository.findById(context, exerciseObjectWithIdOnly.getId());
         if(exercise.getExerciseName().length() >= 25){
             viewHolder.exerciseName.setText(exercise.getExerciseName().substring(0,25));
         } else {
@@ -67,24 +68,31 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
         viewHolder.repeats.setText(String.valueOf(exerciseInTrainingPlan.getRepeats()));
         viewHolder.load.setText(String.valueOf(exerciseInTrainingPlan.getLoad()));
 
-        if(isExerciseDone(exerciseObjectWithIdOnly.getId())){
+        if(isExerciseDone(exercise.getId())){
             viewHolder.layout.setBackgroundColor(Color.GREEN);
+        } else {
+            viewHolder.layout.setBackgroundColor(Color.WHITE);
         }
 
         viewHolder.layout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ExecuteExerciseActivity.class);
+                Intent intent;
+                if(checkIfMapExercise(exercise)){
+                    intent = new Intent(view.getContext(), TrackerActivity.class);
+                } else {
+                    intent = new Intent(view.getContext(), ExecuteExerciseActivity.class);
+                }
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("trainingPlan", trainingPlan.getId());
                 intent.putExtra("exerciseId", exerciseObjectWithIdOnly.getId());
                 intent.putExtra("from", ActivityOrigin.UserExercisePlanExerciseListActivity.which);
                 view.getContext().startActivity(intent);
-
                 //Without this, after back button pressed, adapter's list could show data that have been deleted
                 // which could lead to nullPointer
                 ((UserExercisePlanExerciseListActivity)context).finish();
+
             }
         });
         return convertView;
@@ -100,5 +108,9 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
             }
         }
         return false;
+    }
+
+    private boolean checkIfMapExercise(Exercise exercise){
+        return exercise.getExerciseName().equals(context.getString(R.string.running)) ||  exercise.getExerciseName().equals(context.getString(R.string.cycling));
     }
 }

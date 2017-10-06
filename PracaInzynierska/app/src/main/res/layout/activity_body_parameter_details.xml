@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:text="@string/name"/>
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/circumference"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/bodyParameterTextView"/>
 
     <TextView
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/archive"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@+id/bodyParameterCurrTextView">
     </TextView>
 
@@ -54,7 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start|center_vertical"
-            android:textSize="13dp"
+            android:textSize="13sp"
             android:layout_marginLeft="15dp"
             android:text="@string/archival_circumference"
             android:layout_weight="0.5" />

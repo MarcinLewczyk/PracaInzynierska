@@ -12,16 +12,18 @@ import butterknife.OnClick;
 import lewczyk.pracainzynierska.Data.ActivityOrigin;
 import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.ExerciseRepository;
-import lewczyk.pracainzynierska.Database.ExerciseToDoRepository;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
-import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.R;
 
 public class UserExerciseParametersActivity extends AppCompatActivity {
     private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private long exerciseId;
+    private Exercise exercise;
     private int FIELDS_MINIMUM_LENGTH = 0;
     @BindView(R.id.userExerciseNameTextView) TextView exerciseName;
+    @BindView(R.id.userExerciseSeriesTitleTextView) TextView seriesTextView;
+    @BindView(R.id.userExerciseRepeatsTitleTextView) TextView repeatsTextView;
+    @BindView(R.id.userExerciseLoadTitleTextView) TextView loadTextView;
     @BindView(R.id.userExerciseSeriesEditText) EditText seriesEditText;
     @BindView(R.id.userExerciseRepeatsEditText) EditText repeatsEditText;
     @BindView(R.id.userExerciseLoadEditText) EditText loadEditText;
@@ -37,22 +39,45 @@ public class UserExerciseParametersActivity extends AppCompatActivity {
     private void setViewSettings() {
         setTitle(getString(R.string.set_exercise_parameters));
         loadIntent();
-        Exercise exercise = loadExercise();
         exerciseName.setText(exercise.getExerciseName());
+        if(checkIfMapExercise()){
+            setMapModeUI();
+        }
+    }
+
+    private void loadIntent() {
+        Intent intent = getIntent();
+        exerciseId = intent.getLongExtra("exerciseId", DEFAULT_ID);
+        exercise = loadExercise();
     }
 
     private Exercise loadExercise() {
         return ExerciseRepository.findById(this, exerciseId);
     }
 
-    private void loadIntent() {
-        Intent intent = getIntent();
-        exerciseId = intent.getLongExtra("exerciseId", DEFAULT_ID);
+    private void setMapModeUI(){
+        seriesTextView.setEnabled(false);
+        seriesEditText.setEnabled(false);
+        seriesEditText.setHint("");
+        repeatsTextView.setEnabled(false);
+        repeatsEditText.setEnabled(false);
+        repeatsEditText.setHint("");
+        loadTextView.setText(R.string.enter_distance);
+        loadEditText.setHint(R.string.route_distance);
     }
 
     @OnClick(R.id.userExerciseAddButton)
     public void executeExerciseButtonPressed(){
-        if(validateFields()){
+        if(checkIfMapExercise()){
+            if(validateLoad()){
+                Intent intent = new Intent(this, TrackerActivity.class);
+                intent.putExtra("exerciseId", exerciseId);
+                intent.putExtra("from", ActivityOrigin.UserExerciseParametersActivity.which);
+                intent.putExtra("distance", Double.valueOf(loadEditText.getText().toString()));
+                startActivity(intent);
+                finish();
+            }
+        }else if(validateFields()){
             Intent intent = new Intent(this, ExecuteExerciseActivity.class);
             intent.putExtra("series", Integer.valueOf(seriesEditText.getText().toString()));
             intent.putExtra("repeats", Integer.valueOf(repeatsEditText.getText().toString()));
@@ -64,8 +89,12 @@ public class UserExerciseParametersActivity extends AppCompatActivity {
         }
     }
 
+    private boolean checkIfMapExercise(){
+        return exercise.getExerciseName().equals(getString(R.string.running)) ||  exercise.getExerciseName().equals(getString(R.string.cycling));
+    }
+
     private boolean validateFields() {
-        return validateSeries() && validateRepeats() & validateLoads();
+        return validateSeries() && validateRepeats() & validateLoad();
     }
 
     private boolean validateSeries() {
@@ -94,12 +123,12 @@ public class UserExerciseParametersActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean validateLoads() {
+    private boolean validateLoad() {
         if(loadEditText.getText().toString().length() == FIELDS_MINIMUM_LENGTH){
             loadEditText.setText("0.0");
         }
         try{
-            Double.parseDouble( loadEditText.getText().toString());
+            Double.parseDouble(loadEditText.getText().toString());
         }catch(NumberFormatException e){
             loadEditText.setError(getString(R.string.must_be_floating_point));
             return false;

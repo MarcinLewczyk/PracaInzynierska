@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/exercises_list_to_do"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:background="@android:color/transparent"
         android:layout_above="@+id/userExercisePlanButton"/>
 
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/exercise_plans"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:background="@android:color/transparent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
@@ -28,7 +28,7 @@
         android:id="@+id/userExerciseListButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:layout_below="@id/userExercisePlanButton"
         android:background="@android:color/transparent"
         android:text="@string/exercises"/>

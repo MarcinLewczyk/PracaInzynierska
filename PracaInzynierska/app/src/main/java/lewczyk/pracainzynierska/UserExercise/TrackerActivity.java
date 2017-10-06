@@ -2,8 +2,10 @@ package lewczyk.pracainzynierska.UserExercise;
 
 import android.Manifest;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -37,12 +39,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import lewczyk.pracainzynierska.Database.ExerciseArchiveRepository;
+import lewczyk.pracainzynierska.Database.ExerciseInTrainingPlanRepository;
+import lewczyk.pracainzynierska.Database.ExerciseRepository;
+import lewczyk.pracainzynierska.Database.ExerciseToDoRepository;
+import lewczyk.pracainzynierska.Database.TrainingPlanRepository;
+import lewczyk.pracainzynierska.DatabaseTables.Exercise;
+import lewczyk.pracainzynierska.DatabaseTables.ExerciseArchive;
+import lewczyk.pracainzynierska.DatabaseTables.ExerciseInTrainingPlan;
+import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.R;
 
 public class TrackerActivity extends FragmentActivity implements  LocationListener, OnMapReadyCallback,
@@ -53,8 +66,8 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
     @BindView(R.id.duration_value) TextView durationTextView;
     @BindView(R.id.startStopTracking) Button startStopTracking;
     private static final String TAG = "TrackerActivity";
-    private static final long INTERVAL = 1000 * 10 * 1; //1 minute
-    private static final long FASTEST_INTERVAL = 1000 * 10 * 1; // 1 minute = 1000*60*1
+    private static long INTERVAL = 1000 * 30 * 1; //30 seconds
+    private static long FASTEST_INTERVAL = 1000 * 30 * 1;
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
@@ -66,15 +79,24 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
     private Handler timerHandler = new Handler();
     private boolean exerciseContinues = false;
     private long startTime, timeInMilliseconds, timeBuffer, updatedTime;
+    private int fromActivity;
+    private long exerciseToDoId, exerciseId, trainingPlanId;
+    private ExerciseToDo exerciseToDo;
+    private Exercise exercise;
+    private ExerciseInTrainingPlan exerciseInTrainingPlan;
+    private double sensorParameter, planedDistance;
+    private ArrayList<String> exercisesDone;
 
     private static final int PERMISSION_LOCATION_REQUEST_CODE = 100;
 
-    // TODO: 05.10.2017 connect this activity to exercise list and add exercise database logic(archive)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracker);
         ButterKnife.bind(this);
+        if(!checkLocationPermission()){
+            requestPermissionsFromUser();
+        }
         if (!isGooglePlayServicesAvailable()) {
             finish();
         }
@@ -97,9 +119,69 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
 
     private void setViewSettings() {
         setTitle(getString(R.string.title_activity_tracker));
+        loadIntentData();
         startStopTracking.setText(getString(R.string.begin_exercise));
         durationTextView.setText("0:00:000");
-        distanceTextView.setText("0.0 m");
+        if(planedDistance != 0.0){
+            distanceTextView.setText("0.0 m" + "/" + planedDistance + "m");
+        } else {
+            distanceTextView.setText("0.0 m");
+        }
+    }
+
+    private void loadIntentData() {
+        Intent intent = getIntent();
+        fromActivity = intent.getIntExtra("from", -1);
+        exercisesDone = intent.getStringArrayListExtra("exercisesDone");
+        switch(fromActivity){
+            case 0:
+                exerciseId = intent.getLongExtra("exerciseId", -1);
+                trainingPlanId = intent.getLongExtra("trainingPlan", -1);
+                if(validateId(exerciseId) && validateId(trainingPlanId)){
+                    exercise = loadExercise();
+                    exerciseInTrainingPlan = loadExerciseInTrainingPlan();
+                    planedDistance = exerciseInTrainingPlan.getLoad();
+                    sensorParameter = exercise.getSensorParameter();
+                }
+                break;
+            case 1:
+                exerciseId = intent.getLongExtra("exerciseId", -1);
+                if(validateId(exerciseId)){
+                    exercise = loadExercise();
+                    planedDistance = intent.getDoubleExtra("distance", 0.0);
+                    sensorParameter = exercise.getSensorParameter();
+                }
+                break;
+            case 2:
+                exerciseToDoId = intent.getLongExtra("exerciseToDo", -1);
+                if(validateId(exerciseToDoId)){
+                    exerciseToDo = loadExerciseToDo();
+                    exerciseId = exerciseToDo.getExercise().getId();
+                    exercise = loadExercise();
+                    planedDistance = exerciseToDo.getLoad();
+                    sensorParameter = exercise.getSensorParameter();
+                }
+                break;
+        }
+        Log.i(TAG, "planedDistance" + planedDistance);
+        INTERVAL = 1000 * (long) sensorParameter;
+        FASTEST_INTERVAL = 1000 * (long) sensorParameter;
+    }
+
+    private ExerciseInTrainingPlan loadExerciseInTrainingPlan() {
+        return ExerciseInTrainingPlanRepository.findByGivenTrainingPlanAndExercise(this, TrainingPlanRepository.findById(this, trainingPlanId), exercise);
+    }
+
+    private Exercise loadExercise() {
+        return ExerciseRepository.findById(this, exerciseId);
+    }
+
+    private ExerciseToDo loadExerciseToDo() {
+        return ExerciseToDoRepository.findById(this, exerciseToDoId);
+    }
+
+    private boolean validateId(long id) {
+        return id != -1;
     }
 
     private void initVariables() {
@@ -108,7 +190,7 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
         locations = new ArrayList<>();
     }
 
-    protected void createLocationRequest() {
+    private void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(INTERVAL);
         mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
@@ -164,7 +246,7 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
         exerciseContinues = false;
     }
 
-    Runnable updateTimerThread = new Runnable() {
+    private Runnable updateTimerThread = new Runnable() {
         @Override
         public void run() {
             timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
@@ -211,7 +293,7 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
         });
     }
 
-    protected void startLocationUpdates() {
+    private void startLocationUpdates() {
         if(checkLocationPermission()){
             PendingResult<Status> pendingResult = LocationServices.FusedLocationApi.requestLocationUpdates(
                     mGoogleApiClient, mLocationRequest, this);
@@ -252,8 +334,19 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
         int secondPoint = locations.size() - 1;
         Location.distanceBetween(locations.get(firstPoint).getLatitude(), locations.get(firstPoint).getLongitude(), locations.get(secondPoint).getLatitude(), locations.get(secondPoint).getLongitude(), distanceResult);
         distanceTo += distanceResult[0];
-        distanceTextView.setText(String.valueOf(Math.round(distanceTo * 10)/ 10f) + " m");
-        Log.i(TAG, "distance " + distanceTo);
+        if(planedDistance != 0.0){
+            distanceTextView.setText(String.valueOf(Math.round(distanceTo * 10)/ 10f) + " / " + planedDistance + " m");
+            if(distanceTo > planedDistance){
+                playMotivationSound();
+            }
+        } else {
+            distanceTextView.setText(String.valueOf(Math.round(distanceTo * 10)/ 10f) + " m");
+        }
+    }
+
+    private void playMotivationSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.ta_da);
+        mediaPlayer.start();
     }
 
     private void addMarker() {
@@ -281,7 +374,7 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
         stopLocationUpdates();
     }
 
-    protected void stopLocationUpdates() {
+    private void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(
                 mGoogleApiClient, this);
         Log.d(TAG, "Location update stopped .......................");
@@ -302,6 +395,53 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
         } else {
             timerCounts();
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        timerStops();
+        goToPreviousActivity();
+    }
+
+    private void goToPreviousActivity(){
+        addExerciseToArchive();
+        if(exercisesDone == null){
+            exercisesDone = new ArrayList<>();
+        }
+        exercisesDone.add(String.valueOf(exerciseId));
+        Intent intent;
+        switch(fromActivity){
+            case 0:
+                intent = new Intent(this, UserExercisePlanExerciseListActivity.class);
+                intent.putStringArrayListExtra("exercisesDone", exercisesDone);
+                intent.putExtra("planId", trainingPlanId);
+                startActivity(intent);
+                finish();
+                break;
+            case 1:
+                intent = new Intent(this, UserExerciseListActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case 2:
+                ExerciseToDoRepository.deleteExerciseToDo(this, exerciseToDo);
+                intent = new Intent(this, UserExerciseToDoListActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
+    }
+
+    private void addExerciseToArchive() {
+        int secs = (int) (updatedTime / 1000);
+        ExerciseArchive exerciseArchive = new ExerciseArchive(0, 0, Math.round(distanceTo * 10)/ 10f, getCurrentDateString(), secs, exercise);
+        ExerciseArchiveRepository.addExerciseArchive(this, exerciseArchive);
+    }
+
+    private String getCurrentDateString(){
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        return df.format(c.getTime());
     }
 
     @Override

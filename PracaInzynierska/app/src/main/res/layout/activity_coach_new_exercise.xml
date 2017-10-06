@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:text="@string/exercise_name"/>
 
     <EditText
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/muscle_part"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/coachNewExerciseNameEditText"/>
 
     <EditText
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/difficult_level"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/coachNewExerciseMusclePartEditText"/>
 
     <Spinner
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/equipment_requirement"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/coachNewExerciseDifficultLevelSpinner"/>
 
     <Spinner
@@ -72,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/exercise_type"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/coachNewExerciseEquipmentRequirementSpinner"/>
 
     <Spinner
@@ -86,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/demonstration"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/coachNewExerciseTypeSpinner"/>
 
     <EditText

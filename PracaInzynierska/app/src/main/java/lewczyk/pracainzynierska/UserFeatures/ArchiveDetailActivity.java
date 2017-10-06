@@ -17,6 +17,7 @@ import lewczyk.pracainzynierska.R;
 public class ArchiveDetailActivity extends AppCompatActivity {
     private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private long archiveId;
+    private Exercise exercise;
     @BindView(R.id.exerciseArchiveExerciseNameTextView) TextView exerciseName;
     @BindView(R.id.exerciseArchiveMusclePartTextView) TextView musclePart;
     @BindView(R.id.exerciseArchiveExerciseDateTextView) TextView date;
@@ -24,6 +25,9 @@ public class ArchiveDetailActivity extends AppCompatActivity {
     @BindView(R.id.exerciseArchiveExerciseSeriesTextView) TextView series;
     @BindView(R.id.exerciseArchiveExerciseRepeatsTextView) TextView repeats;
     @BindView(R.id.exerciseArchiveExerciseLoadTextView) TextView load;
+    @BindView(R.id.setNumberArchiveDetailTextView) TextView seriesTextView;
+    @BindView(R.id.repeatsNumberArchiveDetailTextView) TextView repeatsTextView;
+    @BindView(R.id.exerciseArchiveLoadTextView) TextView loadTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,26 +39,10 @@ public class ArchiveDetailActivity extends AppCompatActivity {
 
     private void setViewSettings() {
         setTitle(getString(R.string.exercise_archive_details));
-        loadStrings();
-    }
-
-    private void loadStrings() {
         loadIntent();
         if(validateArchiveId()){
             loadTextViewsContent();
         }
-    }
-
-    private void loadTextViewsContent() {
-        ExerciseArchive exerciseArchive = loadExerciseArchive();
-        Exercise exercise = loadExercise(exerciseArchive);
-        exerciseName.setText(exercise.getExerciseName());
-        musclePart.setText(exercise.getMusclePart());
-        date.setText(transformStringDateToDateFormat(exerciseArchive.getDate()));
-        time.setText(String.valueOf(exerciseArchive.getTime()) + getString(R.string.seconds));
-        series.setText(String.valueOf(exerciseArchive.getSeries()));
-        repeats.setText(String.valueOf(exerciseArchive.getRepeats()));
-        load.setText(String.valueOf(exerciseArchive.getLoad()));
     }
 
     private void loadIntent() {
@@ -66,12 +54,40 @@ public class ArchiveDetailActivity extends AppCompatActivity {
         return archiveId != DEFAULT_ID;
     }
 
-    private Exercise loadExercise(ExerciseArchive exerciseArchive){
-        return ExerciseRepository.findById(this, exerciseArchive.getExercise().getId());
+    private void loadTextViewsContent() {
+        ExerciseArchive exerciseArchive = loadExerciseArchive();
+        exercise = loadExercise(exerciseArchive);
+        exerciseName.setText(exercise.getExerciseName());
+        musclePart.setText(exercise.getMusclePart());
+        date.setText(transformStringDateToDateFormat(exerciseArchive.getDate()));
+        time.setText(String.valueOf(exerciseArchive.getTime()) + getString(R.string.seconds));
+        if(checkIfMapExercise()){
+            setMapModeUI();
+        } else {
+            series.setText(String.valueOf(exerciseArchive.getSeries()));
+            repeats.setText(String.valueOf(exerciseArchive.getRepeats()));
+        }
+        load.setText(String.valueOf(exerciseArchive.getLoad()));
     }
 
     private ExerciseArchive loadExerciseArchive(){
         return ExerciseArchiveRepository.findById(this, archiveId);
+    }
+
+    private Exercise loadExercise(ExerciseArchive exerciseArchive){
+        return ExerciseRepository.findById(this, exerciseArchive.getExercise().getId());
+    }
+
+    private boolean checkIfMapExercise(){
+        return exercise.getExerciseName().equals(getString(R.string.running)) ||  exercise.getExerciseName().equals(getString(R.string.cycling));
+    }
+
+    private void setMapModeUI(){
+        seriesTextView.setEnabled(false);
+        series.setEnabled(false);
+        repeatsTextView.setEnabled(false);
+        repeats.setEnabled(false);
+        loadTextView.setText(getString(R.string.route_distance) + getString(R.string.distance_unit));
     }
 
     private String transformStringDateToDateFormat(String dateBeforeTransformation){

@@ -152,7 +152,7 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         Exercise cycling = new Exercise(context.getString(R.string.cycling),
                 context.getString(R.string.legs_muscle), context.getString(R.string.cycling), beginer, smallEq, cardio);
-        cycling.setSensorParameter(20.0);
+        cycling.setSensorParameter(15.0);
 
         ExerciseRepository.addExercise(context, pushup);
         ExerciseRepository.addExercise(context, squat);

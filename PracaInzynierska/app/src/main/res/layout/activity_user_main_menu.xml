@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/exercises"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:background="@android:color/transparent"
         android:layout_above="@+id/userNotesMainMenuButton"/>
 
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/notes"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:background="@android:color/transparent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
@@ -28,7 +28,7 @@
         android:id="@+id/userPersonalInfoButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:layout_below="@id/userNotesMainMenuButton"
         android:background="@android:color/transparent"
         android:text="@string/personal_info"/>
@@ -37,7 +37,7 @@
         android:id="@+id/userArchiveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:layout_below="@id/userPersonalInfoButton"
         android:background="@android:color/transparent"
         android:text="@string/archive"/>

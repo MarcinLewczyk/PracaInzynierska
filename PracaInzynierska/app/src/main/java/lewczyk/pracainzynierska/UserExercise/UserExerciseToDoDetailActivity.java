@@ -19,6 +19,8 @@ import lewczyk.pracainzynierska.R;
 public class UserExerciseToDoDetailActivity extends AppCompatActivity {
     private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private long exerciseToDoId;
+    private Exercise exercise;
+    private ExerciseToDo exerciseToDo;
     @BindView(R.id.userExerciseToDoNameTextView) TextView exerciseName;
     @BindView(R.id.userExerciseToDoMusclePartTextView) TextView musclePart;
     @BindView(R.id.userExerciseToDoDateTextView) TextView date;
@@ -36,11 +38,12 @@ public class UserExerciseToDoDetailActivity extends AppCompatActivity {
 
     private void setViewSettings() {
         loadIntent();
+
         if(!validateId()){
             exerciseName.setText(R.string.no_data);
+        } else if(checkIfMapExercise()){
+            setMapModeUI();
         } else {
-            ExerciseToDo exerciseToDo = loadExerciseToDo();
-            Exercise exercise = ExerciseRepository.findById(this, exerciseToDo.getExercise().getId());
             exerciseName.setText(exercise.getExerciseName());
             musclePart.setText(exercise.getMusclePart());
             date.setText(transformStringDateToDateFormat(exerciseToDo.getDate()));
@@ -53,6 +56,21 @@ public class UserExerciseToDoDetailActivity extends AppCompatActivity {
     private void loadIntent() {
         Intent intent = getIntent();
         exerciseToDoId = intent.getLongExtra("exerciseToDoId", DEFAULT_ID);
+        exerciseToDo = loadExerciseToDo();
+        exercise = loadExercise();
+    }
+
+    private Exercise loadExercise(){
+        return  ExerciseRepository.findById(this, exerciseToDo.getExercise().getId());
+    }
+
+    private void setMapModeUI(){
+        exerciseName.setText(exercise.getExerciseName());
+        musclePart.setText(exercise.getMusclePart());
+        date.setText(transformStringDateToDateFormat(exerciseToDo.getDate()));
+        series.setEnabled(false);
+        repeats.setEnabled(false);
+        load.setText(String.valueOf(exerciseToDo.getLoad()));
     }
 
     private ExerciseToDo loadExerciseToDo() {
@@ -74,11 +92,20 @@ public class UserExerciseToDoDetailActivity extends AppCompatActivity {
     
     @OnClick(R.id.userExerciseToDoExecuteButton)
     public void executeExerciseButtonPressed(){
-        Intent intent = new Intent(this, ExecuteExerciseActivity.class);
+        Intent intent;
+        if(checkIfMapExercise()){
+            intent = new Intent(this, TrackerActivity.class);
+        } else {
+            intent = new Intent(this, ExecuteExerciseActivity.class);
+        }
         intent.putExtra("exerciseToDo", exerciseToDoId);
         intent.putExtra("from", ActivityOrigin.UserExerciseToDoDetailActivity.which);
         startActivity(intent);
         finish();
+    }
+
+    private boolean checkIfMapExercise(){
+        return exercise.getExerciseName().equals(getString(R.string.running)) ||  exercise.getExerciseName().equals(getString(R.string.cycling));
     }
 
     @Override

@@ -244,7 +244,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         exerciseContinues = false;
     }
 
-    Runnable updateTimerThread = new Runnable() {
+    private Runnable updateTimerThread = new Runnable() {
         @Override
         public void run() {
             timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
@@ -270,7 +270,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         breakTimerHandler.removeCallbacks(updateBreakTimerThread);
     }
 
-    Runnable updateBreakTimerThread = new Runnable() {
+    private Runnable updateBreakTimerThread = new Runnable() {
         @Override
         public void run() {
             breakTimeInMilliseconds = SystemClock.uptimeMillis() - startBreakTime;

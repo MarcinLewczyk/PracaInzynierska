@@ -20,7 +20,7 @@ import lewczyk.pracainzynierska.R;
 public class UserExercisePlanExerciseListActivity extends AppCompatActivity {
     private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private long planId;
-    ArrayList<String> exercisesDone;
+    private ArrayList<String> exercisesDone;
     @BindView(R.id.userExerciseInTrainingPlanListView) ListView exercisesListView;
 
     @Override

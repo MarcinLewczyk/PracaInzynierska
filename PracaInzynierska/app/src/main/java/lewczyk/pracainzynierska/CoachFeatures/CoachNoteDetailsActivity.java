@@ -77,7 +77,7 @@ public class CoachNoteDetailsActivity extends AppCompatActivity {
         moveToCoachNoteList();
     }
 
-    public void moveToCoachNoteList(){
+    private void moveToCoachNoteList(){
         Intent intent = new Intent(this,CoachNoteListActivity.class);
         startActivity(intent);
         finish();

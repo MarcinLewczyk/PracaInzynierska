@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:text="@string/exercise_name"/>
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/muscle_part"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/coachExerciseNameTextView"/>
 
     <TextView
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/difficult_level"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/coachExerciseMusclePartTextView"/>
 
     <TextView
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/equipment_requirement"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/coachExerciseDifficultLevelTextView"/>
 
     <TextView
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/exercise_type"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/coachExerciseEquipmentRequirementTextView"/>
 
     <TextView
@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/demonstration"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_below="@id/coachExerciseExerciseTypeTextView"/>
 
     <WebView
