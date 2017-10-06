@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -127,6 +128,7 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
         } else {
             distanceTextView.setText("0.0 m");
         }
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     private void loadIntentData() {
@@ -392,9 +394,17 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
     public void startStopTrackingButtonPressed(){
         if(exerciseContinues){
             timerStops();
+            changeScreenBrightness(-1F);
         } else {
             timerCounts();
+            changeScreenBrightness(0.01F);
         }
+    }
+
+    private void changeScreenBrightness(float screenBrightness){
+        WindowManager.LayoutParams layout = getWindow().getAttributes();
+        layout.screenBrightness = screenBrightness;
+        getWindow().setAttributes(layout);
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -84,6 +85,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         endOfSetButton.setEnabled(false);
         timerTextView.setText(getString(R.string.exercise_time) + ": " + "0:00:000");
         breakTimerTextView.setText(getString(R.string.breaks_time) + ": " +"0:00:000");
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     private void loadIntentData() {
