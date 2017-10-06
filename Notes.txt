@@ -1,5 +1,5 @@
 Gdy koñczy siê seria to wstrzymanie licznika czasu cwiczenia i licznik czasu przerwy ze wstrzymaniem dzia³ania czujników.
-
+porobione
 æwiczenia:
 przysiady - akcelerometr(tak jak w przyk³adowej aplikacji shake) - urz¹dzenie do kieszenie(trudniej wykryæ ruch) lub do r¹k - ³atwiej przy zmianie po³o¿enia
 Próba na aplikacji z tutoriala wygl¹da obiecuj¹co.
@@ -18,8 +18,7 @@ podci¹gniêcia na dr¹zku - akcelerometr jak w przysiadach.
 porobione
 
 bieganie - tracker ruchu uzytkownika, mierzenie dystansu i czasu co pozwoli opbliczyæ œredni¹ prêdkoœæ.
-
-skakanka/pajacyki - trzeba by spróbowaæ urzyæ krokomierza skonfigurowanego pod skoki. - nie ma krokomierza w telefonie - zobaczyæ jak dzia³a z akcelerometrem
+porobione
 
 Sensory:
 Spróbowaæ po³¹czyæ dzia³anie akcelerometra i "kompasu" w celu lepszego pomiaru - problematyczne bo sporo matematyki co mo¿e opóŸniæ dzia³anie oraz wiêkszoœæ 
