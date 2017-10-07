@@ -4,3 +4,7 @@ Tests done(packages):
 in-progress:
 -CoachExercise
 -CoachFeatures
+
+
+
+Dont know how to make tests with databse work - till then writing tests is pointless
