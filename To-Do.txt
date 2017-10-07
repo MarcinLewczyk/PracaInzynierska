@@ -1,0 +1,6 @@
+Tests done(packages):
+-MainMenus
+
+in-progress:
+-CoachExercise
+-CoachFeatures
