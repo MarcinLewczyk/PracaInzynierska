@@ -16,5 +16,5 @@ https://developers.google.com/maps/documentation/android-api/
 http://robolectric.org/
 
 
-# Used sound(copyright free):
+# Sound used (copyright free):
 https://www.youtube.com/watch?v=tw2b1igHUGs
