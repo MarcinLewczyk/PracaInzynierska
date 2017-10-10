@@ -38,6 +38,7 @@ public class CoachExerciseDetailActivityTest {
     public void modificationButtonPressedWithExercise(){
         intent.putExtra("exerciseId", exerciseId);
         activity = Robolectric.buildActivity(CoachExerciseDetailActivity.class).withIntent(intent).create().get();
+
         activity.findViewById(R.id.coachExerciseModButton).performClick();
         Intent expectedIntent = new Intent(activity, CoachNewExerciseActivity.class);
         Intent actual = ShadowApplication.getInstance().getNextStartedActivity();
@@ -45,7 +46,7 @@ public class CoachExerciseDetailActivityTest {
     }
 
     @Test
-    public void modificationButtonPressedWithhoutExercise(){
+    public void modificationButtonPressedWithoutExercise(){
         activity.findViewById(R.id.coachExerciseModButton).performClick();
         Intent actual = ShadowApplication.getInstance().getNextStartedActivity();
         assertNull(actual);
@@ -55,6 +56,7 @@ public class CoachExerciseDetailActivityTest {
     public void deleteButtonPressedWithExercise(){
         intent.putExtra("exerciseId", exerciseId);
         activity = Robolectric.buildActivity(CoachExerciseDetailActivity.class).withIntent(intent).create().get();
+
         activity.findViewById(R.id.coachExerciseDelButton).performClick();
         Intent expectedIntent = new Intent(activity, CoachExerciseListActivity.class);
         Intent actual = ShadowApplication.getInstance().getNextStartedActivity();
