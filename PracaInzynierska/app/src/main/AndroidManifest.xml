@@ -65,10 +65,10 @@
         <activity android:name=".UserPersonalInfo.ExercisePurposeEditActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" />
-        <activity android:name=".UserPersonalInfo.BodyParameterListActivity"
+        <activity android:name=".UserPersonalInfo.BodyParametersList.BodyParametersListActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".UserPersonalInfo.BodyParameterDetailsActivity"
+        <activity android:name=".UserPersonalInfo.BodyParameterDetails.BodyParameterDetailsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>
         <activity android:name=".UserPersonalInfo.BodyParameterEditActivity"

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterDetailsActivity;
-import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterListActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterDetails.BodyParameterDetailsActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.BodyParametersList.BodyParametersListActivity;
 
 public class BodyParameterAdapter extends ArrayAdapter<BodyParameter> {
     private Context context;
@@ -59,7 +59,7 @@ public class BodyParameterAdapter extends ArrayAdapter<BodyParameter> {
 
                 //Without this, after back button pressed, adapter's list could show data that have been deleted
                 // which could lead to nullPointer
-                ((BodyParameterListActivity)context).finish();
+                ((BodyParametersListActivity)context).finish();
             }
         });
         return convertView;

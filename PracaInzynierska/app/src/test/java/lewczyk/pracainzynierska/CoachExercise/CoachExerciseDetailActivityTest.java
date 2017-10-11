@@ -51,7 +51,7 @@ public class CoachExerciseDetailActivityTest {
         Intent actual = ShadowApplication.getInstance().getNextStartedActivity();
         assertNull(actual);
     }
-/*  not working couse i have not idea how to mock or prepare database to tests
+/*  not working couse i have not idea how to mock or prepare database to tests*/
     @Test
     public void deleteButtonPressedWithExercise(){
         intent.putExtra("exerciseId", exerciseId);
@@ -62,7 +62,7 @@ public class CoachExerciseDetailActivityTest {
         Intent actual = ShadowApplication.getInstance().getNextStartedActivity();
         assertEquals(expectedIntent.getComponent(), actual.getComponent());
     }
-*/
+
     @Test
     public void deleteButtonPressedWithoutExercise(){
         activity.findViewById(R.id.coachExerciseDelButton).performClick();

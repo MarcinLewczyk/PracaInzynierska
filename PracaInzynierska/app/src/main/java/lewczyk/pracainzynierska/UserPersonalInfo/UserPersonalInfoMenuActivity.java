@@ -7,6 +7,7 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.R;
+import lewczyk.pracainzynierska.UserPersonalInfo.BodyParametersList.BodyParametersListActivity;
 
 public class UserPersonalInfoMenuActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class UserPersonalInfoMenuActivity extends AppCompatActivity {
 
     @OnClick(R.id.bodyParametersListButton)
     public void bodyParametersButtonPressed(){
-        Intent intent = new Intent(this, BodyParameterListActivity.class);
+        Intent intent = new Intent(this, BodyParametersListActivity.class);
         startActivity(intent);
     }
 }

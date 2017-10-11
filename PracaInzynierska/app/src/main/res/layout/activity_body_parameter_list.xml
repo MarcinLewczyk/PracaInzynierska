@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterListActivity">
+    tools:context="lewczyk.pracainzynierska.UserPersonalInfo.BodyParametersList.BodyParametersListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
 
     <ListView
         android:layout_below="@+id/userParametersListLinearLayout"
-        android:id="@+id/bodyParameterListView"
+        android:id="@+id/bodyParametersListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>

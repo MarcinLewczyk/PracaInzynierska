@@ -14,6 +14,7 @@ import lewczyk.pracainzynierska.Database.BodyParameterRepository;
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameterArchive;
 import lewczyk.pracainzynierska.R;
+import lewczyk.pracainzynierska.UserPersonalInfo.BodyParametersList.BodyParametersListActivity;
 
 public class BodyParameterEditActivity extends AppCompatActivity {
     private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
@@ -126,7 +127,7 @@ public class BodyParameterEditActivity extends AppCompatActivity {
     }
 
     private void moveToBodyParameterListActivity(){
-        Intent intent = new Intent(this, BodyParameterListActivity.class);
+        Intent intent = new Intent(this, BodyParametersListActivity.class);
         startActivity(intent);
         finish();
     }
