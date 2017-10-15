@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lewczyk.pracainzynierska.CoachFeatures.CoachNoteEditActivity">
+    tools:context="lewczyk.pracainzynierska.CoachFeatures.CoachNoteEdit.CoachNoteEditActivity">
 
     <EditText
         android:id="@+id/coachNoteEditText"

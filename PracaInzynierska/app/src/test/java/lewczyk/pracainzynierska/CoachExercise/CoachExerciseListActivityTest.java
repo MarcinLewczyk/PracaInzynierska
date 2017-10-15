@@ -14,6 +14,7 @@ import org.robolectric.annotation.Config;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lewczyk.pracainzynierska.BuildConfig;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseList.CoachExerciseListActivity;
 import lewczyk.pracainzynierska.R;
 
 import static junit.framework.Assert.assertEquals;

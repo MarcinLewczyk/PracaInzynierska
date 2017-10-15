@@ -2,34 +2,59 @@ package lewczyk.pracainzynierska.Database;
 
 import android.content.Context;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 
 public class ExercisePurposeRepository {
+    private OrmLiteDatabaseHelper databaseHelper;
 
-    public static List<ExercisePurpose> findAll(Context context){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getExercisePurposeDao().queryForAll();
+    public ExercisePurposeRepository(Context context) {
+        databaseHelper = DatabaseManager.getHelper(context);
     }
 
-    public static ExercisePurpose findById(Context context, long exercisePurposeId){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getExercisePurposeDao().queryForId(exercisePurposeId);
+    public List<ExercisePurpose> findAll(){
+        List<ExercisePurpose> list = null;
+        try {
+            list = databaseHelper.getExercisePurposeDao().queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
-    public static void addExercisePurpose(Context context, ExercisePurpose exercisePurpose){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getExercisePurposeDao().create(exercisePurpose);
+    public ExercisePurpose findById(long exercisePurposeId){
+       ExercisePurpose exercisePurpose = null;
+        try {
+            exercisePurpose = databaseHelper.getExercisePurposeDao().queryForId(exercisePurposeId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exercisePurpose;
     }
 
-    public static void updateExercisePurpose(Context context, ExercisePurpose exercisePurpose){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getExercisePurposeDao().update(exercisePurpose);
+    public void addExercisePurpose(ExercisePurpose exercisePurpose){
+        try {
+            databaseHelper.getExercisePurposeDao().create(exercisePurpose);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void deleteExercisePurpose(Context context, ExercisePurpose exercisePurpose){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getExercisePurposeDao().delete(exercisePurpose);
+    public void updateExercisePurpose(ExercisePurpose exercisePurpose){
+        try {
+            databaseHelper.getExercisePurposeDao().update(exercisePurpose);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteExercisePurpose(ExercisePurpose exercisePurpose){
+        try {
+            databaseHelper.getExercisePurposeDao().delete(exercisePurpose);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

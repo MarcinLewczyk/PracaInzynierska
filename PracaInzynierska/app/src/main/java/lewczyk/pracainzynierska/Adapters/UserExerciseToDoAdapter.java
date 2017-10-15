@@ -15,8 +15,8 @@ import lewczyk.pracainzynierska.Database.ExerciseRepository;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserExercise.UserExerciseToDoDetailActivity;
-import lewczyk.pracainzynierska.UserExercise.UserExerciseToDoListActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExerciseToDoDetail.UserExerciseToDoDetailActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExerciseToDoList.UserExerciseToDoListActivity;
 
 public class UserExerciseToDoAdapter extends ArrayAdapter<ExerciseToDo>{
     private Context context;
@@ -46,7 +46,8 @@ public class UserExerciseToDoAdapter extends ArrayAdapter<ExerciseToDo>{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Exercise exercise = ExerciseRepository.findById(context, dataModel.getExercise().getId());
+        ExerciseRepository exerciseRepository = new ExerciseRepository(context);
+        Exercise exercise = exerciseRepository.findById(dataModel.getExercise().getId());
         if(exercise.getExerciseName().length() >= 25){
             viewHolder.exerciseName.setText(exercise.getExerciseName().substring(0,25));
         } else {

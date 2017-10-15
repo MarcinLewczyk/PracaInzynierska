@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lewczyk.pracainzynierska.CoachFeatures.CoachNoteDetailsActivity;
-import lewczyk.pracainzynierska.CoachFeatures.CoachNoteListActivity;
+import lewczyk.pracainzynierska.CoachFeatures.CoachNoteDetails.CoachNoteDetailsActivity;
+import lewczyk.pracainzynierska.CoachFeatures.CoachNoteList.CoachNoteListActivity;
 import lewczyk.pracainzynierska.DatabaseTables.CoachNote;
 import lewczyk.pracainzynierska.R;
 

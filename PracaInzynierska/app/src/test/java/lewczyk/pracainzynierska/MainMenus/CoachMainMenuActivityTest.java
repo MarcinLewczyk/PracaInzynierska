@@ -11,9 +11,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import lewczyk.pracainzynierska.BuildConfig;
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseListActivity;
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoListActivity;
-import lewczyk.pracainzynierska.CoachFeatures.CoachNoteListActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseList.CoachExerciseListActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoList.CoachExerciseToDoListActivity;
+import lewczyk.pracainzynierska.CoachFeatures.CoachNoteList.CoachNoteListActivity;
 import lewczyk.pracainzynierska.R;
 
 import static junit.framework.Assert.assertEquals;

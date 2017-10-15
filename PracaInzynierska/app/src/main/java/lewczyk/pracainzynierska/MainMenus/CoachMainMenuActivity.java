@@ -6,9 +6,9 @@ import android.os.Bundle;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseListActivity;
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoListActivity;
-import lewczyk.pracainzynierska.CoachFeatures.CoachNoteListActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseList.CoachExerciseListActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoList.CoachExerciseToDoListActivity;
+import lewczyk.pracainzynierska.CoachFeatures.CoachNoteList.CoachNoteListActivity;
 import lewczyk.pracainzynierska.R;
 
 public class CoachMainMenuActivity extends AppCompatActivity {

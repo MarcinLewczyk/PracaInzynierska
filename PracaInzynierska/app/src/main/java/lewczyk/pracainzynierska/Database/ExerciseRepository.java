@@ -2,6 +2,7 @@ package lewczyk.pracainzynierska.Database;
 
 import android.content.Context;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,33 +12,57 @@ import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseType;
 
 public class ExerciseRepository {
+    private OrmLiteDatabaseHelper databaseHelper;
 
-    public static List<Exercise> findAll(Context context){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getExerciseDao().queryForAll();
+    public ExerciseRepository(Context context) {
+        databaseHelper = DatabaseManager.getHelper(context);
     }
 
-    public static Exercise findById(Context context, long exerciseId){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getExerciseDao().queryForId(exerciseId);
+    public List<Exercise> findAll(){
+        List<Exercise> list = null;
+        try {
+            list = databaseHelper.getExerciseDao().queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list ;
     }
 
-    public static void addExercise(Context context, Exercise exercise){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getExerciseDao().create(exercise);
+    public Exercise findById(long exerciseId){
+        Exercise exercise = null;
+        try {
+            exercise = databaseHelper.getExerciseDao().queryForId(exerciseId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exercise;
     }
 
-    public static void updateExercise(Context context, Exercise exercise){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getExerciseDao().update(exercise);
+    public void addExercise(Exercise exercise){
+        try {
+            databaseHelper.getExerciseDao().create(exercise);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void deleteExercise(Context context, Exercise exercise){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getExerciseDao().delete(exercise);
+    public void updateExercise(Exercise exercise){
+        try {
+            databaseHelper.getExerciseDao().update(exercise);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static List<Exercise> findAllWithGivenExerciseType(List<Exercise> preFilteredList, ExerciseType exerciseType){
+    public void deleteExercise(Exercise exercise){
+        try {
+            databaseHelper.getExerciseDao().delete(exercise);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Exercise> findAllWithGivenExerciseType(List<Exercise> preFilteredList, ExerciseType exerciseType){
         List<Exercise> filteredList = new ArrayList<>();
         for(Exercise e: preFilteredList){
             if(e.getExerciseType().getId() == exerciseType.getId()){
@@ -47,7 +72,7 @@ public class ExerciseRepository {
         return filteredList;
     }
 
-    public static List<Exercise> findAllWithGivenDifficultLevel(List<Exercise> preFilteredList, DifficultLevel difficultLevel){
+    public List<Exercise> findAllWithGivenDifficultLevel(List<Exercise> preFilteredList, DifficultLevel difficultLevel){
         List<Exercise> filteredList = new ArrayList<>();
         for(Exercise e: preFilteredList){
             if(e.getDifficultLevel().getId() == difficultLevel.getId()){
@@ -57,7 +82,7 @@ public class ExerciseRepository {
         return filteredList;
     }
 
-    public static List<Exercise> findAllWithGivenEquimpentRequirement(List<Exercise> preFilteredList, EquipmentRequirement equipmentRequirement){
+    public List<Exercise> findAllWithGivenEquimpentRequirement(List<Exercise> preFilteredList, EquipmentRequirement equipmentRequirement){
         List<Exercise> filteredList = new ArrayList<>();
         for(Exercise e: preFilteredList){
             if(e.getEquipmentRequirement().getId() == equipmentRequirement.getId()){
@@ -67,7 +92,7 @@ public class ExerciseRepository {
         return filteredList;
     }
 
-    public static List<Exercise> filterList(List<Exercise> preFilterList, ExerciseType exerciseType,
+    public List<Exercise> filterList(List<Exercise> preFilterList, ExerciseType exerciseType,
                                                    DifficultLevel difficultLevel, EquipmentRequirement equipmentRequirement){
         List<Exercise> filteredList = preFilterList;
 

@@ -3,22 +3,15 @@ package lewczyk.pracainzynierska.UserPersonalInfo.BodyParametersList;
 import java.util.ArrayList;
 
 import lewczyk.pracainzynierska.Database.BodyParameterRepository;
-import lewczyk.pracainzynierska.R;
 
 public class BodyParametersListPresenter {
-
-    private BodyParametersListView bodyParametersListView;
+    private BodyParameterRepository bodyParameterRepository;
 
     public BodyParametersListPresenter(BodyParametersListView bodyParametersListView){
-        this.bodyParametersListView = bodyParametersListView;
+        this.bodyParameterRepository = new BodyParameterRepository(bodyParametersListView.getContext());
     }
 
-    public String getTitle(){
-        return bodyParametersListView.getContext().getString(R.string.parameters);
+    ArrayList getBodyParametersList(){
+        return (ArrayList) bodyParameterRepository.findAll();
     }
-
-    public ArrayList getBodyParametersList(){
-        return (ArrayList) BodyParameterRepository.findAll(bodyParametersListView.getContext());
-    }
-
 }

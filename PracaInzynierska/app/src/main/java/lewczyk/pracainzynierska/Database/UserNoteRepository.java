@@ -2,34 +2,59 @@ package lewczyk.pracainzynierska.Database;
 
 import android.content.Context;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 
 public class UserNoteRepository {
+    private OrmLiteDatabaseHelper databaseHelper;
 
-    public static List<UserNote> findAll(Context context){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getUserNoteDao().queryForAll();
+    public UserNoteRepository(Context context) {
+        databaseHelper = DatabaseManager.getHelper(context);
     }
 
-    public static UserNote findById(Context context, long userNoteId){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getUserNoteDao().queryForId(userNoteId);
+    public List<UserNote> findAll(){
+        List<UserNote> list = null;
+        try {
+            list = databaseHelper.getUserNoteDao().queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
-    public static void addUserNote(Context context, UserNote userNote){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getUserNoteDao().create(userNote);
+    public UserNote findById(long userNoteId){
+        UserNote userNote = null;
+        try {
+            userNote = databaseHelper.getUserNoteDao().queryForId(userNoteId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userNote;
     }
 
-    public static void updateUserNote(Context context, UserNote userNote){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getUserNoteDao().update(userNote);
+    public void addUserNote(UserNote userNote){
+        try {
+            databaseHelper.getUserNoteDao().create(userNote);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void deleteUserNote(Context context, UserNote userNote){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getUserNoteDao().delete(userNote);
+    public void updateUserNote(UserNote userNote){
+        try {
+            databaseHelper.getUserNoteDao().update(userNote);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteUserNote(UserNote userNote){
+        try {
+            databaseHelper.getUserNoteDao().delete(userNote);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

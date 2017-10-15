@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeDetailsActivity">
+    tools:context="lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeDetails.ExercisePurposeDetailsActivity">
 
     <TextView
         android:id="@+id/exercisePurposeDetailTitleTextView"

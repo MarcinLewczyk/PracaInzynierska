@@ -2,6 +2,7 @@ package lewczyk.pracainzynierska.Database;
 
 import android.content.Context;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,34 +11,58 @@ import lewczyk.pracainzynierska.DatabaseTables.ExerciseInTrainingPlan;
 import lewczyk.pracainzynierska.DatabaseTables.TrainingPlan;
 
 public class ExerciseInTrainingPlanRepository {
+    private OrmLiteDatabaseHelper databaseHelper;
 
-    public static List<ExerciseInTrainingPlan> findAll(Context context){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getExerciseInTrainingPlanDao().queryForAll();
+    public ExerciseInTrainingPlanRepository(Context context) {
+        databaseHelper = DatabaseManager.getHelper(context);
     }
 
-    public static ExerciseInTrainingPlan findById(Context context, long exerciseInTrainingPlanId){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getExerciseInTrainingPlanDao().queryForId(exerciseInTrainingPlanId);
+    public List<ExerciseInTrainingPlan> findAll(){
+        List<ExerciseInTrainingPlan> list = null;
+        try {
+            list = databaseHelper.getExerciseInTrainingPlanDao().queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
-    public static void addExerciseInTrainingPlan(Context context, ExerciseInTrainingPlan exerciseInTrainingPlan){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getExerciseInTrainingPlanDao().create(exerciseInTrainingPlan);
+    public ExerciseInTrainingPlan findById(long exerciseInTrainingPlanId){
+        ExerciseInTrainingPlan exerciseInTrainingPlan = null;
+        try {
+            exerciseInTrainingPlan = databaseHelper.getExerciseInTrainingPlanDao().queryForId(exerciseInTrainingPlanId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exerciseInTrainingPlan;
     }
 
-    public static void updateExerciseInTrainingPlan(Context context, ExerciseInTrainingPlan exerciseInTrainingPlan){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getExerciseInTrainingPlanDao().update(exerciseInTrainingPlan);
+    public void addExerciseInTrainingPlan(ExerciseInTrainingPlan exerciseInTrainingPlan){
+        try {
+            databaseHelper.getExerciseInTrainingPlanDao().create(exerciseInTrainingPlan);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void deleteExerciseInTrainingPlan(Context context, ExerciseInTrainingPlan exerciseInTrainingPlan){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getExerciseInTrainingPlanDao().delete(exerciseInTrainingPlan);
+    public void updateExerciseInTrainingPlan(ExerciseInTrainingPlan exerciseInTrainingPlan){
+        try {
+            databaseHelper.getExerciseInTrainingPlanDao().update(exerciseInTrainingPlan);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static ExerciseInTrainingPlan findByGivenTrainingPlanAndExercise(Context context, TrainingPlan trainingPlan, Exercise exercise){
-        List<ExerciseInTrainingPlan> exerciseInTrainingPlan = findAll(context);
+    public void deleteExerciseInTrainingPlan(ExerciseInTrainingPlan exerciseInTrainingPlan){
+        try {
+            databaseHelper.getExerciseInTrainingPlanDao().delete(exerciseInTrainingPlan);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ExerciseInTrainingPlan findByGivenTrainingPlanAndExercise(TrainingPlan trainingPlan, Exercise exercise){
+        List<ExerciseInTrainingPlan> exerciseInTrainingPlan = findAll();
         for(ExerciseInTrainingPlan e: exerciseInTrainingPlan){
             if(e.getExercise().getId() == exercise.getId() && e.getTrainingPlan().getId() == trainingPlan.getId()){
                 return e;
@@ -46,9 +71,9 @@ public class ExerciseInTrainingPlanRepository {
         return null;
     }
 
-    public static List<Exercise> findAllWithGivenTrainingPlan(Context context, TrainingPlan trainingPlan){
+    public List<Exercise> findAllWithGivenTrainingPlan(TrainingPlan trainingPlan){
         List<Exercise> filteredList = new ArrayList<>();
-        List<ExerciseInTrainingPlan> tmp = findAll(context);
+        List<ExerciseInTrainingPlan> tmp = findAll();
         for(ExerciseInTrainingPlan e: tmp){
             if(e.getTrainingPlan().getId() == trainingPlan.getId()){
                 filteredList.add(e.getExercise());

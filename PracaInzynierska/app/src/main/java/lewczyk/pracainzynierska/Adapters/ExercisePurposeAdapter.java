@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 import lewczyk.pracainzynierska.DatabaseTables.ExercisePurpose;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeDetailsActivity;
-import lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeListActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeDetails.ExercisePurposeDetailsActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeList.ExercisePurposeListActivity;
 
 public class ExercisePurposeAdapter extends ArrayAdapter<ExercisePurpose> {
     private Context context;

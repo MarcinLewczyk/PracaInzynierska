@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -28,92 +28,89 @@ import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 import lewczyk.pracainzynierska.R;
 
 public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
-
-    private static OrmLiteDatabaseHelper instance;
     private Context context;
 
     private static final String DATABASE_NAME = "SportApp.db";
     private static final int DATABASE_VERSION = 1;
 
-    private RuntimeExceptionDao<ExercisePurpose, Long> exercisePurposeDao;
-    private RuntimeExceptionDao<BodyParameter, Long> bodyParameterDao;
-    private RuntimeExceptionDao<UserNote, Long> userNoteDao;
-    private RuntimeExceptionDao<CoachNote, Long> coachNoteDao;
-    private RuntimeExceptionDao<DifficultLevel, Long> difficultLevelDao;
-    private RuntimeExceptionDao<ExerciseType, Long> exerciseTypeDao;
-    private RuntimeExceptionDao<EquipmentRequirement, Long> equipmentRequirementDao;
-    private RuntimeExceptionDao<Exercise, Long> exerciseDao;
-    private RuntimeExceptionDao<ExerciseArchive, Long> exerciseArchiveDao;
-    private RuntimeExceptionDao<ExerciseToDo, Long> exerciseToDoDao;
-    private RuntimeExceptionDao<TrainingPlan, Long> trainingPlanDao;
-    private RuntimeExceptionDao<ExerciseInTrainingPlan, Long> exerciseInTrainingPlanDao;
+    private Dao<ExercisePurpose, Long> exercisePurposeDao = null;
+    private Dao<BodyParameter, Long> bodyParameterDao = null;
+    private Dao<UserNote, Long> userNoteDao = null;
+    private Dao<CoachNote, Long> coachNoteDao = null;
+    private Dao<DifficultLevel, Long> difficultLevelDao = null;
+    private Dao<ExerciseType, Long> exerciseTypeDao = null;
+    private Dao<EquipmentRequirement, Long> equipmentRequirementDao = null;
+    private Dao<Exercise, Long> exerciseDao = null;
+    private Dao<ExerciseArchive, Long> exerciseArchiveDao = null;
+    private Dao<ExerciseToDo, Long> exerciseToDoDao = null;
+    private Dao<TrainingPlan, Long> trainingPlanDao = null;
+    private Dao<ExerciseInTrainingPlan, Long> exerciseInTrainingPlanDao = null;
 
-    private OrmLiteDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public OrmLiteDatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
-    }
-
-    public static OrmLiteDatabaseHelper getInstance(Context context) {
-        if (instance == null) {
-            instance = new OrmLiteDatabaseHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
-        }
-        return instance;
     }
 
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         Log.d("database", "onCreate start");
-        recreateTables();
+        createTables();
         fillTables();
         Log.d("database", "onCreate end");
     }
 
     private void fillTables() {
         /*  Exercise Types  */
+        ExerciseTypeRepository exerciseTypeRepository = new ExerciseTypeRepository(context);
         ExerciseType warmup = new ExerciseType(context.getString(R.string.warmup));
         ExerciseType cardio = new ExerciseType(context.getString(R.string.cardio));
         ExerciseType strength_exercise = new ExerciseType(context.getString(R.string.strength_exercise));
 
-        ExerciseTypeRepository.addExerciseType(context, warmup);
-        ExerciseTypeRepository.addExerciseType(context, cardio);
-        ExerciseTypeRepository.addExerciseType(context, strength_exercise);
+        exerciseTypeRepository.addExerciseType(warmup);
+        exerciseTypeRepository.addExerciseType(cardio);
+        exerciseTypeRepository.addExerciseType(strength_exercise);
 
         /*  Equipment Requirements  */
+        EquipmentRequirementRepository equipmentRequirementRepository = new EquipmentRequirementRepository(context);
         EquipmentRequirement noEq = new EquipmentRequirement(context.getString(R.string.no_equipment));
         EquipmentRequirement smallEq = new EquipmentRequirement(context.getString(R.string.small_equipment));
         EquipmentRequirement machine = new EquipmentRequirement(context.getString(R.string.exercise_machines));
 
-        EquipmentRequirementRepository.addEquipmentRequirement(context, noEq);
-        EquipmentRequirementRepository.addEquipmentRequirement(context, smallEq);
-        EquipmentRequirementRepository.addEquipmentRequirement(context, machine);
+        equipmentRequirementRepository.addEquipmentRequirement(noEq);
+        equipmentRequirementRepository.addEquipmentRequirement(smallEq);
+        equipmentRequirementRepository.addEquipmentRequirement(machine);
 
         /*  Difficult Levels    */
+        DifficultLevelRepository difficultLevelRepository = new DifficultLevelRepository(context);
         DifficultLevel beginer = new DifficultLevel(context.getString(R.string.beginer));
         DifficultLevel intermediate = new DifficultLevel(context.getString(R.string.intermediate));
         DifficultLevel advanced = new DifficultLevel(context.getString(R.string.advanced));
 
-        DifficultLevelRepository.addDifficultLevel(context, beginer);
-        DifficultLevelRepository.addDifficultLevel(context, intermediate);
-        DifficultLevelRepository.addDifficultLevel(context, advanced);
+        difficultLevelRepository.addDifficultLevel(beginer);
+        difficultLevelRepository.addDifficultLevel(intermediate);
+        difficultLevelRepository.addDifficultLevel(advanced);
 
         /*  test exercises  */
+        ExerciseRepository exerciseRepository = new ExerciseRepository(context);
         Exercise ex1 = new Exercise("Kaptury", "Szyja", "Hantle w dłonie i wzruszaj ramionami", beginer, smallEq, strength_exercise);
         Exercise ex2 = new Exercise("Drążek", "Plecy", "Podciągnięcia na drążku", intermediate, noEq, warmup);
         Exercise ex3 = new Exercise("Laweczka", "Klata", "Machanie gryfem", advanced, machine, cardio);
 
-        ExerciseRepository.addExercise(context, ex1);
-        ExerciseRepository.addExercise(context, ex2);
-        ExerciseRepository.addExercise(context, ex3);
+        exerciseRepository.addExercise(ex1);
+        exerciseRepository.addExercise(ex2);
+        exerciseRepository.addExercise(ex3);
 
+        TrainingPlanRepository trainingPlanRepository = new TrainingPlanRepository(context);
         TrainingPlan trainingPlan = new TrainingPlan(context.getString(R.string.Back_Muscle));
 
-        TrainingPlanRepository.addTrainingPlan(context, trainingPlan);
+        trainingPlanRepository.addTrainingPlan(trainingPlan);
 
         ExerciseInTrainingPlan exer1 = new ExerciseInTrainingPlan(trainingPlan, ex1, 3, 12, 15.0);
         ExerciseInTrainingPlan exer2 = new ExerciseInTrainingPlan(trainingPlan, ex2, 2, 15, 0.0);
 
-        ExerciseInTrainingPlanRepository.addExerciseInTrainingPlan(context, exer1);
-        ExerciseInTrainingPlanRepository.addExerciseInTrainingPlan(context, exer2);
+        ExerciseInTrainingPlanRepository exerciseInTrainingPlanRepository = new ExerciseInTrainingPlanRepository(context);
+        exerciseInTrainingPlanRepository.addExerciseInTrainingPlan(exer1);
+        exerciseInTrainingPlanRepository.addExerciseInTrainingPlan(exer2);
 
         /*  End of test */
 
@@ -150,152 +147,162 @@ public class OrmLiteDatabaseHelper extends OrmLiteSqliteOpenHelper {
                 context.getString(R.string.legs_muscle), context.getString(R.string.cycling), beginer, smallEq, cardio);
         cycling.setSensorParameter(15.0);
 
-        ExerciseRepository.addExercise(context, pushup);
-        ExerciseRepository.addExercise(context, squat);
-        ExerciseRepository.addExercise(context, tablePull);
-        ExerciseRepository.addExercise(context, armsAndLegsRaise);
-        ExerciseRepository.addExercise(context, pullUp);
-        ExerciseRepository.addExercise(context, running);
-        ExerciseRepository.addExercise(context, cycling);
+        exerciseRepository.addExercise(pushup);
+        exerciseRepository.addExercise(squat);
+        exerciseRepository.addExercise(tablePull);
+        exerciseRepository.addExercise(armsAndLegsRaise);
+        exerciseRepository.addExercise(pullUp);
+        exerciseRepository.addExercise(running);
+        exerciseRepository.addExercise(cycling);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         Log.d("database", "onUpgrade start");
-        recreateTables();
+        dropTables();
         Log.d("database", "onUpgrade end");
     }
 
-    private void recreateTables() {
+    private void createTables(){
         try {
-            TableUtils.dropTable(connectionSource, ExercisePurpose.class, true);
             TableUtils.createTableIfNotExists(connectionSource, ExercisePurpose.class);
-
-            TableUtils.dropTable(connectionSource, BodyParameter.class, true);
             TableUtils.createTableIfNotExists(connectionSource, BodyParameter.class);
-
-            TableUtils.dropTable(connectionSource, UserNote.class, true);
             TableUtils.createTableIfNotExists(connectionSource, UserNote.class);
-
-            TableUtils.dropTable(connectionSource, CoachNote.class, true);
             TableUtils.createTableIfNotExists(connectionSource, CoachNote.class);
-
-            TableUtils.dropTable(connectionSource, ExercisePurposeArchive.class, true);
             TableUtils.createTableIfNotExists(connectionSource, ExercisePurposeArchive.class);
-
-            TableUtils.dropTable(connectionSource, BodyParameterArchive.class, true);
             TableUtils.createTableIfNotExists(connectionSource, BodyParameterArchive.class);
-
-            TableUtils.dropTable(connectionSource, DifficultLevel.class, true);
             TableUtils.createTableIfNotExists(connectionSource, DifficultLevel.class);
-
-            TableUtils.dropTable(connectionSource, EquipmentRequirement.class, true);
             TableUtils.createTableIfNotExists(connectionSource, EquipmentRequirement.class);
-
-            TableUtils.dropTable(connectionSource, ExerciseType.class, true);
             TableUtils.createTableIfNotExists(connectionSource, ExerciseType.class);
-
-            TableUtils.dropTable(connectionSource, Exercise.class, true);
             TableUtils.createTableIfNotExists(connectionSource, Exercise.class);
-
-            TableUtils.dropTable(connectionSource, ExerciseArchive.class, true);
             TableUtils.createTableIfNotExists(connectionSource, ExerciseArchive.class);
-
-            TableUtils.dropTable(connectionSource, ExerciseToDo.class, true);
             TableUtils.createTableIfNotExists(connectionSource, ExerciseToDo.class);
-
-            TableUtils.dropTable(connectionSource, TrainingPlan.class, true);
             TableUtils.createTableIfNotExists(connectionSource, TrainingPlan.class);
-
-            TableUtils.dropTable(connectionSource, ExerciseInTrainingPlan.class, true);
             TableUtils.createTableIfNotExists(connectionSource, ExerciseInTrainingPlan.class);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public RuntimeExceptionDao<ExercisePurpose, Long> getExercisePurposeDao() {
+    private void dropTables() {
+        try {
+            TableUtils.dropTable(connectionSource, ExercisePurpose.class, true);
+            TableUtils.dropTable(connectionSource, BodyParameter.class, true);
+            TableUtils.dropTable(connectionSource, UserNote.class, true);
+            TableUtils.dropTable(connectionSource, CoachNote.class, true);
+            TableUtils.dropTable(connectionSource, ExercisePurposeArchive.class, true);
+            TableUtils.dropTable(connectionSource, BodyParameterArchive.class, true);
+            TableUtils.dropTable(connectionSource, DifficultLevel.class, true);
+            TableUtils.dropTable(connectionSource, EquipmentRequirement.class, true);
+            TableUtils.dropTable(connectionSource, ExerciseType.class, true);
+            TableUtils.dropTable(connectionSource, Exercise.class, true);
+            TableUtils.dropTable(connectionSource, ExerciseArchive.class, true);
+            TableUtils.dropTable(connectionSource, ExerciseToDo.class, true);
+            TableUtils.dropTable(connectionSource, TrainingPlan.class, true);
+            TableUtils.dropTable(connectionSource, ExerciseInTrainingPlan.class, true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Dao<ExercisePurpose, Long> getExercisePurposeDao() throws SQLException{
         if (exercisePurposeDao == null) {
-            exercisePurposeDao = getRuntimeExceptionDao(ExercisePurpose.class);
+            exercisePurposeDao = getDao(ExercisePurpose.class);
         }
         return exercisePurposeDao;
     }
 
-    public RuntimeExceptionDao<BodyParameter, Long> getBodyParameterDao(){
-        if(bodyParameterDao == null){
-            bodyParameterDao = getRuntimeExceptionDao(BodyParameter.class);
+    public Dao<BodyParameter, Long> getBodyParameterDao() throws SQLException{
+        if (bodyParameterDao == null) {
+            bodyParameterDao = getDao(BodyParameter.class);
         }
         return bodyParameterDao;
     }
 
-    public RuntimeExceptionDao<UserNote, Long> getUserNoteDao() {
+    public Dao<UserNote, Long> getUserNoteDao() throws SQLException{
         if(userNoteDao == null){
-            userNoteDao = getRuntimeExceptionDao(UserNote.class);
+            userNoteDao = getDao(UserNote.class);
         }
         return userNoteDao;
     }
 
-    public RuntimeExceptionDao<CoachNote, Long> getCoachNoteDao() {
-        if(coachNoteDao == null) {
-            coachNoteDao = getRuntimeExceptionDao(CoachNote.class);
-        }
-        return coachNoteDao;
+    public Dao<CoachNote, Long> getCoachNoteDao() throws SQLException{
+    if(coachNoteDao == null) {
+        coachNoteDao = getDao(CoachNote.class);
     }
+    return coachNoteDao;
+}
 
-    public RuntimeExceptionDao<DifficultLevel, Long> getDifficultLevelDao() {
+    public Dao<DifficultLevel, Long> getDifficultLevelDao() throws SQLException{
         if(difficultLevelDao == null){
-            difficultLevelDao = getRuntimeExceptionDao(DifficultLevel.class);
+            difficultLevelDao = getDao(DifficultLevel.class);
         }
         return difficultLevelDao;
     }
 
-    public RuntimeExceptionDao<ExerciseType, Long> getExerciseTypeDao() {
+    public Dao<ExerciseType, Long> getExerciseTypeDao() throws SQLException{
         if(exerciseTypeDao == null){
-            exerciseTypeDao = getRuntimeExceptionDao(ExerciseType.class);
+            exerciseTypeDao = getDao(ExerciseType.class);
         }
         return exerciseTypeDao;
     }
 
-    public RuntimeExceptionDao<EquipmentRequirement, Long> getEquipmentRequirementDao() {
+    public Dao<EquipmentRequirement, Long> getEquipmentRequirementDao() throws SQLException{
         if(equipmentRequirementDao == null){
-            equipmentRequirementDao = getRuntimeExceptionDao(EquipmentRequirement.class);
+            equipmentRequirementDao = getDao(EquipmentRequirement.class);
         }
         return equipmentRequirementDao;
     }
 
-    public RuntimeExceptionDao<Exercise, Long> getExerciseDao() {
+    public Dao<Exercise, Long> getExerciseDao() throws SQLException{
         if (exerciseDao == null) {
-            exerciseDao = getRuntimeExceptionDao(Exercise.class);
+            exerciseDao = getDao(Exercise.class);
         }
         return exerciseDao;
     }
 
-    public RuntimeExceptionDao<ExerciseArchive, Long> getExerciseArchiveDao() {
+    public Dao<ExerciseArchive, Long> getExerciseArchiveDao() throws SQLException{
         if(exerciseArchiveDao == null){
-            exerciseArchiveDao = getRuntimeExceptionDao(ExerciseArchive.class);
+            exerciseArchiveDao = getDao(ExerciseArchive.class);
         }
         return exerciseArchiveDao;
     }
 
-    public RuntimeExceptionDao<ExerciseToDo, Long> getExerciseToDoDao() {
+    public Dao<ExerciseToDo, Long> getExerciseToDoDao() throws SQLException{
         if(exerciseToDoDao == null){
-            exerciseToDoDao = getRuntimeExceptionDao(ExerciseToDo.class);
+            exerciseToDoDao = getDao(ExerciseToDo.class);
         }
         return exerciseToDoDao;
     }
 
-    public RuntimeExceptionDao<TrainingPlan, Long> getTrainingPlanDao() {
+    public Dao<TrainingPlan, Long> getTrainingPlanDao() throws SQLException{
         if(trainingPlanDao == null){
-            trainingPlanDao = getRuntimeExceptionDao(TrainingPlan.class);
+            trainingPlanDao = getDao(TrainingPlan.class);
         }
         return trainingPlanDao;
     }
 
-    public RuntimeExceptionDao<ExerciseInTrainingPlan, Long> getExerciseInTrainingPlanDao() {
+    public Dao<ExerciseInTrainingPlan, Long> getExerciseInTrainingPlanDao() throws SQLException{
         if(exerciseInTrainingPlanDao == null){
-            exerciseInTrainingPlanDao = getRuntimeExceptionDao(ExerciseInTrainingPlan.class);
+            exerciseInTrainingPlanDao = getDao(ExerciseInTrainingPlan.class);
         }
         return exerciseInTrainingPlanDao;
+    }
+
+    @Override
+    public void close() {
+        super.close();
+        exercisePurposeDao = null;
+        bodyParameterDao = null;
+        userNoteDao = null;
+        coachNoteDao = null;
+        difficultLevelDao = null;
+        exerciseTypeDao = null;
+        equipmentRequirementDao = null;
+        exerciseDao = null;
+        exerciseArchiveDao = null;
+        exerciseToDoDao = null;
+        trainingPlanDao = null;
+        exerciseInTrainingPlanDao = null;
     }
 }

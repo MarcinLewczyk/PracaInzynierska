@@ -15,47 +15,39 @@ import butterknife.OnClick;
 import lewczyk.pracainzynierska.Adapters.BodyParameterArchiveAdapter;
 import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterEditActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterEdit.BodyParameterEditActivity;
 import lewczyk.pracainzynierska.UserPersonalInfo.BodyParametersList.BodyParametersListActivity;
 
 public class BodyParameterDetailsActivity extends AppCompatActivity implements BodyParameterDetailsView, BodyParameterDetailsNavigator{
-    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
-    private long parameterId;
-    private BodyParameterDetailsPresenter presenter;
     @BindView(R.id.bodyParameterTextView) TextView parameterTitle;
     @BindView(R.id.bodyParameterCurrTextView) TextView parameterState;
     @BindView(R.id.bodyParameterArchiveListView) ListView archive;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
+    private BodyParameterDetailsPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new BodyParameterDetailsPresenter(this);
+        presenter = new BodyParameterDetailsPresenter(this, this);
         setContentView(R.layout.activity_body_parameter_details);
         ButterKnife.bind(this);
         setViewSettings();
     }
 
     private void setViewSettings() {
-        loadIntent();
-        setActivityTitle(presenter.getTitle());
+        presenter.loadBodyParameter();
+        setTitle(getString(R.string.parameter_detail));
         loadViewContent();
     }
 
     @Override
-    public void setActivityTitle(String title){
-        setTitle(title);
-    }
-
-    @Override
-    public void loadIntent() {
+    public long loadIntent() {
         Intent intent = getIntent();
-        parameterId = intent.getLongExtra("parameterId", DEFAULT_ID);
+        return intent.getLongExtra("parameterId", DEFAULT_ID);
     }
 
-    @Override
-    public void loadViewContent() {
+    private void loadViewContent() {
         if(validateParameter()){
-            presenter.getBodyParameter(parameterId);
             parameterTitle.setText(presenter.getParametersMuscleName());
             parameterState.setText(presenter.getParametersCircumference());
             showArchiveList(presenter.getBodyParameterArchive());
@@ -64,34 +56,30 @@ public class BodyParameterDetailsActivity extends AppCompatActivity implements B
         }
     }
 
-    @Override
-    public void showArchiveList(ArrayList content) {
+    private void showArchiveList(ArrayList content) {
         BodyParameterArchiveAdapter adapter = new BodyParameterArchiveAdapter(content, this);
         archive.setAdapter(adapter);
     }
 
-    @Override
     @OnClick(R.id.bodyParameterModButton)
     public void navigateToBodyParameterEditActivity(){
         if(validateParameter()){
             Intent intent = new Intent(this, BodyParameterEditActivity.class);
-            intent.putExtra("parameterId", parameterId);
+            intent.putExtra("parameterId", presenter.getParameterId());
             startActivity(intent);
             finish();
         }
     }
 
-    @Override
     @OnClick(R.id.bodyParameterDelButton)
     public void navigateBackDeleteButtonPressed(){
         if(validateParameter()){
-            presenter.deleteGivenBodyParameter(parameterId);
-            navigateBack();
+            presenter.deleteCurrentBodyParameter();
         }
     }
 
     private boolean validateParameter(){
-        return presenter.validateId(parameterId);
+        return presenter.validateId();
     }
 
     @Override
@@ -108,6 +96,6 @@ public class BodyParameterDetailsActivity extends AppCompatActivity implements B
 
     @Override
     public Context getContext() {
-        return getApplicationContext();
+        return this;
     }
 }

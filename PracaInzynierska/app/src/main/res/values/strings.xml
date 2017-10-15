@@ -143,4 +143,5 @@
     <string name="cycling">Jazda na rowerze</string>
     <string name="enter_distance">Wprowadź dystans(w metrach)</string>
     <string name="distance_unit">[m]</string>
+    <string name="cannot_delete_sensor_exercise_message">Nie można usunąć ćwiczeń korzystających z czujników</string>
 </resources>

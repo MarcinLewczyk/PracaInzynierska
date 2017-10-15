@@ -2,6 +2,7 @@ package lewczyk.pracainzynierska.CoachExercise;
 
 import android.content.Intent;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import lewczyk.pracainzynierska.BuildConfig;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseDetail.CoachExerciseDetailActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseList.CoachExerciseListActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachNewExercise.CoachNewExerciseActivity;
+import lewczyk.pracainzynierska.Database.OrmLiteDatabaseHelper;
 import lewczyk.pracainzynierska.R;
 
 import static junit.framework.Assert.assertEquals;
@@ -22,11 +27,18 @@ public class CoachExerciseDetailActivityTest {
     private CoachExerciseDetailActivity activity;
     private Intent intent;
     private long exerciseId = 1L;
+    private OrmLiteDatabaseHelper dbHelper;
 
     @Before
     public void setUp() throws Exception{
         intent = new Intent();
+      //  dbHelper = OrmLiteDatabaseHelper.getInstance(RuntimeEnvironment.application);
         activity = Robolectric.setupActivity(CoachExerciseDetailActivity.class);
+    }
+
+    @After
+    public void tearDown(){
+
     }
 
     @Test

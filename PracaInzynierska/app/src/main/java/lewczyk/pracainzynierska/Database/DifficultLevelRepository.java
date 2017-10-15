@@ -2,40 +2,65 @@ package lewczyk.pracainzynierska.Database;
 
 import android.content.Context;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import lewczyk.pracainzynierska.DatabaseTables.DifficultLevel;
 
 public class DifficultLevelRepository {
+    private OrmLiteDatabaseHelper databaseHelper;
 
-    public static List<DifficultLevel> findAll(Context context){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getDifficultLevelDao().queryForAll();
+    public DifficultLevelRepository(Context context) {
+        databaseHelper = DatabaseManager.getHelper(context);
     }
 
-    public static DifficultLevel findById(Context context, long difficultLevelId){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getDifficultLevelDao().queryForId(difficultLevelId);
+    public List<DifficultLevel> findAll(){
+        List<DifficultLevel> list = null;
+        try {
+            list = databaseHelper.getDifficultLevelDao().queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
-    public static void addDifficultLevel(Context context, DifficultLevel difficultLevel){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getDifficultLevelDao().create(difficultLevel);
+    public DifficultLevel findById(long difficultLevelId){
+        DifficultLevel difficultLevel = null;
+        try {
+            difficultLevel = databaseHelper.getDifficultLevelDao().queryForId(difficultLevelId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return difficultLevel;
     }
 
-    public static void updateDifficultLevel(Context context, DifficultLevel difficultLevel){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getDifficultLevelDao().update(difficultLevel);
+    public void addDifficultLevel(DifficultLevel difficultLevel){
+        try {
+            databaseHelper.getDifficultLevelDao().create(difficultLevel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void deleteDifficultLevel(Context context, DifficultLevel difficultLevel){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getDifficultLevelDao().delete(difficultLevel);
+    public void updateDifficultLevel(DifficultLevel difficultLevel){
+        try {
+            databaseHelper.getDifficultLevelDao().update(difficultLevel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static List<String> findAllNames(Context context){
-        List<DifficultLevel> tmp = findAll(context);
+    public void deleteDifficultLevel(DifficultLevel difficultLevel){
+        try {
+            databaseHelper.getDifficultLevelDao().delete(difficultLevel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<String> findAllNames(){
+        List<DifficultLevel> tmp = findAll();
         List<String> categoriesName = new ArrayList<>();
         for(DifficultLevel d: tmp){
             categoriesName.add(d.getName());
@@ -43,8 +68,8 @@ public class DifficultLevelRepository {
         return categoriesName;
     }
 
-    public static DifficultLevel findByName(Context context, String name){
-        List<DifficultLevel> tmp = findAll(context);
+    public DifficultLevel findByName(String name){
+        List<DifficultLevel> tmp = findAll();
         DifficultLevel difficultLevel = null;
         for(DifficultLevel e: tmp){
             if(e.getName().equals(name)){

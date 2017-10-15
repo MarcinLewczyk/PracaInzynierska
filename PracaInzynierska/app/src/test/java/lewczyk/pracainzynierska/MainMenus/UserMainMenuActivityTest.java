@@ -13,8 +13,8 @@ import org.robolectric.shadows.ShadowApplication;
 import lewczyk.pracainzynierska.BuildConfig;
 import lewczyk.pracainzynierska.R;
 import lewczyk.pracainzynierska.UserExercise.UserExerciseMenuActivity;
-import lewczyk.pracainzynierska.UserFeatures.ArchiveListActivity;
-import lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity;
+import lewczyk.pracainzynierska.UserFeatures.ArchiveList.ArchiveListActivity;
+import lewczyk.pracainzynierska.UserFeatures.UserNoteList.UserNoteListActivity;
 import lewczyk.pracainzynierska.UserPersonalInfo.UserPersonalInfoMenuActivity;
 
 import static junit.framework.Assert.assertEquals;

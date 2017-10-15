@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseDetailActivity;
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseListActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseDetail.CoachExerciseDetailActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseList.CoachExerciseListActivity;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.R;
 

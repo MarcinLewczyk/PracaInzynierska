@@ -1,6 +1,5 @@
 package lewczyk.pracainzynierska.CoachExercise;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
@@ -10,12 +9,12 @@ import android.widget.TextView;
 
 import junit.framework.Assert;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import butterknife.BindView;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseDetail.CoachExerciseDetailActivity;
 import lewczyk.pracainzynierska.R;
 
 import static org.junit.Assert.assertEquals;

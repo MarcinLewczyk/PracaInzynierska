@@ -7,6 +7,9 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.R;
+import lewczyk.pracainzynierska.UserExercise.UserExerciseList.UserExerciseListActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExercisePlanList.UserExercisePlanListActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExerciseToDoList.UserExerciseToDoListActivity;
 
 public class UserExerciseMenuActivity extends AppCompatActivity {
 

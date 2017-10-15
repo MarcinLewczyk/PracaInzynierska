@@ -8,6 +8,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.R;
 import lewczyk.pracainzynierska.UserPersonalInfo.BodyParametersList.BodyParametersListActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeList.ExercisePurposeListActivity;
 
 public class UserPersonalInfoMenuActivity extends AppCompatActivity {
 

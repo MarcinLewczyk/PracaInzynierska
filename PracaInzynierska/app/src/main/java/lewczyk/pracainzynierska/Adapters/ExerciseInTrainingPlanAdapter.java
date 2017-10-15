@@ -19,9 +19,9 @@ import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseInTrainingPlan;
 import lewczyk.pracainzynierska.DatabaseTables.TrainingPlan;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserExercise.ExecuteExerciseActivity;
-import lewczyk.pracainzynierska.UserExercise.TrackerActivity;
-import lewczyk.pracainzynierska.UserExercise.UserExercisePlanExerciseListActivity;
+import lewczyk.pracainzynierska.UserExercise.ExecuteExercise.ExecuteExerciseActivity;
+import lewczyk.pracainzynierska.UserExercise.Tracker.TrackerActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExercisePlanExerciseList.UserExercisePlanExerciseListActivity;
 
 public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
     private Context context;
@@ -43,7 +43,9 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Exercise exerciseObjectWithIdOnly = getItem(position);
-        final ExerciseInTrainingPlan exerciseInTrainingPlan = ExerciseInTrainingPlanRepository.findByGivenTrainingPlanAndExercise(context, trainingPlan, exerciseObjectWithIdOnly);
+        ExerciseInTrainingPlanRepository exerciseInTrainingPlanRepository = new ExerciseInTrainingPlanRepository(context);
+        final ExerciseInTrainingPlan exerciseInTrainingPlan =
+                exerciseInTrainingPlanRepository.findByGivenTrainingPlanAndExercise(trainingPlan, exerciseObjectWithIdOnly);
         ViewHolder viewHolder;
         if(convertView == null) {
             viewHolder = new ViewHolder();
@@ -57,7 +59,8 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        final Exercise exercise = ExerciseRepository.findById(context, exerciseObjectWithIdOnly.getId());
+        ExerciseRepository exerciseRepository = new ExerciseRepository(context);
+        final Exercise exercise = exerciseRepository.findById(exerciseObjectWithIdOnly.getId());
         if(exercise.getExerciseName().length() >= 25){
             viewHolder.exerciseName.setText(exercise.getExerciseName().substring(0,25));
         } else {

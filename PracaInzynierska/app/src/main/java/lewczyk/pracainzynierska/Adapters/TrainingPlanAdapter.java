@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 import lewczyk.pracainzynierska.DatabaseTables.TrainingPlan;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserExercise.UserExercisePlanExerciseListActivity;
-import lewczyk.pracainzynierska.UserExercise.UserExercisePlanListActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExercisePlanExerciseList.UserExercisePlanExerciseListActivity;
+import lewczyk.pracainzynierska.UserExercise.UserExercisePlanList.UserExercisePlanListActivity;
 
 public class TrainingPlanAdapter extends ArrayAdapter<TrainingPlan> {
     private Context context;

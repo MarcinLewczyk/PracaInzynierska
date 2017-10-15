@@ -2,34 +2,59 @@ package lewczyk.pracainzynierska.Database;
 
 import android.content.Context;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
 
-public class BodyParameterRepository {
+public class BodyParameterRepository{
+    private OrmLiteDatabaseHelper databaseHelper;
 
-    public static List<BodyParameter> findAll(Context context){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getBodyParameterDao().queryForAll();
+    public BodyParameterRepository(Context context){
+        databaseHelper = DatabaseManager.getHelper(context);
     }
 
-    public static BodyParameter findById(Context context, long bodyParameterId){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getBodyParameterDao().queryForId(bodyParameterId);
+    public List<BodyParameter> findAll(){
+        List<BodyParameter> list = null;
+        try {
+            list = databaseHelper.getBodyParameterDao().queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list ;
     }
 
-    public static void addBodyParameter(Context context, BodyParameter bodyParameter){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getBodyParameterDao().create(bodyParameter);
+    public BodyParameter findById(long bodyParameterId){
+        BodyParameter bodyParameter = null;
+        try {
+            bodyParameter = databaseHelper.getBodyParameterDao().queryForId(bodyParameterId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bodyParameter;
     }
 
-    public static void updateBodyParameter(Context context, BodyParameter bodyParameter){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getBodyParameterDao().update(bodyParameter);
+    public void addBodyParameter(BodyParameter bodyParameter){
+        try {
+            databaseHelper.getBodyParameterDao().create(bodyParameter);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void deleteBodyParameter(Context context, BodyParameter bodyParameter){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getBodyParameterDao().delete(bodyParameter);
+    public void updateBodyParameter(BodyParameter bodyParameter){
+        try {
+            databaseHelper.getBodyParameterDao().update(bodyParameter);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteBodyParameter(BodyParameter bodyParameter){
+        try {
+            databaseHelper.getBodyParameterDao().delete(bodyParameter);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

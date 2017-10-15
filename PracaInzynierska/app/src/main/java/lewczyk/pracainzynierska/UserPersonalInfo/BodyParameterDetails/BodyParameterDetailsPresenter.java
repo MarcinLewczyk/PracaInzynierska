@@ -9,34 +9,35 @@ import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.Database.BodyParameterRepository;
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameter;
 import lewczyk.pracainzynierska.DatabaseTables.BodyParameterArchive;
-import lewczyk.pracainzynierska.R;
 
 public class BodyParameterDetailsPresenter {
     private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
-    private BodyParameterDetailsView bodyParameterDetailsView;
+    private BodyParameterRepository bodyParameterRepository;
     private BodyParameter bodyParameter;
+    private BodyParameterDetailsView bodyParameterDetailsView;
+    private BodyParameterDetailsNavigator bodyParameterDetailsNavigator;
+    private long parameterId;
 
-    public BodyParameterDetailsPresenter(BodyParameterDetailsView bodyParameterDetailsView) {
+    public BodyParameterDetailsPresenter(BodyParameterDetailsView bodyParameterDetailsView, BodyParameterDetailsNavigator bodyParameterDetailsNavigator) {
         this.bodyParameterDetailsView = bodyParameterDetailsView;
+        this.bodyParameterDetailsNavigator = bodyParameterDetailsNavigator;
+        this.bodyParameterRepository = new BodyParameterRepository(bodyParameterDetailsView.getContext());
     }
 
-    public String getTitle(){
-        return bodyParameterDetailsView.getContext().getString(R.string.parameter_detail);
+    void loadBodyParameter() {
+        parameterId = bodyParameterDetailsView.loadIntent();
+        bodyParameter = bodyParameterRepository.findById(parameterId);
     }
 
-    public void getBodyParameter(long parameterId) {
-         bodyParameter = BodyParameterRepository.findById(bodyParameterDetailsView.getContext(), parameterId);
-    }
-
-    public String getParametersMuscleName(){
+    String getParametersMuscleName(){
         return bodyParameter.getMuscleName();
     }
 
-    public String getParametersCircumference(){
+    String getParametersCircumference(){
         return Double.toString(bodyParameter.getCircumference());
     }
 
-    public ArrayList getBodyParameterArchive(){
+    ArrayList getBodyParameterArchive(){
         return getReversedArchive(bodyParameter.getParametersArchive());
     }
 
@@ -49,11 +50,16 @@ public class BodyParameterDetailsPresenter {
         return listToReverse;
     }
 
-    public void deleteGivenBodyParameter(long parameterId){
-        BodyParameterRepository.deleteBodyParameter(bodyParameterDetailsView.getContext(), BodyParameterRepository.findById(bodyParameterDetailsView.getContext(), parameterId));
+    void deleteCurrentBodyParameter(){
+        bodyParameterRepository.deleteBodyParameter(bodyParameter);
+        bodyParameterDetailsNavigator.navigateBack();
     }
 
-    public boolean validateId(long id){
-        return  id != DEFAULT_ID;
+    boolean validateId(){
+        return parameterId != DEFAULT_ID;
+    }
+
+    long getParameterId(){
+        return parameterId;
     }
 }

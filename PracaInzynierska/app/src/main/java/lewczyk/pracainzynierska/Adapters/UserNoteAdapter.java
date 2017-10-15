@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lewczyk.pracainzynierska.UserFeatures.UserNoteDetailsActivity;
+import lewczyk.pracainzynierska.UserFeatures.UserNoteDetails.UserNoteDetailsActivity;
 import lewczyk.pracainzynierska.DatabaseTables.UserNote;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity;
+import lewczyk.pracainzynierska.UserFeatures.UserNoteList.UserNoteListActivity;
 
 public class UserNoteAdapter extends ArrayAdapter<UserNote>{
     private Context context;

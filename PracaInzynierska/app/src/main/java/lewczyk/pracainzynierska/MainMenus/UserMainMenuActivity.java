@@ -8,8 +8,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.R;
 import lewczyk.pracainzynierska.UserExercise.UserExerciseMenuActivity;
-import lewczyk.pracainzynierska.UserFeatures.ArchiveListActivity;
-import lewczyk.pracainzynierska.UserFeatures.UserNoteListActivity;
+import lewczyk.pracainzynierska.UserFeatures.ArchiveList.ArchiveListActivity;
+import lewczyk.pracainzynierska.UserFeatures.UserNoteList.UserNoteListActivity;
 import lewczyk.pracainzynierska.UserPersonalInfo.UserPersonalInfoMenuActivity;
 
 public class UserMainMenuActivity extends AppCompatActivity {

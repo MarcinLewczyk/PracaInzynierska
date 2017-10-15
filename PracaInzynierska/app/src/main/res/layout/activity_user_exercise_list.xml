@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lewczyk.pracainzynierska.UserExercise.UserExerciseListActivity">
+    tools:context="lewczyk.pracainzynierska.UserExercise.UserExerciseList.UserExerciseListActivity">
 
     <Spinner
         android:id="@+id/userExerciseDifficultLevelSpinner"

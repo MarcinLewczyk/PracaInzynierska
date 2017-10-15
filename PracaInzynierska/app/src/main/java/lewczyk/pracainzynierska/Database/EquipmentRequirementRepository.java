@@ -3,40 +3,65 @@ package lewczyk.pracainzynierska.Database;
 
 import android.content.Context;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import lewczyk.pracainzynierska.DatabaseTables.EquipmentRequirement;
 
 public class EquipmentRequirementRepository {
+    private OrmLiteDatabaseHelper databaseHelper;
 
-    public static List<EquipmentRequirement> findAll(Context context){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getEquipmentRequirementDao().queryForAll();
+    public EquipmentRequirementRepository(Context context) {
+        databaseHelper = DatabaseManager.getHelper(context);
     }
 
-    public static EquipmentRequirement findById(Context context, long equipmentRequirementId){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        return databaseHelper.getEquipmentRequirementDao().queryForId(equipmentRequirementId);
+    public List<EquipmentRequirement> findAll(){
+        List<EquipmentRequirement> list = null;
+        try {
+            list = databaseHelper.getEquipmentRequirementDao().queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
-    public static void addEquipmentRequirement(Context context, EquipmentRequirement equipmentRequirement){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getEquipmentRequirementDao().create(equipmentRequirement);
+    public EquipmentRequirement findById(long equipmentRequirementId){
+        EquipmentRequirement equipmentRequirement = null;
+        try {
+            equipmentRequirement = databaseHelper.getEquipmentRequirementDao().queryForId(equipmentRequirementId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return equipmentRequirement;
     }
 
-    public static void updateEquipmentRequirement(Context context, EquipmentRequirement equipmentRequirement){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getEquipmentRequirementDao().update(equipmentRequirement);
+    public void addEquipmentRequirement(EquipmentRequirement equipmentRequirement){
+        try {
+            databaseHelper.getEquipmentRequirementDao().create(equipmentRequirement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void deleteEquipmentRequirement(Context context, EquipmentRequirement equipmentRequirement){
-        OrmLiteDatabaseHelper databaseHelper = OrmLiteDatabaseHelper.getInstance(context);
-        databaseHelper.getEquipmentRequirementDao().delete(equipmentRequirement);
+    public void updateEquipmentRequirement(EquipmentRequirement equipmentRequirement){
+        try {
+            databaseHelper.getEquipmentRequirementDao().update(equipmentRequirement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static List<String> findAllNames(Context context){
-        List<EquipmentRequirement> tmp = findAll(context);
+    public void deleteEquipmentRequirement(EquipmentRequirement equipmentRequirement){
+        try {
+            databaseHelper.getEquipmentRequirementDao().delete(equipmentRequirement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<String> findAllNames(){
+        List<EquipmentRequirement> tmp = findAll();
         List<String> categoriesName = new ArrayList<>();
         for(EquipmentRequirement e: tmp){
             categoriesName.add(e.getName());
@@ -44,8 +69,8 @@ public class EquipmentRequirementRepository {
         return categoriesName;
     }
 
-    public static EquipmentRequirement findByName(Context context, String name){
-        List<EquipmentRequirement> tmp = findAll(context);
+    public EquipmentRequirement findByName(String name){
+        List<EquipmentRequirement> tmp = findAll();
         EquipmentRequirement equipmentRequirement = null;
         for(EquipmentRequirement e: tmp){
             if(e.getName().equals(name)){

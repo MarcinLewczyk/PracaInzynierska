@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoListActivity;
-import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoDetailActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoList.CoachExerciseToDoListActivity;
+import lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoDetail.CoachExerciseToDoDetailActivity;
 import lewczyk.pracainzynierska.Database.ExerciseRepository;
 import lewczyk.pracainzynierska.DatabaseTables.Exercise;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
@@ -46,7 +46,8 @@ public class CoachExerciseToDoAdapter extends ArrayAdapter<ExerciseToDo>{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Exercise exercise = ExerciseRepository.findById(context, dataModel.getExercise().getId());
+        ExerciseRepository exerciseRepository = new ExerciseRepository(context);
+        Exercise exercise = exerciseRepository.findById(dataModel.getExercise().getId());
         if(exercise.getExerciseName().length() >= 25){
             viewHolder.exerciseTextView.setText(exercise.getExerciseName().substring(0,25));
         } else {

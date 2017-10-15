@@ -14,11 +14,11 @@ import butterknife.OnClick;
 import lewczyk.pracainzynierska.Adapters.BodyParameterAdapter;
 import lewczyk.pracainzynierska.Data.DefaultId;
 import lewczyk.pracainzynierska.R;
-import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterEditActivity;
+import lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterEdit.BodyParameterEditActivity;
 
-public class BodyParametersListActivity extends AppCompatActivity implements BodyParametersListView, BodyParametersListNavigator{
-    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
+public class BodyParametersListActivity extends AppCompatActivity implements BodyParametersListView{
     @BindView(R.id.bodyParametersListView) ListView bodyParameterListView;
+    private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private BodyParametersListPresenter presenter;
 
     @Override
@@ -31,17 +31,11 @@ public class BodyParametersListActivity extends AppCompatActivity implements Bod
     }
 
     private void setViewSettings() {
+        setTitle(getString(R.string.parameters));
         showBodyParameterList(presenter.getBodyParametersList());
-        setActivityTitle(presenter.getTitle());
     }
 
-    @Override
-    public void setActivityTitle(String title){
-        setTitle(title);
-    }
-
-    @Override
-    public void showBodyParameterList(ArrayList content){
+    private void showBodyParameterList(ArrayList content){
         BodyParameterAdapter adapter = new BodyParameterAdapter(content, this);
         bodyParameterListView.setAdapter(adapter);
     }
@@ -56,6 +50,6 @@ public class BodyParametersListActivity extends AppCompatActivity implements Bod
 
     @Override
     public Context getContext(){
-        return getApplicationContext();
+        return this;
     }
 }
