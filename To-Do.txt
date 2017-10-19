@@ -1,5 +1,3 @@
-Rewriting into MVP
-
 Tests done(packages):
 -MainMenus
 

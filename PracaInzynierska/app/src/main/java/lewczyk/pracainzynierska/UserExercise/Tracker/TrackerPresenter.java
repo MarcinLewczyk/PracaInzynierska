@@ -1,4 +1,4 @@
-package lewczyk.pracainzynierska.UserExercise.ExecuteExercise;
+package lewczyk.pracainzynierska.UserExercise.Tracker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,9 +14,9 @@ import lewczyk.pracainzynierska.DatabaseTables.ExerciseArchive;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseInTrainingPlan;
 import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 
-public class ExecuteExercisePresenter {
+public class TrackerPresenter {
     private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
-    private ExecuteExerciseView view;
+    private TrackerView view;
 
     private Exercise exercise;
     private long exerciseId;
@@ -25,7 +25,7 @@ public class ExecuteExercisePresenter {
     private ExerciseInTrainingPlan exerciseInTrainingPlan;
     private long trainingPlanId;
 
-    public ExecuteExercisePresenter(ExecuteExerciseView view) {
+    public TrackerPresenter(TrackerView view) {
         this.view = view;
     }
 
@@ -46,10 +46,6 @@ public class ExecuteExercisePresenter {
         loadExercise();
     }
 
-    private void loadExercise(){
-        exercise = new ExerciseRepository(view.getContext()).findById(exerciseId);
-    }
-
     void loadExerciseToDoData(){
         exerciseToDoId = view.getExerciseToDoId();
         loadExerciseToDo();
@@ -61,36 +57,20 @@ public class ExecuteExercisePresenter {
         exerciseToDo = new ExerciseToDoRepository(view.getContext()).findById(exerciseToDoId);
     }
 
-    int getTrainingPlanSeries(){
-        return exerciseInTrainingPlan.getSeries();
-    }
-
-    int getTrainingPlanRepeats(){
-        return exerciseInTrainingPlan.getRepeats();
-    }
-
-    double getTrainingPlanLoad(){
-        return exerciseInTrainingPlan.getLoad();
+    private void loadExercise(){
+        exercise = new ExerciseRepository(view.getContext()).findById(exerciseId);
     }
 
     double getSensorParameter(){
         return  exercise.getSensorParameter();
     }
 
-    int getExerciseToDoSeries(){
-        return exerciseToDo.getSeries();
-    }
-
-    int getExerciseToDoRepeats(){
-        return exerciseToDo.getRepeats();
+    double getTrainingPlanLoad(){
+        return exerciseInTrainingPlan.getLoad();
     }
 
     double getExerciseToDoLoad(){
         return exerciseToDo.getLoad();
-    }
-
-    String getExerciseName(){
-        return exercise.getExerciseName();
     }
 
     boolean validateId(long id){
@@ -99,7 +79,7 @@ public class ExecuteExercisePresenter {
 
     void addExerciseToArchive(){
         int secs = (int) (view.getUpdatedTime() / 1000);
-        ExerciseArchive exerciseArchive = new ExerciseArchive(view.getCurrentSet(), view.getCurrentRepeat(), view.getLoad(), getCurrentDateString(), secs, exercise);
+        ExerciseArchive exerciseArchive = new ExerciseArchive(0, 0, Math.round(view.getDistanceReached() * 10)/ 10f, getCurrentDateString(), secs, exercise);
         new ExerciseArchiveRepository(view.getContext()).addExerciseArchive(exerciseArchive);
     }
 

@@ -4,6 +4,7 @@ Aplikacja mobilna do wspomagania pracy trenera sportowego.
 # BSc Thesis
 Mobile application supporting sport trainer.
 
+MVP pattern used.
 
 # Libraries used in project:
 - Butter Knife

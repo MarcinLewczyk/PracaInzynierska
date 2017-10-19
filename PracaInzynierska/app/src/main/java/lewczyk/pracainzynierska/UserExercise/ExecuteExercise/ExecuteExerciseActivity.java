@@ -1,5 +1,6 @@
 package lewczyk.pracainzynierska.UserExercise.ExecuteExercise;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -17,23 +18,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lewczyk.pracainzynierska.Data.DefaultId;
-import lewczyk.pracainzynierska.Database.ExerciseArchiveRepository;
-import lewczyk.pracainzynierska.Database.ExerciseInTrainingPlanRepository;
-import lewczyk.pracainzynierska.Database.ExerciseRepository;
-import lewczyk.pracainzynierska.Database.ExerciseToDoRepository;
-import lewczyk.pracainzynierska.Database.TrainingPlanRepository;
-import lewczyk.pracainzynierska.DatabaseTables.Exercise;
-import lewczyk.pracainzynierska.DatabaseTables.ExerciseArchive;
-import lewczyk.pracainzynierska.DatabaseTables.ExerciseInTrainingPlan;
-import lewczyk.pracainzynierska.DatabaseTables.ExerciseToDo;
 import lewczyk.pracainzynierska.R;
 import lewczyk.pracainzynierska.UserExercise.UserExerciseList.UserExerciseListActivity;
 import lewczyk.pracainzynierska.UserExercise.UserExercisePlanExerciseList.UserExercisePlanExerciseListActivity;
@@ -50,9 +40,6 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
     private int DEFAULT_ID = DefaultId.DEFAULT_ID.defaultNumber;
     private int fromActivity, currentSet, series, currentRepeat, repeats, timeParameter;
     private long exerciseToDoId, exerciseId, trainingPlanId;
-    private ExerciseToDo exerciseToDo;
-    private Exercise exercise;
-    private ExerciseInTrainingPlan exerciseInTrainingPlan;
     private long startTime, timeInMilliseconds, timeBuffer, updatedTime, lastSensorUpdate;
     private long startBreakTime, breakTimeInMilliseconds, breakTimeBuffer, updatedBreakTime;
     private Handler timerHandler = new Handler();
@@ -79,9 +66,48 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         loadViewContent();
     }
 
+    private void loadIntentData() {
+        Intent intent = getIntent();
+        fromActivity = intent.getIntExtra("from", DEFAULT_ID);
+        exercisesDone = intent.getStringArrayListExtra("exercisesDone");
+        switch(fromActivity){
+            case 0:
+                exerciseId = intent.getLongExtra("exerciseId", DEFAULT_ID);
+                trainingPlanId = intent.getLongExtra("trainingPlan", DEFAULT_ID);
+                if(validateId(exerciseId) && validateId(trainingPlanId)){
+                    presenter.loadExercisePlanData();
+                    series = presenter.getTrainingPlanSeries();
+                    repeats = presenter.getTrainingPlanRepeats();
+                    load = presenter.getTrainingPlanLoad();
+                    sensorParameter = presenter.getSensorParameter();
+                }
+                break;
+            case 1:
+                exerciseId = intent.getLongExtra("exerciseId", DEFAULT_ID);
+                if(validateId(exerciseId)){
+                    presenter.loadExerciseParametersActivityData();
+                    series = intent.getIntExtra("series", DEFAULT_ID);
+                    repeats = intent.getIntExtra("repeats", DEFAULT_ID);
+                    load = intent.getDoubleExtra("load", 0.0);
+                    sensorParameter = presenter.getSensorParameter();
+                }
+                break;
+            case 2:
+                exerciseToDoId = intent.getLongExtra("exerciseToDo", DEFAULT_ID);
+                if(validateId(exerciseToDoId)){
+                    presenter.loadExerciseToDoData();
+                    series = presenter.getExerciseToDoSeries();
+                    repeats = presenter.getExerciseToDoRepeats();
+                    load = presenter.getExerciseToDoLoad();
+                    sensorParameter = presenter.getSensorParameter();
+                }
+                break;
+        }
+    }
+
     private void loadViewContent() {
         startStopExerciseButton.setText(R.string.begin_exercise);
-        exerciseTitle.setText(exercise.getExerciseName());
+        exerciseTitle.setText(presenter.getExerciseName());
         if(series == 0){
             seriesTextView.setVisibility(View.INVISIBLE);
         } else {
@@ -96,63 +122,6 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         timerTextView.setText(getString(R.string.exercise_time) + ": " + "0:00:000");
         breakTimerTextView.setText(getString(R.string.breaks_time) + ": " +"0:00:000");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-    }
-
-    private void loadIntentData() {
-        Intent intent = getIntent();
-        fromActivity = intent.getIntExtra("from", DEFAULT_ID);
-        exercisesDone = intent.getStringArrayListExtra("exercisesDone");
-        switch(fromActivity){
-            case 0:
-                exerciseId = intent.getLongExtra("exerciseId", DEFAULT_ID);
-                trainingPlanId = intent.getLongExtra("trainingPlan", DEFAULT_ID);
-                if(validateId(exerciseId) && validateId(trainingPlanId)){
-                    exercise = loadExercise();
-                    exerciseInTrainingPlan = loadExerciseInTrainingPlan();
-                    series = exerciseInTrainingPlan.getSeries();
-                    repeats = exerciseInTrainingPlan.getRepeats();
-                    load = exerciseInTrainingPlan.getLoad();
-                    sensorParameter = exercise.getSensorParameter();
-                }
-                break;
-            case 1:
-                exerciseId = intent.getLongExtra("exerciseId", DEFAULT_ID);
-                if(validateId(exerciseId)){
-                    exercise = loadExercise();
-                    series = intent.getIntExtra("series", DEFAULT_ID);
-                    repeats = intent.getIntExtra("repeats", DEFAULT_ID);
-                    load = intent.getDoubleExtra("load", 0.0);
-                    sensorParameter = exercise.getSensorParameter();
-                }
-                break;
-            case 2:
-                exerciseToDoId = intent.getLongExtra("exerciseToDo", DEFAULT_ID);
-                if(validateId(exerciseToDoId)){
-                    exerciseToDo = loadExerciseToDo();
-                    exerciseId = exerciseToDo.getExercise().getId();
-                    exercise = loadExercise();
-                    series = exerciseToDo.getSeries();
-                    repeats = exerciseToDo.getRepeats();
-                    load = exerciseToDo.getLoad();
-                    sensorParameter = exercise.getSensorParameter();
-                }
-                break;
-        }
-    }
-
-    private ExerciseInTrainingPlan loadExerciseInTrainingPlan() {
-        ExerciseInTrainingPlanRepository repository = new ExerciseInTrainingPlanRepository(this);
-        TrainingPlanRepository trainingPlanRepository = new TrainingPlanRepository(this);
-        return repository.findByGivenTrainingPlanAndExercise(trainingPlanRepository.findById(trainingPlanId), exercise);
-    }
-
-    private Exercise loadExercise() {
-        ExerciseRepository exerciseRepository = new ExerciseRepository(this);
-        return exerciseRepository.findById(exerciseId);
-    }
-
-    private ExerciseToDo loadExerciseToDo() {
-        return new ExerciseToDoRepository(this).findById(exerciseToDoId);
     }
 
     private boolean validateId(long id) {
@@ -308,7 +277,7 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
     }
 
     private void goToPreviousActivity(){
-        addExerciseToArchive();
+        presenter.addExerciseToArchive();
         if(exercisesDone == null){
             exercisesDone = new ArrayList<>();
         }
@@ -328,24 +297,12 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
                 finish();
                 break;
             case 2:
-                new ExerciseToDoRepository(this).deleteExerciseToDo(exerciseToDo);
+                presenter.deleteCurrentExerciseFromExerciseToDo();
                 intent = new Intent(this, UserExerciseToDoListActivity.class);
                 startActivity(intent);
                 finish();
                 break;
         }
-    }
-
-    private void addExerciseToArchive() {
-        int secs = (int) (updatedTime / 1000);
-        ExerciseArchive exerciseArchive = new ExerciseArchive(currentSet, currentRepeat, load, getCurrentDateString(), secs, exercise);
-        new ExerciseArchiveRepository(this).addExerciseArchive(exerciseArchive);
-    }
-
-    private String getCurrentDateString(){
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-        return df.format(c.getTime());
     }
 
     @Override
@@ -366,23 +323,24 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
 
     private void registerSensor(){
         if(isSensorRequired()){
-            if(exercise.getExerciseName().equals(getString(R.string.push_up))){
+            String exerciseName = presenter.getExerciseName();
+            if(exerciseName.equals(getString(R.string.push_up))){
                 sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY), SensorManager.SENSOR_DELAY_NORMAL);
                 timeParameter = 2500;
             }
-            if(exercise.getExerciseName().equals(getString(R.string.squat))){
+            if(exerciseName.equals(getString(R.string.squat))){
                 sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
                 timeParameter = 2500;
             }
-            if(exercise.getExerciseName().equals(getString(R.string.table_pull))){
+            if(exerciseName.equals(getString(R.string.table_pull))){
                 sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY), SensorManager.SENSOR_DELAY_NORMAL);
                 timeParameter = 2500;
             }
-            if(exercise.getExerciseName().equals(getString(R.string.arms_and_legs_raise_lie_on_belly))){
+            if(exerciseName.equals(getString(R.string.arms_and_legs_raise_lie_on_belly))){
                 sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY), SensorManager.SENSOR_DELAY_NORMAL);
                 timeParameter = 2500;
             }
-            if(exercise.getExerciseName().equals(getString(R.string.pull_up))){
+            if(exerciseName.equals(getString(R.string.pull_up))){
                 sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
                 timeParameter = 2500;
             }
@@ -440,5 +398,45 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         
+    }
+
+    @Override
+    public Context getContext(){
+        return this;
+    }
+
+    @Override
+    public long getUpdatedTime(){
+        return updatedTime;
+    }
+
+    @Override
+    public int getCurrentSet(){
+        return currentSet;
+    }
+
+    @Override
+    public int getCurrentRepeat(){
+        return currentRepeat;
+    }
+
+    @Override
+    public long getExerciseId(){
+        return exerciseId;
+    }
+
+    @Override
+    public long getTrainingPlanId(){
+        return trainingPlanId;
+    }
+
+    @Override
+    public long getExerciseToDoId(){
+        return exerciseToDoId;
+    }
+
+    @Override
+    public double getLoad(){
+        return load;
     }
 }
