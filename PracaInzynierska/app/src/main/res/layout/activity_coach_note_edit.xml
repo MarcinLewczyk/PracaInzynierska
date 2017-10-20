@@ -3,13 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.CoachFeatures.CoachNoteEdit.CoachNoteEditActivity">
 
     <EditText
         android:id="@+id/coachNoteEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorPrimaryText"
         android:hint="@string/enter_note_content"/>
 
     <Button
@@ -17,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/save"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"/>
 

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.UserFeatures.ArchiveDetail.ArchiveDetailActivity">
 
         <LinearLayout
@@ -13,81 +14,116 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:gravity="center_horizontal"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimaryText"
                 android:text="@string/exercise_name"/>
 
             <TextView
                 android:id="@+id/exerciseArchiveExerciseNameTextView"
                 android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:textSize="23sp"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:gravity="center_horizontal"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimaryText"
                 android:text="@string/muscle_part"/>
 
             <TextView
                 android:id="@+id/exerciseArchiveMusclePartTextView"
+                android:gravity="center_horizontal"
+                android:textSize="23sp"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="25sp"
                 android:text="@string/date"/>
 
             <TextView
                 android:id="@+id/exerciseArchiveExerciseDateTextView"
                 android:layout_width="match_parent"
+                android:textSize="23sp"
+                android:textColor="@color/colorPrimaryText"
+                android:gravity="center_horizontal"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:gravity="center_horizontal"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimaryText"
                 android:text="@string/time"/>
 
             <TextView
                 android:id="@+id/exerciseArchiveExerciseTimeTextView"
                 android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:textSize="23sp"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/setNumberArchiveDetailTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:gravity="center_horizontal"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimaryText"
                 android:text="@string/series"/>
 
             <TextView
                 android:id="@+id/exerciseArchiveExerciseSeriesTextView"
+                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
+                android:textSize="23sp"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/repeatsNumberArchiveDetailTextView"
+                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimaryText"
                 android:text="@string/repeats_in_set"/>
 
             <TextView
                 android:id="@+id/exerciseArchiveExerciseRepeatsTextView"
+                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
+                android:textSize="23sp"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/exerciseArchiveLoadTextView"
+                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimaryText"
                 android:text="@string/load"/>
 
             <TextView
                 android:id="@+id/exerciseArchiveExerciseLoadTextView"
+                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
+                android:textSize="23sp"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>

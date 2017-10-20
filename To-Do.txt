@@ -5,6 +5,11 @@ in-progress:
 -CoachExercise
 -CoachFeatures
 
-
-
 Dont know how to make tests with databse work - till then writing tests is pointless
+
+Changing GUI
+todo:
+spinners in code
+
+finish rest of the screens
+(coach_note_list done)

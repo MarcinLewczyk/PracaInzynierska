@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.UserPersonalInfo.BodyParameterEdit.BodyParameterEditActivity">
 
     <TextView
@@ -10,14 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:text="@string/name"/>
 
     <EditText
         android:id="@+id/bodyParameterEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:textSize="20sp"
+        android:textColorHint="@color/colorPrimaryText"
+        android:textColor="@color/colorPrimaryText"
         android:hint="@string/parameters_name"
         android:layout_below="@+id/bodyParameterEditTitleTextView"/>
 
@@ -26,7 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/circumference"
-        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/bodyParameterEditText"/>
 
     <EditText
@@ -34,6 +42,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
+        android:textSize="15sp"
+        android:textColorHint="@color/colorPrimaryText"
+        android:textColor="@color/colorPrimaryText"
         android:hint="@string/parameter_s_current_state_decimal_number"
         android:layout_below="@+id/bodyParameterEditCurrentTextView"/>
 
@@ -41,6 +52,8 @@
         android:id="@+id/bodyParameterEditSaveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:text="@string/save"
         android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"/>

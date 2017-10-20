@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.CoachExercise.CoachExerciseToDoNewExerciseDetail.CoachExerciseToDoNewExerciseDetailActivity">
 
     <TextView
@@ -11,14 +12,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:text="@string/exercise_name"/>
 
     <TextView
         android:id="@+id/coachExerciseToDoNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/coachExerciseToDoNameTitleTextView">
-    </TextView>
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/coachExerciseToDoNameTitleTextView"/>
 
     <TextView
         android:id="@+id/coachExerciseToDoDateTitleTextView"
@@ -26,12 +31,17 @@
         android:layout_height="wrap_content"
         android:text="@string/day"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:layout_below="@id/coachExerciseToDoNameTextView"/>
 
     <TextView
         android:id="@+id/coachExerciseToDoDateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:text="@string/tap_to_choose_date"
         android:layout_below="@+id/coachExerciseToDoDateTitleTextView">
     </TextView>
@@ -42,6 +52,8 @@
         android:layout_height="wrap_content"
         android:text="@string/series"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:layout_below="@id/coachExerciseToDoDateTextView"/>
 
     <EditText
@@ -50,6 +62,10 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="@string/series"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
+        android:textColorHint="@color/colorPrimaryText"
         android:layout_below="@+id/coachExerciseToDoSeriesTitleTextView">
     </EditText>
 
@@ -59,6 +75,8 @@
         android:layout_height="wrap_content"
         android:text="@string/repeats_in_set"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:layout_below="@id/coachExerciseToDoSeriesEditText"/>
 
     <EditText
@@ -67,6 +85,10 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="@string/repeats_in_set"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
+        android:textColorHint="@color/colorPrimaryText"
         android:layout_below="@+id/coachExerciseToDoRepeatsTitleTextView">
     </EditText>
 
@@ -76,6 +98,8 @@
         android:layout_height="wrap_content"
         android:text="@string/load"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:layout_below="@id/coachExerciseToDoRepeatsEditText"/>
 
     <EditText
@@ -84,6 +108,10 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:hint="@string/load"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
+        android:textColorHint="@color/colorPrimaryText"
         android:layout_below="@+id/coachExerciseToDoLoadTitleTextView"/>
 
     <Button
@@ -91,6 +119,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

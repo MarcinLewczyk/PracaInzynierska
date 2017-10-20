@@ -15,7 +15,12 @@ http://ormlite.com/
 https://developers.google.com/maps/documentation/android-api/
 - Robolectric (Testing)
 http://robolectric.org/
-
+- Mockito (Testing)
+http://site.mockito.org/
+- Hamcrest (Testing)
+http://hamcrest.org/
 
 # Sound used (copyright free):
 https://www.youtube.com/watch?v=tw2b1igHUGs
+# Background used(creative commons license):
+https://www.flickr.com/photos/pagedooley/7427165626/in/photostream/

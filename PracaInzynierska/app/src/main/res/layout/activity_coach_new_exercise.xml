@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.CoachExercise.CoachNewExercise.CoachNewExerciseActivity">
 
     <TextView
@@ -11,13 +12,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:text="@string/exercise_name"/>
 
     <EditText
         android:id="@+id/coachNewExerciseNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
+        android:textColorHint="@color/colorPrimaryText"
         android:hint="@string/exercise_name"
         android:layout_below="@id/coachNewExerciseNameTextView">
     </EditText>
@@ -28,13 +35,19 @@
         android:layout_height="wrap_content"
         android:text="@string/muscle_part"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:layout_below="@id/coachNewExerciseNameEditText"/>
 
     <EditText
         android:id="@+id/coachNewExerciseMusclePartEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
+        android:textColorHint="@color/colorPrimaryText"
         android:hint="@string/muscle_part"
         android:layout_below="@+id/coachNewExerciseMusclePartTextView">
     </EditText>
@@ -45,6 +58,8 @@
         android:layout_height="wrap_content"
         android:text="@string/difficult_level"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:layout_below="@id/coachNewExerciseMusclePartEditText"/>
 
     <Spinner
@@ -59,6 +74,8 @@
         android:layout_height="wrap_content"
         android:text="@string/equipment_requirement"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:layout_below="@id/coachNewExerciseDifficultLevelSpinner"/>
 
     <Spinner
@@ -73,6 +90,8 @@
         android:layout_height="wrap_content"
         android:text="@string/exercise_type"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:layout_below="@id/coachNewExerciseEquipmentRequirementSpinner"/>
 
     <Spinner
@@ -87,13 +106,18 @@
         android:layout_height="wrap_content"
         android:text="@string/demonstration"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center_horizontal"
         android:layout_below="@id/coachNewExerciseTypeSpinner"/>
 
     <EditText
         android:id="@+id/coachNewExerciseDemonstrationEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorPrimaryText"
         android:hint="@string/demonstration"
         android:layout_below="@+id/coachExerciseDemonstrationDetailTextView">
     </EditText>
@@ -103,6 +127,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/save"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"/>
 

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.CoachExercise.CoachExerciseDetail.CoachExerciseDetailActivity">
 
     <TextView
@@ -10,13 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimaryText"
         android:text="@string/exercise_name"/>
 
     <TextView
         android:id="@+id/coachExerciseNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/coachExerciseNameDetailTitleTextView">
     </TextView>
 
@@ -25,11 +31,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/muscle_part"
-        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/coachExerciseNameTextView"/>
 
     <TextView
         android:id="@+id/coachExerciseMusclePartTextView"
+        android:textSize="17sp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimaryText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/coachExerciseMusclePartDetailTextView">
@@ -40,11 +51,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/difficult_level"
-        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/coachExerciseMusclePartTextView"/>
 
     <TextView
         android:id="@+id/coachExerciseDifficultLevelTextView"
+        android:textSize="17sp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimaryText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/coachExerciseDifficultLevelDetailTextView">
@@ -55,11 +71,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/equipment_requirement"
-        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/coachExerciseDifficultLevelTextView"/>
 
     <TextView
         android:id="@+id/coachExerciseEquipmentRequirementTextView"
+        android:textSize="17sp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimaryText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/coachExerciseEquipmentRequirementDetailTextView">
@@ -70,13 +91,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/exercise_type"
-        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/coachExerciseEquipmentRequirementTextView"/>
 
     <TextView
         android:id="@+id/coachExerciseExerciseTypeTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@+id/coachExerciseExerciseTypeDetailTextView">
     </TextView>
 
@@ -85,13 +111,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/demonstration"
-        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/coachExerciseExerciseTypeTextView"/>
 
     <WebView
         android:id="@+id/coachExerciseDemonstrationWebView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@+id/coachExerciseDemonstrationDetailTextView"
         android:background="@android:color/transparent">
     </WebView>
@@ -102,6 +133,8 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text="@string/modify"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_above="@+id/coachExerciseDelButton"/>
 
     <Button
@@ -109,6 +142,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/delete"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

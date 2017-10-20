@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.CoachFeatures.CoachNoteList.CoachNoteListActivity">
 
     <LinearLayout
@@ -14,7 +15,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start|center_vertical"
-            android:textSize="13sp"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryText"
             android:layout_marginLeft="15dp"
             android:text="@string/notes"
             android:layout_weight="0.5" />
@@ -33,6 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:text="@string/add_new"
         android:layout_alignParentBottom="true"/>
 
