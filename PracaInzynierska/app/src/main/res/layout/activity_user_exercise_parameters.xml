@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.UserExercise.UserExerciseParameters.UserExerciseParametersActivity">
 
     <TextView
@@ -10,13 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:text="@string/exercise_name"/>
 
     <TextView
         android:id="@+id/userExerciseNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userExerciseNameTitleTextView">
     </TextView>
 
@@ -25,7 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/series"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userExerciseNameTextView"/>
 
     <EditText
@@ -34,6 +42,10 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="@string/series"
+        android:gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorPrimaryText"
         android:layout_below="@+id/userExerciseSeriesTitleTextView">
     </EditText>
 
@@ -42,7 +54,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/repeats_in_set"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userExerciseSeriesEditText"/>
 
     <EditText
@@ -51,6 +65,10 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="@string/repeats_in_set"
+        android:gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorPrimaryText"
         android:layout_below="@+id/userExerciseRepeatsTitleTextView">
     </EditText>
 
@@ -59,7 +77,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/load"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userExerciseRepeatsEditText"/>
 
     <EditText
@@ -67,6 +87,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
+        android:gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorPrimaryText"
         android:hint="@string/load"
         android:layout_below="@+id/userExerciseLoadTitleTextView"/>
 
@@ -76,5 +100,7 @@
         android:layout_height="wrap_content"
         android:text="@string/execute_exercise"
         android:background="@android:color/transparent"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

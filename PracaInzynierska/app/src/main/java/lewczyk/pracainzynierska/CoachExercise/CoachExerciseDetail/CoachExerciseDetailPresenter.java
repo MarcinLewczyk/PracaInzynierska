@@ -30,7 +30,9 @@ public class CoachExerciseDetailPresenter {
 
     void loadExercise(){
         exerciseId = coachExerciseDetailView.loadIntent();
-        exercise = exerciseRepository.findById(exerciseId);
+        if(validateId()){
+            exercise = exerciseRepository.findById(exerciseId);
+        }
     }
 
     boolean validateId(){

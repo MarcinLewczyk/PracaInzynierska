@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.UserExercise.UserExerciseToDoDetail.UserExerciseToDoDetailActivity">
 
     <TextView
@@ -10,13 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:text="@string/exercise_name"/>
 
     <TextView
         android:id="@+id/userExerciseToDoNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userExerciseToDoNameTitleTextView">
     </TextView>
 
@@ -25,13 +31,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/muscle_part"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userExerciseToDoNameTextView"/>
 
     <TextView
         android:id="@+id/userExerciseToDoMusclePartTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@+id/userExerciseToDoMusclePartTitleTextView">
     </TextView>
 
@@ -40,13 +51,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/date"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userExerciseToDoMusclePartTextView"/>
 
     <TextView
         android:id="@+id/userExerciseToDoDateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@+id/userExerciseToDoDateTitleTextView">
     </TextView>
 
@@ -55,13 +71,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/series"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userExerciseToDoDateTextView"/>
 
     <TextView
         android:id="@+id/userExerciseToDoSeriesTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@+id/userExerciseToDoSeriesTitleTextView">
     </TextView>
 
@@ -70,13 +91,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/repeats_in_set"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userExerciseToDoSeriesTextView"/>
 
     <TextView
         android:id="@+id/userExerciseToDoRepeatsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@+id/userExerciseToDoRepeatsTitleTextView">
     </TextView>
 
@@ -85,13 +111,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/load"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userExerciseToDoRepeatsTextView"/>
 
     <TextView
         android:id="@+id/userExerciseToDoLoadTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@+id/userExerciseToDoLoadTitleTextView"/>
 
     <Button
@@ -99,6 +130,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/execute_exercise"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"/>
 

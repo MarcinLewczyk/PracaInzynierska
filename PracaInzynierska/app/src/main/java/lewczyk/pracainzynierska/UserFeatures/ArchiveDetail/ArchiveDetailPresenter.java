@@ -23,8 +23,10 @@ public class ArchiveDetailPresenter {
 
     void loadExerciseArchive(){
         archiveId = archiveDetailView.loadIntent();
-        exerciseArchive = exerciseArchiveRepository.findById(archiveId);
-        getExercise();
+        if(validateId()){
+            exerciseArchive = exerciseArchiveRepository.findById(archiveId);
+            getExercise();
+        }
     }
 
     void getExercise(){

@@ -49,9 +49,9 @@ public class UserExerciseListActivity extends AppCompatActivity implements UserE
         equipmentCategories.add(nothing);
         typeCategories.add(nothing);
 
-        ArrayAdapter<String> difficultAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultCategories);
-        ArrayAdapter<String> equipmentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, equipmentCategories);
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, typeCategories);
+        ArrayAdapter<String> difficultAdapter = new ArrayAdapter<>(this,  R.layout.spinner_layout, difficultCategories);
+        ArrayAdapter<String> equipmentAdapter = new ArrayAdapter<>(this,  R.layout.spinner_layout, equipmentCategories);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this,  R.layout.spinner_layout, typeCategories);
 
         difficultAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         equipmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

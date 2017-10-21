@@ -176,6 +176,12 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
         mediaPlayer.start();
     }
 
+    @Override
+    public void onBackPressed(){
+        timerStops();
+        confirmEndOfExercise();
+    }
+
     private void confirmEndOfExercise() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.confirm);
@@ -269,12 +275,6 @@ public class ExecuteExerciseActivity extends AppCompatActivity implements Sensor
             breakTimerHandler.postDelayed(this, 0);
         }
     };
-
-    @Override
-    public void onBackPressed(){
-        timerStops();
-        goToPreviousActivity();
-    }
 
     private void goToPreviousActivity(){
         presenter.addExerciseToArchive();

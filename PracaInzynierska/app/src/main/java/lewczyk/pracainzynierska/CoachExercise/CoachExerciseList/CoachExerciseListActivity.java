@@ -2,6 +2,7 @@ package lewczyk.pracainzynierska.CoachExercise.CoachExerciseList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -53,9 +54,9 @@ public class CoachExerciseListActivity extends AppCompatActivity implements Coac
         equipmentCategories.add(nothing);
         typeCategories.add(nothing);
 
-        ArrayAdapter<String> difficultAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultCategories);
-        ArrayAdapter<String> equipmentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, equipmentCategories);
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, typeCategories);
+        ArrayAdapter<String> difficultAdapter = new ArrayAdapter<>(this, R.layout.spinner_layout, difficultCategories);
+        ArrayAdapter<String> equipmentAdapter = new ArrayAdapter<>(this,  R.layout.spinner_layout, equipmentCategories);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<>(this,  R.layout.spinner_layout, typeCategories);
 
         difficultAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         equipmentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

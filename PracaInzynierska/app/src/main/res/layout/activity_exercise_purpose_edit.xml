@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.UserPersonalInfo.ExercisePurposeEdit.ExercisePurposeEditActivity">
 
     <TextView
@@ -10,15 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:text="@string/exercise_purpose"/>
 
     <EditText
         android:id="@+id/exercisePurposeEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:hint="@string/exercise_purpose"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorPrimaryText"
         android:layout_below="@+id/exercisePurposeEditTitleTextView"/>
 
     <TextView
@@ -26,14 +32,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/current_state"
+        android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/exercisePurposeEditText"/>
 
     <EditText
         android:id="@+id/exercisePurposeCurrentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:textSize="17sp"
+        android:textColor="@color/colorPrimaryText"
+        android:textColorHint="@color/colorPrimaryText"
         android:hint="@string/enter_current_state"
         android:layout_below="@+id/exercisePurposeEditCurrentTextView"/>
 
@@ -41,6 +52,8 @@
         android:id="@+id/exercisePurposeEditSaveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:text="@string/save"
         android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"/>

@@ -26,7 +26,9 @@ public class BodyParameterDetailsPresenter {
 
     void loadBodyParameter() {
         parameterId = bodyParameterDetailsView.loadIntent();
-        bodyParameter = bodyParameterRepository.findById(parameterId);
+        if(validateId()){
+            bodyParameter = bodyParameterRepository.findById(parameterId);
+        }
     }
 
     String getParametersMuscleName(){

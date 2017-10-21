@@ -25,8 +25,10 @@ public class CoachExerciseToDoDetailPresenter {
 
     void loadExerciseToDo(){
         exerciseToDoId = coachExerciseToDoDetailView.loadIntent();
-        exerciseToDo = exerciseToDoRepository.findById(exerciseToDoId);
-        loadExercise();
+        if(validateId()){
+            exerciseToDo = exerciseToDoRepository.findById(exerciseToDoId);
+            loadExercise();
+        }
     }
 
     private void loadExercise(){

@@ -21,7 +21,9 @@ public class BodyParameterEditPresenter {
 
     void loadBodyParameter() {
         parameterId = bodyParameterEditView.loadIntent();
-        bodyParameter = bodyParameterRepository.findById(parameterId);
+        if(validateId()){
+            bodyParameter = bodyParameterRepository.findById(parameterId);
+        }
     }
 
     String getParametersMuscleName(){

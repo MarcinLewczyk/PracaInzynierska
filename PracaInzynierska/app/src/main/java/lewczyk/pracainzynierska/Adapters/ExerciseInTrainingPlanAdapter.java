@@ -74,7 +74,7 @@ public class ExerciseInTrainingPlanAdapter extends ArrayAdapter<Exercise>{
         if(isExerciseDone(exercise.getId())){
             viewHolder.layout.setBackgroundColor(Color.GREEN);
         } else {
-            viewHolder.layout.setBackgroundColor(Color.WHITE);
+            viewHolder.layout.setBackgroundColor(Color.TRANSPARENT);
         }
 
         viewHolder.layout.setOnClickListener(new View.OnClickListener(){

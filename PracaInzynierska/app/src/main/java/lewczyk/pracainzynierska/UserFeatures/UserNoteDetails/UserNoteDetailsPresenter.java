@@ -20,7 +20,9 @@ public class UserNoteDetailsPresenter {
 
     void loadUserNote(){
         noteId = userNoteDetailsView.loadIntent();
-        userNote = userNoteRepository.findById(noteId);
+        if(validateId()){
+            userNote = userNoteRepository.findById(noteId);
+        }
     }
 
     String getNoteText(){

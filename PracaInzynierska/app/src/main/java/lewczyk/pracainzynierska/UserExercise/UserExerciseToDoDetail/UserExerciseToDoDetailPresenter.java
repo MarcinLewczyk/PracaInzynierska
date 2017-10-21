@@ -23,8 +23,10 @@ public class UserExerciseToDoDetailPresenter {
 
     void loadExerciseToDo(){
         exerciseToDoId = view.loadIntent();
-        exerciseToDo = exerciseToDoRepository.findById(exerciseToDoId);
-        exercise = exerciseRepository.findById(exerciseToDo.getExercise().getId());
+        if(validateId()){
+            exerciseToDo = exerciseToDoRepository.findById(exerciseToDoId);
+            exercise = exerciseRepository.findById(exerciseToDo.getExercise().getId());
+        }
     }
 
     boolean validateId(){

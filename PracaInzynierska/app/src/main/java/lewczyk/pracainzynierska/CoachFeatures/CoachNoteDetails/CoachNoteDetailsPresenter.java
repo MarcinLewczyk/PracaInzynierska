@@ -21,7 +21,9 @@ public class CoachNoteDetailsPresenter {
 
     void loadCoachNote(){
         noteId = coachNoteDetailsView.loadIntent();
-        coachNote = coachNoteRepository.findById(noteId);
+        if(validateId()){
+            coachNote = coachNoteRepository.findById(noteId);
+        }
     }
 
     boolean validateId(){

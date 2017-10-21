@@ -21,7 +21,9 @@ public class ExercisePurposeEditPresenter {
 
     void loadExercisePurpose(){
         purposeId = exercisePurposeEditView.loadIntent();
-        exercisePurpose = exercisePurposeRepository.findById(purposeId);
+        if(validateId()){
+            exercisePurpose = exercisePurposeRepository.findById(purposeId);
+        }
     }
 
     boolean validateId(){

@@ -3,62 +3,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.UserExercise.ExecuteExercise.ExecuteExerciseActivity">
 
     <TextView
         android:id="@+id/exerciseToExecuteTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:gravity="center_vertical|center_horizontal"/>
-
-    <TextView
-        android:id="@+id/exerciseToExecuteSeriesTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/exerciseToExecuteTitleTextView"
-        android:gravity="center_vertical|center_horizontal"
-        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/exerciseToExecuteRepeatsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
         android:layout_below="@+id/exerciseToExecuteSeriesTextView"
-        android:textSize="20sp"
-        android:gravity="center_vertical|center_horizontal"/>
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/exerciseToExecuteSeriesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_below="@+id/exerciseToExecuteTitleTextView"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/exerciseToExecuteTimerTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:gravity="center_vertical|center_horizontal"
-        android:layout_below="@+id/exerciseToExecuteRepeatsTextView"/>
+        android:textColor="@color/colorPrimaryText"
+        android:layout_below="@+id/exerciseToExecuteRepeatsTextView"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/exerciseToExecuteBreakTimerTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:gravity="center_vertical|center_horizontal"
-        android:layout_below="@+id/exerciseToExecuteTimerTextView"/>
-
-    <Button
-        android:id="@+id/endOfSetButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:layout_above="@+id/startStopExerciseButton"
-        android:text="@string/end_of_set" />
+        android:textColor="@color/colorPrimaryText"
+        android:layout_below="@+id/exerciseToExecuteTimerTextView"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/startStopExerciseButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:background="@android:color/transparent"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/endOfSetButton"
         android:text="@string/end_of_exercise" />
+
+    <Button
+        android:id="@+id/endOfSetButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
+        android:background="@android:color/transparent"
+        android:text="@string/end_of_set"
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>

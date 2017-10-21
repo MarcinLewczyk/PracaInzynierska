@@ -20,7 +20,9 @@ public class CoachNoteEditPresenter {
 
     void loadCoachNote(){
         noteId = coachNoteEditView.loadIntent();
-        coachNote = coachNoteRepository.findById(noteId);
+        if(validateId()){
+            coachNote = coachNoteRepository.findById(noteId);
+        }
     }
 
     String getNoteText(){

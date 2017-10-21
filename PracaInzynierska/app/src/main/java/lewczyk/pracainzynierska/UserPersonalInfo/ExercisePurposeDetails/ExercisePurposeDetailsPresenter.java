@@ -26,7 +26,9 @@ public class ExercisePurposeDetailsPresenter {
 
     void loadExercisePurpose(){
         purposeId = exercisePurposeDetailsView.loadIntent();
-        exercisePurpose = exercisePurposeRepository.findById(purposeId);
+        if(validateId()){
+            exercisePurpose = exercisePurposeRepository.findById(purposeId);
+        }
     }
 
     String getExercisePurpose(){

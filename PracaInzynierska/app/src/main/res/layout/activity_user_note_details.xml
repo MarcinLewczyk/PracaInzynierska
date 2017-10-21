@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.UserFeatures.UserNoteDetails.UserNoteDetailsActivity">
 
     <WebView
@@ -17,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:text="@string/modify"
         android:layout_above="@+id/noteDetailsDelButton"/>
 
@@ -24,6 +27,8 @@
         android:id="@+id/noteDetailsDelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryText"
         android:text="@string/delete"
         android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"/>

@@ -20,7 +20,9 @@ public class UserNoteEditPresenter {
 
     void loadUserNote(){
         noteId = userNoteEditView.loadIntent();
-        userNote = userNoteRepository.findById(noteId);
+        if(validateId()){
+            userNote = userNoteRepository.findById(noteId);
+        }
     }
 
     String getNoteText(){

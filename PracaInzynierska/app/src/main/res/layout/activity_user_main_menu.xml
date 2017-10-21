@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context="lewczyk.pracainzynierska.MainMenus.UserMainMenuActivity">
 
     <Button
@@ -10,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/exercises"
-        android:textSize="25sp"
+        android:textSize="28sp"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_marginBottom="20dp"
         android:background="@android:color/transparent"
         android:layout_above="@+id/userNotesMainMenuButton"/>
 
@@ -19,25 +22,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/notes"
-        android:textSize="25sp"
-        android:background="@android:color/transparent"
+        android:textSize="28sp"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/screenCenter"
+        android:background="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/screenCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true" />
 
     <Button
         android:id="@+id/userPersonalInfoButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:layout_below="@id/userNotesMainMenuButton"
+        android:textSize="28sp"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_marginBottom="20dp"
         android:background="@android:color/transparent"
+        android:layout_below="@+id/screenCenter"
         android:text="@string/personal_info"/>
 
     <Button
         android:id="@+id/userArchiveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="28sp"
+        android:textColor="@color/colorPrimaryText"
         android:layout_below="@id/userPersonalInfoButton"
         android:background="@android:color/transparent"
         android:text="@string/archive"/>

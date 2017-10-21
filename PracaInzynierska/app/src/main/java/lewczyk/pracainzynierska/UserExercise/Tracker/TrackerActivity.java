@@ -3,6 +3,7 @@ package lewczyk.pracainzynierska.UserExercise.Tracker;
 import android.Manifest;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -13,6 +14,7 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -360,7 +362,7 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
     @Override
     public void onBackPressed(){
         timerStops();
-        goToPreviousActivity();
+        confirmEndOfExercise();
     }
 
     private void timerCounts(){
@@ -392,6 +394,30 @@ public class TrackerActivity extends FragmentActivity implements  LocationListen
             timerHandler.postDelayed(this, 0);
         }
     };
+
+    private void confirmEndOfExercise() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.confirm);
+        builder.setMessage(R.string.popup_end_exercise_confirm);
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                goToPreviousActivity();
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
     private void goToPreviousActivity(){
         presenter.addExerciseToArchive();
