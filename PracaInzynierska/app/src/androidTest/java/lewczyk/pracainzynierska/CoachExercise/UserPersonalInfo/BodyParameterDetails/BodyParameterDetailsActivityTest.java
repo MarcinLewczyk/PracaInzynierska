@@ -1,4 +1,4 @@
-package lewczyk.pracainzynierska.CoachExercise.UserPersonalInfo.BodyParameterDetailsTest;
+package lewczyk.pracainzynierska.CoachExercise.UserPersonalInfo.BodyParameterDetails;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
