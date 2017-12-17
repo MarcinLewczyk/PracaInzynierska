@@ -135,8 +135,11 @@
         android:text="@string/modify"
         android:textSize="25sp"
         android:textColor="@color/colorPrimaryText"
-        android:layout_above="@+id/coachExerciseDelButton"/>
+        android:layout_alignParentBottom="true"
+        />
+    <!--    android:layout_above="@+id/coachExerciseDelButton" -->
 
+<!---
     <Button
         android:id="@+id/coachExerciseDelButton"
         android:layout_width="match_parent"
@@ -145,5 +148,5 @@
         android:textSize="25sp"
         android:textColor="@color/colorPrimaryText"
         android:background="@android:color/transparent"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"/> -->
 </RelativeLayout>

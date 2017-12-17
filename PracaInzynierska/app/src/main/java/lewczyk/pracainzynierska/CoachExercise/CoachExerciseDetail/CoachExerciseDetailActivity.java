@@ -70,14 +70,14 @@ public class CoachExerciseDetailActivity extends AppCompatActivity implements Co
             finish();
         }
     }
-
+/*
     @OnClick(R.id.coachExerciseDelButton)
     public void deleteButtonPressed(){
         if(validateId()){
             presenter.deleteCurrentExercise();
         }
     }
-
+*/
     private boolean validateId() {
         return presenter.validateId();
     }

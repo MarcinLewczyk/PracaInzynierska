@@ -17,8 +17,6 @@ https://developers.google.com/maps/documentation/android-api/
 http://robolectric.org/
 - Mockito (Testing)
 http://site.mockito.org/
-- Hamcrest (Testing)
-http://hamcrest.org/
 
 # Sound used (copyright free):
 https://www.youtube.com/watch?v=tw2b1igHUGs
